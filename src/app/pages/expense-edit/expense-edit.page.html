@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="status == 'open'">Editar Despesa</ion-title>
+    <ion-title *ngIf="status != 'open'">Visualizar Despesa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <img style="border-color: #0205A1;"  src="../../../assets/nf.jpeg" />
+  <form class="mt-6" #loginForm="ngForm" novalidate>
+    <ion-row class="flex justify-center ">
+      <ion-col size="11">
+        <ion-item  lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="file-tray-full-outline"></ion-icon>
+          <ion-label>Informe de Despesa: </ion-label>
+          <ion-select disabled="true"interface="action-sheet" value="cs" placeholder="">
+            <ion-select-option value="cs"><ion-text>Despesas de Março</ion-text></ion-select-option>
+            <ion-select-option value="cd">Despesas de Fevereiro</ion-select-option>
+            <ion-select-option value="f">Despesas de Janeiro</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="pencil"></ion-icon>
+          <ion-label>Fornecedor: </ion-label>
+          <ion-input value="POSTO RODAO" name="username" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="receipt"></ion-icon>
+          <ion-label>Valor: </ion-label>
+          <ion-input value="150.320" required="true"  name="username" type="number" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <div class="h-2 w-7/12 mt-6 rounded-md mb-6" style="background-color: #0205A1;"></div>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="document-text"></ion-icon>
+          <ion-label>Nr. documento: </ion-label>
+          <ion-input required="true"  name="username" type="number" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="albums"></ion-icon>
+          <ion-label>Categoria: </ion-label>
+          <ion-select value="c" interface="popover" placeholder="">
+            <ion-select-option value="f">Comida</ion-select-option>
+            <ion-select-option value="c">Combustível</ion-select-option>
+            <ion-select-option value="m">Serviço</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="information-circle-outline"></ion-icon>
+          <ion-label position="floating">Observação: </ion-label>
+          <ion-textarea value="Abastecido com gasolina comum"></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </form>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row *ngIf="status == 'open'">
+      <ion-col size="6">
+        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+          Cancelar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="toReportView()"  expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row *ngIf="status != 'open'">
+      <ion-col size="12">
+        <ion-button (click)="toReportView()"  expand="block">
+          Voltar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+   
+  </ion-toolbar>
+</ion-footer>

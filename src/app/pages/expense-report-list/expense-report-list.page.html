@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Informes de despesas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-card (click)="toExpenseReportView('open')" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-icon class="text-5xl z-50" slot="start" color="primary" name="file-tray-full-outline"></ion-icon>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="ml-1 font-bold text-base" style="font-size: 15px;">Despedas de Março</span>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <ion-text class="ml-1">Observação: iureuiheuyihfiuhiwh ihuhsfdiusiufghuys hoijviugs iudafji dh siunfsiuiu fhiuefbiuf biufiusniufiudbnsijfndsjknfkjdsbfjhbdskfjdnigbdsiufjdsoinfbijsnamdifbksefnojagbnigbijsdbfisaufsos</ion-text>
+        </p>
+        <p  style="font-size: 13px;" class="ml-8 mt-2">
+          <ion-badge class="mt-2" color="primary">
+            <ion-icon slot="start" name="elo-information"></ion-icon>
+            Aberto
+          </ion-badge>
+        </p>
+      </ion-label>
+
+      <ion-buttons  slot="end">
+        <ion-button color="primary">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseReportView('revision')" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-icon class="text-5xl z-50" slot="start" color="primary" name="file-tray-full-outline"></ion-icon>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="ml-1 font-bold text-base" style="font-size: 15px;">Despedas de Fevereiro</span>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <ion-text class="ml-1">Observação: iureuiheuyihfiuhiwh ihuhsfdiusiufghuys hoijviugs iudafji dh siunfsiuiu fhiuefbiuf biufiusniufiudbnsijfndsjknfkjdsbfjhbdskfjdnigbdsiufjdsoinfbijsnamdifbksefnojagbnigbijsdbfisaufsos</ion-text>
+        </p>
+        <p  style="font-size: 13px;" class="ml-8 mt-2">
+          <ion-badge class="mt-2" color="warning">
+            <ion-icon slot="start" name="elo-information"></ion-icon>
+            Em Revisão
+          </ion-badge>
+        </p>
+      </ion-label>
+
+      <ion-buttons  slot="end">
+        <ion-button color="primary">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+  
+
+  <ion-card (click)="toExpenseReportView('aprobado')" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-icon class="text-5xl z-50" slot="start" color="primary" name="file-tray-full-outline"></ion-icon>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="ml-1 font-bold text-base" style="font-size: 15px;">Despedas de Janeiro</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <ion-text class="ml-1">Observação: iureuiheuyihfiuhiwh ihuhsfdiusiufghuys hoijviugs iudafji dh siunfsiuiu fhiuefbiuf biufiusniufiudbnsijfndsjknfkjdsbfjhbdskfjdnigbdsiufjdsoinfbijsnamdifbksefnojagbnigbijsdbfisaufsos</ion-text>
+        </p>
+        <p  style="font-size: 13px;" class="ml-8 mt-2">
+          <ion-badge class="mt-2" color="success">
+            <ion-icon slot="start" name="elo-information"></ion-icon>
+            Aprovado
+          </ion-badge>
+        </p>
+      </ion-label>
+
+      <ion-buttons  slot="end">
+        <ion-button color="primary">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+
+  <ion-fab (click)="createExpenseReport()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

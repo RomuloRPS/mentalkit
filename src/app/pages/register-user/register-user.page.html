@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Usuário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <form class="mt-6" #loginForm="ngForm" novalidate>
+
+    <div class="text-center">
+      <ion-icon class="text-6xl" color="secondary" src="../../../assets/icons/elo-employee.svg"></ion-icon>
+    </div>
+   
+    <ion-row class="flex justify-center mt-4">
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" name="person"></ion-icon>
+          <ion-input placeholder="Seu Nome" [(ngModel)]="userData.name" name="name" type="text" #name="ngModel"
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="userData.name || !submitted" class="ion-padding-start">
+            * Informe o nome
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" name="mail"></ion-icon>
+          <ion-input placeholder="Seu Email" [(ngModel)]="userData.mail" name="mail" type="text" #mail="ngModel"
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="userData.mail || !submitted" class="ion-padding-start">
+            * Informe o email
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" name="logo-whatsapp"></ion-icon>
+          <ion-input placeholder="(11) 99999-9999" [brmasker]="{phone: true}" [(ngModel)]="userData.phone" name="whatsapp" type="text" #whatsapp="ngModel"
+            spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" name="lock-closed"></ion-icon>
+          <ion-input placeholder="Informe uma Senha" [(ngModel)]="userData.password" name="password" [type]="passwordType"
+            #password="ngModel" required>
+          </ion-input>
+          <ion-icon color="dark" slot="end" [name]="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="userData.password || !submitted" class="ion-padding-start">
+            * Informe a senha
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" name="lock-closed"></ion-icon>
+          <ion-input placeholder="Confirme sua Senha" [(ngModel)]="userData.confirmPassword" name="confirmPassword" [type]="confirmPasswordType"
+            #confirmPassword="ngModel" required>
+          </ion-input>
+          <ion-icon color="dark" slot="end" [name]="confirmPasswordIcon" (click)='hideShowConfirmPassword()'></ion-icon>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="userData.confirmPassword || !submitted" class="ion-padding-start">
+            * Confirme a senha
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col class="flex justify-center mt-4" size="10">
+        <ion-button color="secondary" [disabled]="loading" (click)="register(loginForm)">
+          <ion-spinner *ngIf="loading" name="crescent" slot="start"></ion-spinner>Próximo
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

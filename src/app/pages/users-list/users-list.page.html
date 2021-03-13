@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+
+  <ion-card (click)="toExpenseReportView('revision')" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+      <ion-avatar slot="start">
+        <img src="../../../assets/usuario.png" />
+      </ion-avatar>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="ml-1 font-bold text-base" style="font-size: 15px;">Rômulo</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong class="ml-1">romulo.rps@hotmail.com</strong>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong class="ml-1">Eloverde</strong>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <span class="ml-1">Desenvolvimento</span  >
+        </p>
+      
+        <p  style="font-size: 13px;" class="ml-8 mt-2">
+          <ion-badge class="mt-2" color="primary">
+            <ion-icon slot="start" name="elo-information"></ion-icon>
+            Usuário
+          </ion-badge>
+        </p>
+      </ion-label>
+
+      <ion-buttons  slot="end">
+        <ion-button color="primary">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+  <ion-fab (click)="toUserCreate()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

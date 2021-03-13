@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Informar Despesa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div *ngIf="!showImg" class="w-7/12 m-auto mt-4">
+    <ion-button (click)="showPhoto()" expand="block" fill="outline">
+      <ion-icon slot="start" name="camera"></ion-icon>
+      Escanear Documento
+    </ion-button>
+  </div>
+
+  <img class="border-b-4" style="border-color: #0205A1;" *ngIf="showImg" src="../../../assets/nf.jpeg" />
+
+  <form class="mt-6" #loginForm="ngForm" novalidate>
+    <ion-row class="flex justify-center ">
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="file-tray-full-outline"></ion-icon>
+          <ion-label>Informe de Despesa: </ion-label>
+          <ion-select name="category" interface="action-sheet" value="{{group ? 'cs' : ''}}" [(ngModel)]="inform" placeholder="">
+            <ion-select-option value="cs"><ion-text>Não Informar</ion-text></ion-select-option>
+            <ion-select-option value="cs1"><ion-text>Despesas Eloverde</ion-text></ion-select-option>
+            <ion-select-option value="cs2"><ion-text>Despesas de Março</ion-text></ion-select-option>
+            <ion-select-option value="cd">Despesas de Fevereiro</ion-select-option>
+            <ion-select-option value="f">Despesas de Janeiro</ion-select-option>
+
+            <ion-select-option value="ci"><ion-icon slot="start" name="add"></ion-icon><ion-text>Criar informe</ion-text></ion-select-option>
+
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col *ngIf="inform == 'ci'" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="pencil"></ion-icon>
+          <ion-label position="floating">Nome de informe de despesa: </ion-label>
+          <ion-input name="username" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col *ngIf="inform == 'ci'" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary"  name="document-outline"></ion-icon>
+          <ion-label position="floating">Política de Despesas</ion-label>
+          <ion-select interface="popover" placeholder="">
+            <ion-select-option value="f">Política 1</ion-select-option>
+            <ion-select-option value="c">Política 2</ion-select-option>
+            <ion-select-option value="m">Política 3</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="pencil"></ion-icon>
+          <ion-label>Fornecedor: </ion-label>
+          <ion-input name="username" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="receipt"></ion-icon>
+          <ion-label>Valor (COP): </ion-label>
+          <ion-input required="true"   name="username" type="number" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <div class="h-2 w-7/12 mt-6 rounded-md mb-6" style="background-color: #0205A1;"></div>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="document-text"></ion-icon>
+          <ion-label>Nr. documento: </ion-label>
+          <ion-input required="true"  name="username" type="number" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="albums"></ion-icon>
+          <ion-label>Categoria: </ion-label>
+          <ion-select [disabled]="!inform" interface="popover" placeholder="">
+            <ion-select-option value="f">Comida</ion-select-option>
+            <ion-select-option value="c">Combustível</ion-select-option>
+            <ion-select-option value="m">Serviço</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="information-circle-outline"></ion-icon>
+          <ion-label position="floating">Observação: </ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </form>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+          Cancelar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="toReportList()"  expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+   
+  </ion-toolbar>
+</ion-footer>

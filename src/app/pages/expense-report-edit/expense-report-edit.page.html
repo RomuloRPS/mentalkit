@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Editar Informe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <form class="mt-6" #loginForm="ngForm" novalidate>
+    <ion-row class="flex justify-center ">
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="pencil"></ion-icon>
+          <ion-input placeholder="Título" name="username" value="Despesas de Março" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary"  name="document-outline"></ion-icon>
+          <ion-label position="floating">Política de Despesas</ion-label>
+          <ion-select value="c" interface="popover" placeholder="">
+            <ion-select-option value="f">Política 1</ion-select-option>
+            <ion-select-option value="c">Política 2</ion-select-option>
+            <ion-select-option value="m">Política 3</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <ion-row class="flex justify-center ">
+    <ion-col size="11" >
+      <ion-card class="card-no-border card-no-margin">
+        <ion-list>
+          <ion-list-header>
+            <ion-title>Despesas</ion-title>
+          </ion-list-header>
+        
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [checked]="true" ></ion-checkbox>
+              <ion-label>POSTO RODAO</ion-label>
+              <ion-badge color="warning">
+                150,320 COP
+              </ion-badge>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [checked]="true" ></ion-checkbox>
+              <ion-label>ELOVERDE</ion-label>
+              <ion-badge color="warning">
+                200,303 COP
+              </ion-badge>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [checked]="false" ></ion-checkbox>
+              <ion-label>APPLE</ion-label>
+              <ion-badge color="warning">
+                600,500 COP
+              </ion-badge>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-checkbox slot="start" [checked]="true" ></ion-checkbox>
+              <ion-label>POSTO RODAO</ion-label>
+              <ion-badge color="warning">
+                120,232 COP
+              </ion-badge>
+          </ion-item>
+
+
+        </ion-list>
+      </ion-card>
+
+      <ion-card  class="card-no-border card-no-margin">
+        <ion-item lines="none">
+          <ion-label position="floating">Nota</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+      </ion-card>
+      
+    </ion-col>
+  
+  </ion-row>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+          Cancelar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="toReportView()"  expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+   
+  </ion-toolbar>
+</ion-footer>

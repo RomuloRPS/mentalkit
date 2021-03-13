@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Revisões</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+
+  <ion-card (click)="toExpenseReportView('revision')" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-icon class="text-5xl z-50" slot="start" color="primary" name="file-tray-full-outline"></ion-icon>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="ml-1 font-bold text-base" style="font-size: 15px;">Despedas de Fevereiro</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong class="ml-1"> 400,00 COP</strong>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong class="ml-1"> Rômulo</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <ion-text class="ml-1">Observação: iureuiheuyihfiuhiwh ihuhsfdiusiufghuys hoijviugs iudafji dh siunfsiuiu fhiuefbiuf biufiusniufiudbnsijfndsjknfkjdsbfjhbdskfjdnigbdsiufjdsoinfbijsnamdifbksefnojagbnigbijsdbfisaufsos</ion-text>
+        </p>
+        <p  style="font-size: 13px;" class="ml-8 mt-2">
+          <ion-badge class="mt-2" color="warning">
+            <ion-icon slot="start" name="elo-information"></ion-icon>
+            Em Revisão - 320,30 COP
+          </ion-badge>
+        </p>
+      </ion-label>
+
+      <ion-buttons  slot="end">
+        <ion-button color="primary">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

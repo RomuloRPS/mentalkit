@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "649687061602",
+    "firebase_url": "https://eloverde-sistemas.firebaseio.com",
+    "project_id": "eloverde-sistemas",
+    "storage_bucket": "eloverde-sistemas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649687061602:android:dcf98bfa076422ea",
+        "android_client_info": {
+          "package_name": "br.com.eloverde.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDErPbICcUKGjiaj_0zJGPfJRxQI01oF8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649687061602-gbtihgea4js62fv0caodf081jj0hc90i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.eloverde.duraseg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649687061602:android:b5b116c3e837edca4cad3b",
+        "android_client_info": {
+          "package_name": "br.com.eloverde.app.teste"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDErPbICcUKGjiaj_0zJGPfJRxQI01oF8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649687061602-gbtihgea4js62fv0caodf081jj0hc90i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.eloverde.duraseg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649687061602:android:3672725804cb76284cad3b",
+        "android_client_info": {
+          "package_name": "br.com.eloverde.duraseg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDErPbICcUKGjiaj_0zJGPfJRxQI01oF8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649687061602-gbtihgea4js62fv0caodf081jj0hc90i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.eloverde.duraseg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649687061602:android:b03dd90e0360b25a4cad3b",
+        "android_client_info": {
+          "package_name": "br.com.eloverde.recycler"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDErPbICcUKGjiaj_0zJGPfJRxQI01oF8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649687061602-gbtihgea4js62fv0caodf081jj0hc90i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.eloverde.duraseg"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

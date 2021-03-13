@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cadastrar Empresa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <form class="mt-6" #loginForm="ngForm" novalidate>
+
+    <div class="text-center">
+      <ion-icon class="text-6xl" color="secondary" src="../../../assets/icons/elo-company.svg"></ion-icon>
+    </div>
+   
+    <ion-row class="flex justify-center mt-4">
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" src="../../../assets/icons/elo-company.svg"></ion-icon>
+          <ion-input placeholder="Nome da Empresa" [(ngModel)]="companyData.name" name="name" type="text" #name="ngModel"
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="companyData.name || !submitted" class="ion-padding-start">
+            * Digite o nome da empresa
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" src="../../../assets/icons/elo-document.svg"></ion-icon>
+          <ion-input placeholder="CNPJ/CPF" [brmasker]="{person: true}" [(ngModel)]="companyData.document" name="mail" type="text" #mail="ngModel"
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="companyData.document || !submitted" class="ion-padding-start">
+            * Digite o cpf ou cnpj
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item (click)="showAddressModal()"  lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="secondary" src="../../../assets/icons/elo-location.svg"></ion-icon>
+          <ion-label  id="googlePlaces" color="{{companyData.address ? '' : 'medium'}}"  placeholder="Endereço Completo">{{companyData.address ? companyData.address : "Endereço Completo"}}</ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="flex justify-center mt-4" size="10">
+        <ion-button color="secondary" [disabled]="loading" (click)="register(loginForm)">
+          <ion-spinner *ngIf="loading" name="crescent" slot="start"></ion-spinner>Ingressar
+        </ion-button>
+      </ion-col>
+
+      <ion-col class="flex justify-center mt-4" size="10">
+        <ion-buttons>
+          <ion-button color="secondary" [disabled]="loading" (click)="register(loginForm)">
+            <ion-spinner *ngIf="loading" name="crescent" slot="start"></ion-spinner>Pular
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

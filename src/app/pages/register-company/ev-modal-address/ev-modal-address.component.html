@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-title>Endereço</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="Digite o Endereço" [(ngModel)]="autocomplete.query"  (ionChange)="updateSearch()" (ionCancel)="dismiss()"></ion-searchbar>
+
+  <ion-list>
+    <ion-item class="py-2" *ngFor="let item of autocompleteItems" tappable (click)="chooseItem(item)">
+      <ion-icon color="primary" slot="start" src="../../../assets/icons/elo-location.svg"></ion-icon>
+      <ion-text>{{ item }}</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-row *ngIf="autocompleteItems?.length == 0">
+
+    <ion-col style="height: 100%;">
+
+      <ion-card style="height: 100%;" mode="ios" style="text-align: center;">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-card-content>
+
+          <ion-icon style="font-size: 80px;" color="primary" name="arrow-up-outline"></ion-icon>
+          <ion-text color="dark">
+            <h2><strong>Digite o endereço que deseja</strong></h2>
+          </ion-text>
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+</ion-content>

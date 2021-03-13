@@ -1,0 +1,8 @@
+{
+  "name": "app-eloverde-transporter",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "6ff21904"
+}

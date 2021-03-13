@@ -1,0 +1,161 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Revisão de Despesas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="status != 'open'"  (click)="openOptions($event)">
+        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div style="background-color: #1acc8d;" class="relative">
+    <div class="pt-4">
+      <ion-text >
+        <p style="color: white;" class="text-center text-base font-bold">Despedas de Março</p>
+      </ion-text>
+      <p style="color: white;" class="text-center font-extrabold text-3xl">448,370 COP</p>
+      <p style="color: white;" class="text-center font-light">Aprobado: 0 COP</p>
+  
+    </div>
+  
+    <div class="w-10/12 h-1 rounded-md m-auto mt-4" style="background-color: white;"></div>
+    <div class="ml-4 mt-4 mr-4 relative">
+      <div class="absolute top-0 right-0">
+        <ion-badge class="mt-2" color="warning">
+          <ion-icon slot="start" name="elo-information"></ion-icon>
+          Em revisão
+        </ion-badge>
+      </div>
+      <p style="color: white;" class="text-left"><strong>Envio:</strong> 2021-02-11</p>
+      <p style="color: white;" class="text-left"><strong>Nota:</strong><ion-text> Revisar as despesas referentes ao mês de Março</ion-text></p>
+    </div>
+    
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </path></defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(244,245,248, .1)">
+      </use></g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(244,245,248, .2)">
+      </use></g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#F4F5F8">
+      </use></g>
+    </svg>
+  </div>
+
+  <div class="m-auto text-center mt-3 px-3 mb-3">
+    <ion-button (click)="toRevisionEdit()" color="primary" expand="block">Aprovar ou reprovar todos as Despesas</ion-button>
+  </div>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">POSTO RODAO</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Combustível</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>150,320 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">ELOVERDE</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Suporte</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>200,303 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">APPLE</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Conserto de celular</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>600,500 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">POSTO RODAO</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Combustível</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>120,232 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+</ion-content>

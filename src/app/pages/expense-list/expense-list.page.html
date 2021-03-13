@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Despesas Avulsas</ion-title>
+    <ion-badge (click)="setSelect(true)" *ngIf="!selectOn" slot="end" color="light">
+      Selecionar
+    </ion-badge>
+
+    <ion-badge (click)="setSelect(false)" *ngIf="selectOn" slot="end" color="light">
+      Cancelar
+    </ion-badge>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content color="light">
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-checkbox *ngIf="selectOn" slot="start"></ion-checkbox>
+      
+      <ion-thumbnail *ngIf="!selectOn" slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">POSTO RODAO</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Combustível</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>150,320 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-checkbox *ngIf="selectOn" slot="start"></ion-checkbox>
+      
+      <ion-thumbnail *ngIf="!selectOn" slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">ELOVERDE</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Suporte</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>200,303 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+     <ion-checkbox *ngIf="selectOn" slot="start"></ion-checkbox>
+      
+      <ion-thumbnail *ngIf="!selectOn" slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">APPLE</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Conserto de celular</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>600,500 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
+    <ion-item  lines="none">
+
+      <ion-checkbox *ngIf="selectOn" slot="start"></ion-checkbox>
+      
+      <ion-thumbnail *ngIf="!selectOn" slot="start">
+        <img src="../../../assets/nf.jpeg">
+      </ion-thumbnail>
+
+      <ion-label class="text-xs ">
+        <p style="font-size: 13px;" class="mt-2 w-12/12">
+          <span class="font-bold text-base" style="font-size: 15px;">POSTO RODAO</span>
+        </p>
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+          <strong > 2021-02-06</strong>
+        </p>
+
+        <p style="font-size: 13px;" class="ml-1 mt-2">
+           <span>Combustível</span>
+        </p>
+      </ion-label>
+
+      <ion-badge color="warning" slot="end">
+        <ion-label>120,232 COP</ion-label>
+      </ion-badge>
+    </ion-item>
+  </ion-card>
+
+
+  <ion-fab *ngIf="selectOn" (click)="openOptions($event)" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  color="secondary">
+      <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab *ngIf="!selectOn"  (click)="toExpenseCreate()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

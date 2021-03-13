@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar color="primary">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12">
+        <ion-item lines="none" color="primary">
+
+          <ion-buttons slot="start">
+            <ion-button (click)="toIntegration()">
+              <ion-icon  size="large" src="../../../assets/icons/elo-hourglass.svg" style="color: white;"></ion-icon>
+            </ion-button>
+            
+            <ion-badge (click)="toIntegration()" color="danger"
+              style="position: absolute; right:2px; top: -5px;">
+            </ion-badge>
+          </ion-buttons>
+          <ion-label class="ion-text-left">
+            <p><strong>Kampo - filial 1</strong></p>
+            <p><strong>Rômulo</strong></p>
+            <!-- <p *ngIf="userModel.get('selectedVehicle')?.plate || userModel.get('selectedVehicle')?.description"><strong>{{userModel.get('selectedVehicle')?.plate}} - {{userModel.get('selectedVehicle')?.description ? userModel.get('selectedVehicle')?.description : 'Não informado'}}</strong></p> -->
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)="openOptions($event)">
+              <ion-icon size="large" name="ellipsis-vertical-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </div>
+    </div>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content color="light">
+  
+
+  <div style="background-color: #0205A1;" class=" h-24 relative">
+    
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </path></defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(244,245,248, .1)">
+      </use></g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(244,245,248, .2)">
+      </use></g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#F4F5F8">
+      </use></g>
+    </svg>
+
+    <ion-grid style="--ion-grid-padding: 0px;">
+      <ion-row>
+        
+        <ion-col *ngFor="let menu of menus" style="--ion-grid-column-padding: 0px; height: 150px;" size="6">
+
+          <ion-card (click)="toPage(menu.action)" mode="ios" class="h-32">
+
+            <ion-card-content>
+
+              <div class="text-center relative">
+                <ion-badge color="warning" class="absolute top-0 right-0 z-50 mr-4" *ngIf="menu.beta">Novo</ion-badge>
+
+                <ion-icon class="text-5xl" color="tertiary" src="../../assets/icons/{{menu.icon | menuIcon}}.svg">
+                </ion-icon>
+                <ion-text color="dark">
+                  <h2><strong>{{menu.name}}</strong></h2>
+                </ion-text>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-fab (click)="toExpenseCreate()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+
+</ion-content>

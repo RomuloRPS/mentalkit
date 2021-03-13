@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Editar Usuário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  
+    <img style="height: 200px; height: 200px; margin: auto; border-radius: 100%; margin-top: 20px;"  src="../../../assets/usuario.png" />
+
+  <form class="mt-6" #loginForm="ngForm" novalidate>
+    <ion-row class="flex justify-center ">
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="person"></ion-icon>
+          <ion-label>Nome: </ion-label>
+          <ion-input value="Rômulo" name="username" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="mail"></ion-icon>
+          <ion-label>Email: </ion-label>
+          <ion-input value="romulo.rps@hotmail.com" name="username" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item  lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="file-tray-full-outline"></ion-icon>
+          <ion-label>Departamento: </ion-label>
+          <ion-select interface="action-sheet" value="cs" placeholder="">
+            <ion-select-option value="cs"><ion-text>Desenvolvimento</ion-text></ion-select-option>
+            <ion-select-option value="cd">Suporte</ion-select-option>
+            <ion-select-option value="f">Comercial</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col size="11">
+        <ion-item  lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="aperture-outline"></ion-icon>
+          <ion-label>Centro de custo: </ion-label>
+          <ion-select interface="action-sheet" value="f" placeholder="">
+            <ion-select-option value="cs"><ion-text>Marketing</ion-text></ion-select-option>
+            <ion-select-option value="cd">Vendas</ion-select-option>
+            <ion-select-option value="f">Desenvolvimento</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item  lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="aperture-outline"></ion-icon>
+          <ion-label>Permissão de Usuário: </ion-label>
+          <ion-select multiple="true" interface="action-sheet" value="f" placeholder="">
+            <ion-select-option value="cs"><ion-text>Admin</ion-text></ion-select-option>
+            <ion-select-option value="cd">Revisador</ion-select-option>
+            <ion-select-option value="f">Gerador</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="lock-closed"></ion-icon>
+          <ion-label>Senha: </ion-label>
+          <ion-input name="username" type="password" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="lock-closed"></ion-icon>
+          <ion-label>Confirmar Senha  : </ion-label>
+          <ion-input name="username" type="password" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </form>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+          Cancelar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="toReportView()"  expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+   
+  </ion-toolbar>
+</ion-footer>

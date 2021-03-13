@@ -1,0 +1,5 @@
+**/*.spec.ts
+node_modules/
+e2e/
+platforms
+plugins
