@@ -11,13 +11,13 @@
   <form class="mt-6" #loginForm="ngForm" novalidate>
 
     <div class="text-center">
-      <ion-icon class="text-6xl" color="secondary" src="../../../assets/icons/elo-company.svg"></ion-icon>
+      <ion-icon class="text-6xl" color="secondary" src="./assets/icons/elo-company.svg"></ion-icon>
     </div>
    
     <ion-row class="flex justify-center mt-4">
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="secondary" src="../../../assets/icons/elo-company.svg"></ion-icon>
+          <ion-icon slot="start" color="secondary" src="./assets/icons/elo-company.svg"></ion-icon>
           <ion-input placeholder="Nome da Empresa" [(ngModel)]="companyData.name" name="name" type="text" #name="ngModel"
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
@@ -31,7 +31,7 @@
 
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="secondary" src="../../../assets/icons/elo-document.svg"></ion-icon>
+          <ion-icon slot="start" color="secondary" src="/assets/icons/elo-document.svg"></ion-icon>
           <ion-input placeholder="CNPJ/CPF" [brmasker]="{person: true}" [(ngModel)]="companyData.document" name="mail" type="text" #mail="ngModel"
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
@@ -45,7 +45,7 @@
 
       <ion-col size="11">
         <ion-item (click)="showAddressModal()"  lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="secondary" src="../../../assets/icons/elo-location.svg"></ion-icon>
+          <ion-icon slot="start" color="secondary" src="/assets/icons/elo-location.svg"></ion-icon>
           <ion-label  id="googlePlaces" color="{{companyData.address ? '' : 'medium'}}"  placeholder="Endereço Completo">{{companyData.address ? companyData.address : "Endereço Completo"}}</ion-label>
         </ion-item>
       </ion-col>

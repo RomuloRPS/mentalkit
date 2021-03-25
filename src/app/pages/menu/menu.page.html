@@ -7,7 +7,7 @@
 
           <ion-buttons slot="start">
             <ion-button (click)="toIntegration()">
-              <ion-icon  size="large" src="../../../assets/icons/elo-hourglass.svg" style="color: white;"></ion-icon>
+              <ion-icon  size="large" src="./assets/icons/elo-hourglass.svg" style="color: white;"></ion-icon>
             </ion-button>
             
             <ion-badge (click)="toIntegration()" color="danger"
@@ -63,7 +63,7 @@
               <div class="text-center relative">
                 <ion-badge color="warning" class="absolute top-0 right-0 z-50 mr-4" *ngIf="menu.beta">Novo</ion-badge>
 
-                <ion-icon class="text-5xl" color="tertiary" src="../../assets/icons/{{menu.icon | menuIcon}}.svg">
+                <ion-icon class="text-5xl" color="tertiary" src="./assets/icons/{{menu.icon | menuIcon}}.svg">
                 </ion-icon>
                 <ion-text color="dark">
                   <h2><strong>{{menu.name}}</strong></h2>

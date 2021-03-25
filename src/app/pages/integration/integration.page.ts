@@ -52,13 +52,13 @@ export class IntegrationPage implements OnInit, OnDestroy {
   public getIcon(name) {
       switch (name) {
           case 'tenancies/:tenancy_id/transport-tasks/program-confirm':
-              return '../../../assets/icons/elo-collect.svg';
+              return './assets/icons/elo-collect.svg';
           case 'tenancies/:tenancy_id/transport-tasks/execute':
-              return '../../../assets/icons/elo-task.svg';
+              return './assets/icons/elo-task.svg';
           case 'tenancies/:tenancy_id/transport-tasks/cancel':
-              return '../../../assets/icons/elo-close.svg';
+              return './assets/icons/elo-close.svg';
           case 'tenancies/:tenancy_id/waste-movements':
-              return '../../../assets/icons/elo-waste.svg';
+              return './assets/icons/elo-waste.svg';
       }
   }
 

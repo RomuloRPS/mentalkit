@@ -20,14 +20,14 @@
     </ion-item>
 
     <ion-item *ngIf="selectedTasks.length == 1" lines="none">
-      <ion-icon (click)="deleteTasks()" color="danger" slot="start" src="../../../assets/icons/elo-trash.svg">
+      <ion-icon (click)="deleteTasks()" color="danger" slot="start" src="./assets/icons/elo-trash.svg">
       </ion-icon>
       <ion-label text-wrap class="text-center">{{selectedTasks.length}} tarefa selecionada</ion-label>
       <ion-icon (click)="unSelectTasks()" slot="end" name="close-outline"></ion-icon>
     </ion-item>
 
     <ion-item *ngIf="selectedTasks.length > 1" lines="none">
-      <ion-icon (click)="deleteTasks()" color="danger" slot="start" src="../../../assets/icons/elo-trash.svg">
+      <ion-icon (click)="deleteTasks()" color="danger" slot="start" src="./assets/icons/elo-trash.svg">
       </ion-icon>
       <ion-label text-wrap class="text-center">{{selectedTasks.length}} tarefas selecionadas</ion-label>
       <ion-icon (click)="unSelectTasks()" slot="end" name="close-outline"></ion-icon>
@@ -45,7 +45,7 @@
   <ion-card *ngIf="getEncodedTasks().length == 0 && !loading">
     <ion-card-content>
       <div class="text-center">
-        <ion-img class="h-40" src="../../assets/integration.svg"></ion-img>
+        <ion-img class="h-40" src="./assets/integration.svg"></ion-img>
 
         <ion-text color="dark">
           <p><strong class="text-xl">No hay más Despesas por sincronizar.</strong></p>
