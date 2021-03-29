@@ -1,55 +1,160 @@
-<ion-header>
+<ion-menu mode="ios" menuId="filters" side="end" type="push" contentId="main">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Filtros</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item  lines="full">
+        <ion-label>Permissão</ion-label>
+        <ion-select (ionChange)="filter()" [(ngModel)]="menuFilters.role" interface="popover">
+          <ion-select-option value="ADMIN">Admin</ion-select-option>
+          <ion-select-option value="REFUNDER">Restituidor</ion-select-option>
+          <ion-select-option value="APPROVING">Aprovador</ion-select-option>
+          <ion-select-option lines="none" value="FINANCIAL">Financeiro</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="clearFilters()" color="primary" fill="outline" expand="block">Limpar</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="filter()" color="primary" expand="block">Filtrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-content>
+  <ion-footer>
+  </ion-footer>
+</ion-menu>
+
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Usuários</ion-title>
+
+    <ion-buttons *ngIf="!isSearchable" slot="end">
+      <ion-button (click)="changeSearch()">
+        <ion-icon name="search-outline"> </ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="!isSearchable">Usuários</ion-title>
+
+    <ion-searchbar (ionBlur)="checkBlur()" #search [hidden]="!isSearchable" color="light" [(ngModel)]="searchTerm"
+      (ionChange)="searchTask()" placeholder="Pesquisar"></ion-searchbar>
+  </ion-toolbar>
+
+
+  <ion-toolbar class="text-center" color="primary">
+    <ion-buttons *ngIf="selecteds.length === 0" slot="start">
+      <ion-button [disabled]="loading" (click)="doRefresh()">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="selecteds.length >= 1"  slot="start">
+      <ion-button (click)="deleteUsers()" >
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ng-container *ngIf="!loadingFirstTime">
+      <ion-label *ngIf="selecteds.length == 0" class="font-bold">{{users?.length}} / {{usersLength}} usuários</ion-label>
+      <ion-label *ngIf="selecteds.length == 1" class="font-bold">{{selecteds.length}} usuário selecionado</ion-label>
+      <ion-label *ngIf="selecteds.length > 1" class="font-bold">{{selecteds.length}} usuários selecionados</ion-label>
+    </ng-container>
+
+    <ng-container *ngIf="loadingFirstTime">
+      <ion-label *ngIf="selecteds.length == 0" class="font-bold">Carregando...</ion-label>
+    </ng-container>
+    <ion-buttons *ngIf="selecteds.length >= 1"  slot="end">
+      <ion-button (click)="clearSelect()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="selecteds.length === 0" slot="end">
+      <ion-button (click)="openMenu()">
+        <ion-icon size="large" name="filter-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
 
+<ion-content id="main" color="light">
+  <ion-progress-bar color="dark" *ngIf="loading" type="indeterminate"></ion-progress-bar>
 
-  <ion-card (click)="toExpenseReportView('revision')" class="card-no-border card-no-margin">
-    <ion-item  lines="none">
-      <ion-avatar slot="start">
-        <img src="./assets/usuario.png" />
-      </ion-avatar>
+  <ion-refresher [disabled]="loading" id="refresher" #refresher (ionRefresh)="refresh($event)" color="light" slot="fixed">
+    <ion-refresher-content color="light" pullingIcon="chevron-down-outline" pullingText="Puxe para atualizar"
+      refreshingSpinner="crescent" refreshingText="Carregando...">
+    </ion-refresher-content>
+  </ion-refresher>
 
-      <ion-label class="text-xs ">
-        <p style="font-size: 13px;" class="mt-2 w-12/12">
-          <span class="ml-1 font-bold text-base" style="font-size: 15px;">Rômulo</span>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <strong class="ml-1">romulo.rps@hotmail.com</strong>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <strong class="ml-1">Eloverde</strong>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <span class="ml-1">Desenvolvimento</span  >
-        </p>
-      
-        <p  style="font-size: 13px;" class="ml-8 mt-2">
-          <ion-badge class="mt-2" color="primary">
-            <ion-icon slot="start" name="elo-information"></ion-icon>
-            Usuário
-          </ion-badge>
-        </p>
-      </ion-label>
+  <ng-container *ngIf="!loadingFirstTime">
+    <ng-container *ngFor="let user of users">
+      <ion-card  [color]="getCardColor(user)" (click)="trySelect(user)" class="relative card-no-border card-no-margin">
+        <ev-long-press (onPressing)="triggerLongPress(user)">
+          <ion-card [color]="getCardColor(user)" class="card-no-border card-no-margin">
+            <ion-item [color]="getCardColor(user)" lines="none">
+              <ion-avatar size="large" slot="start">
+                <img *ngIf="user?.getRelation('avatar')?.getAttribute('token')"  style="height: 40px; width: 40px;" [src]="getIconUrl(user?.getRelation('avatar')?.getAttribute('token'))" />
+                <ion-icon *ngIf="!user?.getRelation('avatar')?.getAttribute('token')" color="primary" class="text-4xl m-auto" src="/assets/fontawesome/solid/user.svg"></ion-icon>
+              </ion-avatar>
+        
+              <ion-text class="text-xs ">
+                <p style="font-size: 13px;" class="mt-2 w-12/12">
+                  <span class="ml-1 font-bold text-base" style="font-size: 15px;">{{user.getAttribute('name')}}</span>
+                </p>
+                <p style="font-size: 13px;" class="mt-2">
+                  <strong class="ml-1">{{user.getAttribute('email')}}</strong>
+                </p>
+              
+              </ion-text>
+        
+              <ion-buttons  slot="end">
+                <ion-button [disabled]="user.selected" (click)="toUserEdit(user.getApiId())" color="primary">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+            <p  style="font-size: 13px;" class="ml-2 mt-2">
+              <ion-badge *ngFor="let role of user.getRelation('roles')" [color]="getRoleBadgeColor(role.getAttribute('name'))" class="ml-1 mt-2" >
+                <ion-icon slot="start" name="elo-information"></ion-icon>
+                {{role.getAttribute('description')}}
+              </ion-badge>
+            </p>
+          </ion-card>
+        </ev-long-press>
+      </ion-card>
+    </ng-container>
+  </ng-container>
 
-      <ion-buttons  slot="end">
-        <ion-button color="primary">
-          <ion-icon name="chevron-forward-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
+  <ion-card *ngIf="users.length == 0 && !this.loading">
+    <ion-card-content>
+      <div class="text-center">
+        <ion-img class="h-20" src="../../assets/fontawesome/solid/users.svg"></ion-img>
+        <ion-text color="dark" class="mt-4">
+          <p class="mt-4">
+            <strong class="text-xl mt-4">Nenhum usuário encontrado!</strong>
+          </p>
+        </ion-text>
+      </div>
+    </ion-card-content>
   </ion-card>
 
-  <ion-fab (click)="toUserCreate()" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button  color="secondary">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-infinite-scroll id="infiniteScroll" #infiniteScroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
+
+<ion-fab (click)="toUserCreate()" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button  color="secondary">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

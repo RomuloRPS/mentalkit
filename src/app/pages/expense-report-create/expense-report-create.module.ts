@@ -9,12 +9,12 @@ import { ExpenseReportCreatePageRoutingModule } from './expense-report-create-ro
 import { ExpenseReportCreatePage } from './expense-report-create.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ExpenseReportCreatePageRoutingModule
-  ],
-  declarations: [ExpenseReportCreatePage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ExpenseReportCreatePageRoutingModule
+    ],
+    declarations: [ExpenseReportCreatePage]
 })
 export class ExpenseReportCreatePageModule {}

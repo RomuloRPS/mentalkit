@@ -8,33 +8,103 @@
 </ion-header>
 
 <ion-content color="light">
-  
-    <img style="height: 200px; height: 200px; margin: auto; border-radius: 100%; margin-top: 20px;"  src="./assets/usuario.png" />
+  <div style="border-color: gray;" (click)="openOptions($event)" class="circular m-auto mt-6 relative border-2">
+    <img *ngIf="user?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(user?.getRelation('avatar')?.getAttribute('token'))" />
+    <div class="w-full text-center absolute bottom-0 mb-12 justify-center">
+      <ion-icon color="primary" class="text-6xl m-auto" *ngIf="!user?.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/user.svg"></ion-icon>
+    </div>
+    <div style="background-color: black;" class="absolute bottom-0 pb-6 h-12 w-full opacity-50 text-center"></div>
+    <div class="absolute bottom-0 mb-6 w-full text-center">
+      <span style="color: white;" class="text-sm font-bold">Alterar imagem</span>
+    </div>
 
-  <form class="mt-6" #loginForm="ngForm" novalidate>
+  </div>
+
+  <form *ngIf="user" class="mt-6" #userForm="ngForm" name="userForm">
     <ion-row class="flex justify-center ">
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="person"></ion-icon>
           <ion-label>Nome: </ion-label>
-          <ion-input value="Rômulo" name="username" type="text" 
+          <ion-input #name="ngModel"  [(ngModel)]="user.elements.name" name="name" type="text" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="name.valid || submitted == false" class="ion-padding-start">
+            Informe o nome de usuário
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="person"></ion-icon>
+          <ion-label>Login: </ion-label>
+          <ion-input #username="ngModel" [(ngModel)]="user.elements.username" name="username" type="text" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
+            Informe o login
+          </p>
+        </ion-text>
       </ion-col>
 
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="mail"></ion-icon>
           <ion-label>Email: </ion-label>
-          <ion-input value="romulo.rps@hotmail.com" name="username" type="text" 
+          <ion-input #email="ngModel"  [(ngModel)]="user.elements.email" name="email" type="email" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="(email.valid && verifyEmail())|| submitted == false" class="ion-padding-start">
+            Informe um email válido
+          </p>
+        </ion-text>
       </ion-col>
 
       <ion-col size="11">
-        <ion-item  lines="none" class="rounded-lg">
+        <app-ev-multi-select [values]="roles" iconColor="tertiary" icon="../../../assets/fontawesome/solid/user-lock.svg" showField="description" placeholder="Permissões de usuário"
+        (valueChange)="selectChange($event)" [(valueId)]="selectedRoles" inputName='Roles' [baseService]="roleService"
+        #roleSelect></app-ev-multi-select>
+      </ion-col>
+
+      <ion-col *ngIf="!editing" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="lock-closed"></ion-icon>
+          <ion-label>Senha: </ion-label>
+          <ion-input #password="ngModel"  [(ngModel)]="passwordParams.password" name="password" type="password" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="(password.valid && verifyEmail())|| submitted == false" class="ion-padding-start">
+            Informe uma senha
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col *ngIf="!editing" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="lock-closed"></ion-icon>
+          <ion-label>Confirmar senha: </ion-label>
+          <ion-input #confirmation="ngModel"  [(ngModel)]="passwordParams.confirmation" name="confirmation" type="password" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="(confirmation.valid && verifyEmail())|| submitted == false" class="ion-padding-start">
+            Informe a confirmação de senha
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <ion-item disabled="true" lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="file-tray-full-outline"></ion-icon>
           <ion-label>Departamento: </ion-label>
           <ion-select interface="action-sheet" value="cs" placeholder="">
@@ -45,9 +115,8 @@
         </ion-item>
       </ion-col>
 
-
       <ion-col size="11">
-        <ion-item  lines="none" class="rounded-lg">
+        <ion-item disabled="true" lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="aperture-outline"></ion-icon>
           <ion-label>Centro de custo: </ion-label>
           <ion-select interface="action-sheet" value="f" placeholder="">
@@ -58,58 +127,36 @@
         </ion-item>
       </ion-col>
 
-      <ion-col size="11">
-        <ion-item  lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="aperture-outline"></ion-icon>
-          <ion-label>Permissão de Usuário: </ion-label>
-          <ion-select multiple="true" interface="action-sheet" value="f" placeholder="">
-            <ion-select-option value="cs"><ion-text>Admin</ion-text></ion-select-option>
-            <ion-select-option value="cd">Revisador</ion-select-option>
-            <ion-select-option value="f">Gerador</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    
-      <ion-col size="11">
-        <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="lock-closed"></ion-icon>
-          <ion-label>Senha: </ion-label>
-          <ion-input name="username" type="password" 
-            spellcheck="false" autocapitalize="off" required>
-          </ion-input>
-        </ion-item>
-      </ion-col>
-      
-      <ion-col size="11">
-        <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="lock-closed"></ion-icon>
-          <ion-label>Confirmar Senha  : </ion-label>
-          <ion-input name="username" type="password" 
-            spellcheck="false" autocapitalize="off" required>
-          </ion-input>
-        </ion-item>
-      </ion-col>
-
     </ion-row>
   </form>
-  
+
+  <div *ngIf="editing" class="mt-4 w-full m-auto text-center">
+    <ion-button (click)="changePassword()" class="m-auto" fill="outline">
+      <ion-icon slot="start" name="lock-closed" color="tertiary"></ion-icon>
+      <ion-label>Trocar senha</ion-label>
+    </ion-button>  
+  </div>
+
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-row>
       <ion-col size="6">
-        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+        <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
           Cancelar
         </ion-button>
       </ion-col>
-      <ion-col size="6">
-        <ion-button (click)="toReportView()"  expand="block">
-          Salvar
+      <ion-col *ngIf="!editing" size="6">
+        <ion-button [disabled]="!hasPasswordInformedAndIsValid()" (click)="create(userForm)"  expand="block">
+          Criar
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="editing" size="6">
+        <ion-button [disabled]="!hasPasswordInformedAndIsValid()" (click)="save(userForm)"  expand="block">
+          Editar
         </ion-button>
       </ion-col>
     </ion-row>
-    
-   
   </ion-toolbar>
 </ion-footer>

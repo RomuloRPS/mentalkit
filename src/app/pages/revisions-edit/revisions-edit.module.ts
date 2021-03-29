@@ -9,12 +9,12 @@ import { RevisionsEditPageRoutingModule } from './revisions-edit-routing.module'
 import { RevisionsEditPage } from './revisions-edit.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RevisionsEditPageRoutingModule
-  ],
-  declarations: [RevisionsEditPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RevisionsEditPageRoutingModule
+    ],
+    declarations: [RevisionsEditPage]
 })
 export class RevisionsEditPageModule {}

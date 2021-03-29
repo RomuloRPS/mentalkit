@@ -1,0 +1,28 @@
+<ion-header color="medium">
+  <ion-toolbar class="text-center" color="medium">
+    <ion-icon [name]="getLogo()" size="large"></ion-icon>
+
+  </ion-toolbar>
+</ion-header>
+
+<h1 class="text-center mt-5 text-2xl"><strong>Atenção!</strong></h1>
+<ion-row>
+  <ion-col class="text-center">
+    <ion-text>
+      <h2 *ngIf="blocked">
+        Você precisa <strong>atualizar</strong> seu aplicativo para continuar usando!
+      </h2>
+      <h2 *ngIf="!blocked">
+        Há uma nova atualização na loja disponível para download!
+      </h2>
+    </ion-text>
+  </ion-col>
+</ion-row>
+
+<div class="flex justify-center mb-2">
+  <ion-button (click)="toStore()" color="primary" class="text-center">
+    <ion-icon slot="start" name="cloud-download-outline"></ion-icon>
+    <!-- <ion-icon name="logo-google-playstore"></ion-icon> -->
+    Atualizar
+  </ion-button>
+</div>

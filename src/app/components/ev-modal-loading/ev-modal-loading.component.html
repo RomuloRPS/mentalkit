@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-text  *ngIf="!modalLoadingData.isFailed() && !modalLoadingData.isWarning() && !modalLoadingData.isSucceeded()"  color="primary" class="mt-2">
+      <h2 class="r text-center font-bold"><strong>{{message}}</strong></h2>
+    </ion-text>
+    <ion-text *ngIf="modalLoadingData.isFailed()" color="danger" class="mt-2">
+      <h2 class="r text-center font-bold"><strong>{{modalLoadingData.getFailMessage()}}</strong></h2>
+    </ion-text>
+    <ion-text *ngIf="modalLoadingData.isWarning()" color="warning" class="mt-2">
+      <h2 class="r text-center font-bold"><strong>{{modalLoadingData.getWarningMessage()}}</strong></h2>
+    </ion-text>
+    <ion-text *ngIf="modalLoadingData.isSucceeded()" color="primary" class="mt-2">
+      <h2 class="r text-center font-bold"><strong>{{modalLoadingData.getSuccessMessage()}}</strong></h2>
+    </ion-text>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="h-full flex items-stretch content-center justify-center align-middle">
+    <ion-icon  *ngIf="modalLoadingData.isLoading()" color="primary" class="s self-center" src="../../../assets/icons/elo-verde.svg"></ion-icon>
+    <ion-icon  *ngIf="modalLoadingData.isSucceeded()" color="light" class="self-center success-loading" name="checkmark-circle-outline"></ion-icon>
+    <ion-icon  *ngIf="modalLoadingData.isFailed()" color="light" class="self-center failed-loading" name="close-circle-outline"></ion-icon>
+    <ion-icon  *ngIf="modalLoadingData.isWarning()" color="light" class="self-center warning-loading" name="close-circle-outline"></ion-icon>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-progress-bar *ngIf="modalLoadingData.isLoading()" type="indeterminate"></ion-progress-bar>
+  <ion-progress-bar *ngIf="modalLoadingData.isSucceeded()" type="linear" value="100"></ion-progress-bar>
+  <ion-progress-bar *ngIf="modalLoadingData.isFailed()" color="danger" type="linear" value="100"></ion-progress-bar>
+  <ion-progress-bar *ngIf="modalLoadingData.isWarning()" color="warning" type="linear" value="100"></ion-progress-bar>
+  <ion-toolbar>
+    <ion-label color="primary">
+      <h2 *ngIf="modalLoadingData.isLoading()" class="text-center"><strong>{{buttonText ? buttonText : 'Enviando...'}}</strong></h2>
+    </ion-label>
+
+    
+
+    <div class="flex items-stretch content-center justify-center align-middle">
+      <ion-button (click)="close()" class="self-center" color="primary" *ngIf="modalLoadingData.isSucceeded()">Ok</ion-button>
+      <ion-button (click)="close()" class="self-center" color="danger" *ngIf="modalLoadingData.isFailed()">Voltar</ion-button>
+      <ion-button (click)="close()" class="self-center" color="warning" *ngIf="modalLoadingData.isWarning()">Voltar</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

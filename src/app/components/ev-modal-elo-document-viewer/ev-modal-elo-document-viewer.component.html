@@ -1,0 +1,26 @@
+<ion-header color="danger">
+  <ion-toolbar class="text-center" color="medium">
+    <ion-icon src="../../../assets/icons/elo-incident.svg" size="large"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div style="background:url(../../../assets/loading.svg) center 30% no-repeat;" >
+    <ng-container *ngIf='url'>
+      <iframe class="z-30" frameborder="0" style="overflow:hidden;height:297mm;width:100%" width="100%" height="100%" [src]=" url"></iframe>
+    </ng-container>
+  </div>
+
+  
+</ion-content>
+
+
+<ion-footer color="medium">
+  <ion-toolbar color="medium">
+    <div class="flex justify-center mb-2">
+      <ion-button (click)="close()" color="primary" class="text-center">Fechar</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

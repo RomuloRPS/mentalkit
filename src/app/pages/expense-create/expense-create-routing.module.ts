@@ -4,14 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ExpenseCreatePage } from './expense-create.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ExpenseCreatePage
-  }
+    {
+        path: '',
+        component: ExpenseCreatePage
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 export class ExpenseCreatePageRoutingModule {}

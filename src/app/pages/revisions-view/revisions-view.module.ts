@@ -9,12 +9,12 @@ import { RevisionsViewPageRoutingModule } from './revisions-view-routing.module'
 import { RevisionsViewPage } from './revisions-view.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RevisionsViewPageRoutingModule
-  ],
-  declarations: [RevisionsViewPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RevisionsViewPageRoutingModule
+    ],
+    declarations: [RevisionsViewPage]
 })
 export class RevisionsViewPageModule {}

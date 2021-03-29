@@ -18,6 +18,8 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { CodePush } from '@ionic-native/code-push/ngx';
+import { SharedServicesModule } from './shared-services/shared-services.module';
+import { ModelsModule } from './models/models.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -28,6 +30,8 @@ import { CodePush } from '@ionic-native/code-push/ngx';
         AppRoutingModule,
         PipesModule,
         SignaturePadModule,
+        SharedServicesModule,
+        ModelsModule.forRoot(),
     ],
     providers: [
         CodePush,

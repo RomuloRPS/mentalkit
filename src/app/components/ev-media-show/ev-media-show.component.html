@@ -1,0 +1,45 @@
+
+
+<ion-chip *ngIf="!showAttachment && images?.length" (click)="changeAttachment()" class="relative right-0"
+    color="primary">
+    <ion-label class="text-center">Mostrar Anexos</ion-label>
+    <ion-icon name="chevron-up-outline" color="primary"></ion-icon>
+  </ion-chip>
+
+
+  <ion-chip *ngIf="showAttachment && images?.length" (click)="changeAttachment()" class="relative right-0"
+    color="primary">
+    <ion-label class="text-center">Esconder Anexos</ion-label>
+    <ion-icon name="chevron-down-outline" color="primary"></ion-icon>
+  </ion-chip>
+
+  <div [hidden]="!showAttachment">
+    <ion-row>
+      <ion-col *ngFor="let item of images; let i = index" size="4">
+
+        <ion-badge  style="position: absolute; right: 0; z-index: 50;" (click)="removeImage(i)" class="absolute top-0 right-0 z-10 mr-4" color="primary"
+          *ngIf="item.file">
+          <ion-icon name="close"></ion-icon>
+        </ion-badge>
+
+        <ion-card *ngIf="item.file">
+          <img class="h-16 w-full" style="height: 50px; width: 100%;" *ngIf="item.file" [src]="item.file | safeHtml">
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="flex items-center" *ngFor="let audio of audios; let i = index" >
+        <audio controls>
+          <source [src]="audio.file | safeHtml" type="audio/x-m4a">
+        </audio>
+        <div class="flex-1 w-full">
+          <ion-buttons class="m-auto justify-center itemc">
+            <ion-button color="danger" (click)="removeAudio(i)">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+    </ion-row>
+
+  </div>

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="medium">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon size="large" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Tela de Assinatura
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-row class="mt-4" [ngClass]="{'drawing-active': isDrawing}">
+    <ion-col></ion-col>
+    <ion-col class="border-2 border-green-500">
+      <signature-pad  [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+
+  
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar >
+      <ion-tab-bar>
+        <ion-tab-button (click)="close()" >
+          <ion-icon size="large" color="danger" name="close"></ion-icon>
+          <ion-label>Cancelar</ion-label>
+        </ion-tab-button>
+     
+        <ion-tab-button (click)="clear()" >
+          <ion-icon size="large" color="warning" name="refresh-outline"></ion-icon>
+          <ion-label>Limpar</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button (click)="savePad()" >
+          <ion-icon size="large" color="primary" name="send"></ion-icon>
+          <ion-label>Salvar</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-toolbar>
+</ion-footer>

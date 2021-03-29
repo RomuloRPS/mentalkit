@@ -4,14 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { RevisionsExpenseViewPage } from './revisions-expense-view.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: RevisionsExpenseViewPage
-  }
+    {
+        path: '',
+        component: RevisionsExpenseViewPage
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
 export class RevisionsExpenseViewPageRoutingModule {}

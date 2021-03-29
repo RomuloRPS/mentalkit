@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { UsersListPageRoutingModule } from './users-list-routing.module';
 
 import { UsersListPage } from './users-list.page';
+import { EvComponentsModule } from 'src/app/components/ev-components';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    UsersListPageRoutingModule
-  ],
-  declarations: [UsersListPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        UsersListPageRoutingModule,
+        EvComponentsModule
+    ],
+    declarations: [UsersListPage]
 })
 export class UsersListPageModule {}

@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { DatabaseService } from './worker/database/database.service';
 import { CodePush, InstallMode } from '@ionic-native/code-push/ngx';
+import { RoleService } from './services/role/role.service';
+import { LogoutService } from './shared-services/logout/logout.service';
 
 @Component({
     selector: 'app-root',
@@ -15,27 +17,14 @@ import { CodePush, InstallMode } from '@ionic-native/code-push/ngx';
 })
 export class AppComponent {
   public dark = false;
-
-  public aferidor = [
-      { title: 'Despesas', url: '/expense-list', icon: 'cash' },
-      { title: 'Informe de Despesas', url: 'expense-report-list', icon: 'list' }
-  ];
-
-  public aprovador = [
-      { title: 'Revisão', url: '/revisions-list', icon: 'checkmark-circle' },
-  ];
-
-  public admin = [
-      { title: 'Usuários', url: '/users-list', icon: 'people' }
-  ];
-
-  public labels = ['', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   public user;
 
   public constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private androidPermissions: AndroidPermissions,
+    private logoutService: LogoutService,
+    public roleService: RoleService,
   ) {
       this.initializeApp();
   }
@@ -46,6 +35,8 @@ export class AppComponent {
               this.requestAllPermissions();
           }
 
+          this.roleService.updateRoles();
+
           setInterval(() => {
               this.user = localStorage.getItem('user');
           }, 1000);
@@ -54,7 +45,11 @@ export class AppComponent {
   }
 
   public logout() {
-      document.location.href = '/login';
+      this.logoutService.logout();
+  }
+
+  public getIcon(menu) {
+      return './assets/' + menu.getAttribute('icon') + '.svg';
   }
 
   public requestAllPermissions() {

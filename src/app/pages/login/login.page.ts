@@ -6,6 +6,14 @@ import { AlertController, ToastController, ActionSheetController } from '@ionic/
 import { environment } from 'src/environments/environment';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from 'src/app/shared-services/auth.service';
+import { ToasterService } from 'src/app/shared-services/toaster/toaster.service';
+import { UserResourceModel } from 'src/app/coloquent-model/user/user.model';
+import { Resource } from 'coloquent/dist/Resource';
+import { UserModel } from 'src/app/models/user.model';
+import { PluralResponse, SingularResponse } from 'coloquent';
+import { RoleService } from 'src/app/services/role/role.service';
+import { OfflineCacheService } from 'src/app/shared-services/offline-cache.service';
 
 @Component({
     selector: 'app-login',
@@ -27,8 +35,12 @@ export class LoginPage implements OnInit {
         private alertController: AlertController,
         private toastController: ToastController,
         private barcodeScanner: BarcodeScanner,
-        private statusBar: StatusBar
-
+        private statusBar: StatusBar,
+        private authService: AuthService,
+        private toasterService: ToasterService,
+        private userModel: UserModel,
+        private roleService: RoleService,
+        private offlineCacheSercice: OfflineCacheService
     ) {
         this.version = environment.version;
     }
@@ -43,30 +55,39 @@ export class LoginPage implements OnInit {
         if (form.valid) {
             this.userData.email = this.userData.login;
 
-            if (this.userData.login == 'revisador') {
-                localStorage.setItem('user', 'revisador');
-            } else if (this.userData.login == 'admin') {
-                localStorage.setItem('user', 'admin');
-            } else {
-                localStorage.setItem('user', 'normal');
-            }
+            this.authService.login(this.userData).then((response: any) => {
+                if (response && response.data) {
+                    const userResource = new SingularResponse(
+                        UserResourceModel.query().getQuery(),
+                        null,
+                        UserResourceModel,
+                        response
+                    ).getData();
 
-            if (!window.navigator.onLine) {
+                    this.saveUserParams(userResource, response);
+
+                    this.offlineCacheSercice.cacheInfo().toPromise().then((resp) => {
+                        this.loading = false;
+
+                        this.route.navigate(['menu']);
+                    }).catch((error) => {
+                        this.loading = false;
+                        this.toasterService.error('Usuário ou senha inválidos!');
+                    });
+                }
+            }).catch((error) => {
+                console.log(error);
                 this.loading = false;
-                this.loginFailed('Sem conexão com internet!');
-
-                return;
-            }
-
-            this.loading = false;
-            setTimeout(() => {
-                localStorage.setItem('JWT', 'batata');
-                this.route.navigate(['/']);
-            }, 2000);
+                this.toasterService.error('Usuário ou senha inválidos!');
+            });
         } else {
             this.submitted = true;
             this.loading = false;
         }
+    }
+
+    public setAuthenticatedUser(user: Resource) {
+        localStorage.setItem('login', JSON.stringify(user));
     }
 
     public hideShowPassword() {
@@ -104,5 +125,19 @@ export class LoginPage implements OnInit {
 
     public forgotPassword() {
         this.route.navigate(['forgot-password']);
+    }
+
+    private saveUserParams(user, resp) {
+        localStorage.setItem('JWT', user.getAttribute('token'));
+        this.userModel
+            .set("id", user.getApiId())
+            .set("JWT", user.getAttribute('token'))
+            .set("username", user.getAttribute('username'))
+            .set("name", user.getAttribute('name'))
+            .set("email", user.getAttribute('email'))
+            .set("user", JSON.stringify(resp))
+            .save();
+
+        this.roleService.updateRoles();
     }
 }

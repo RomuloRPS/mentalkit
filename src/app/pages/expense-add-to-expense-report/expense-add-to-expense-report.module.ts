@@ -9,12 +9,12 @@ import { ExpenseAddToExpenseReportPageRoutingModule } from './expense-add-to-exp
 import { ExpenseAddToExpenseReportPage } from './expense-add-to-expense-report.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ExpenseAddToExpenseReportPageRoutingModule
-  ],
-  declarations: [ExpenseAddToExpenseReportPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ExpenseAddToExpenseReportPageRoutingModule
+    ],
+    declarations: [ExpenseAddToExpenseReportPage]
 })
 export class ExpenseAddToExpenseReportPageModule {}

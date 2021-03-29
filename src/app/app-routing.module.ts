@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'expense-list',
+        redirectTo: 'menu',
         pathMatch: 'full'
     },
     {
@@ -15,6 +15,11 @@ const routes: Routes = [
     {
         path: 'integration',
         loadChildren: () => import('./pages/integration/integration.module').then(m => m.IntegrationPageModule)
+    },
+    {
+        path: 'menu',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule)
     },
     {
         path: 'register-user',
@@ -45,7 +50,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/expense-edit/expense-edit.module').then( m => m.ExpenseEditPageModule)
     },
     {
-        path: 'users-list',
+        path: 'usuarios',
+        loadChildren: () => import('./pages/users-list/users-list.module').then( m => m.UsersListPageModule)
+    },
+    {
+        path: 'usuarios/:update',
         loadChildren: () => import('./pages/users-list/users-list.module').then( m => m.UsersListPageModule)
     },
     {
@@ -66,24 +75,24 @@ const routes: Routes = [
     },
     {
         path: 'users-create',
-        loadChildren: () => import('./pages/users-create/users-create.module').then( m => m.UsersCreatePageModule)
-    },
-    {
-        path: 'users-edit',
         loadChildren: () => import('./pages/users-edit/users-edit.module').then( m => m.UsersEditPageModule)
     },
     {
-        path: 'expense-list',
+        path: 'users-edit/:id',
+        loadChildren: () => import('./pages/users-edit/users-edit.module').then( m => m.UsersEditPageModule)
+    },
+    {
+        path: 'despesas',
         loadChildren: () => import('./pages/expense-list/expense-list.module').then( m => m.ExpenseListPageModule)
     },
-  {
-    path: 'expense-add-to-expense-report',
-    loadChildren: () => import('./pages/expense-add-to-expense-report/expense-add-to-expense-report.module').then( m => m.ExpenseAddToExpenseReportPageModule)
-  },
-  {
-    path: 'expense-add-to-expense-report',
-    loadChildren: () => import('./pages/expense-add-to-expense-report/expense-add-to-expense-report.module').then( m => m.ExpenseAddToExpenseReportPageModule)
-  }
+    {
+        path: 'expense-add-to-expense-report',
+        loadChildren: () => import('./pages/expense-add-to-expense-report/expense-add-to-expense-report.module').then( m => m.ExpenseAddToExpenseReportPageModule)
+    },
+    {
+        path: 'expense-add-to-expense-report',
+        loadChildren: () => import('./pages/expense-add-to-expense-report/expense-add-to-expense-report.module').then( m => m.ExpenseAddToExpenseReportPageModule)
+    }
 ];
 
 @NgModule({

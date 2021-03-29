@@ -1,0 +1,47 @@
+
+<ion-buttons *ngIf="!getAudioOption()" slot="primary">
+  <ion-row>
+    <ng-container *ngIf="!hideOrShow">
+      <ion-col size="4">
+          <ion-icon  style="width: 25vw;" (click)="cameraCapture()" size="large" name="camera-outline"></ion-icon>
+      </ion-col>
+
+      <ion-col *ngIf="!galeryDisabled" size="4">
+            <ion-icon color="dark" style="width: 25vw;" size="large" name="image-outline"></ion-icon>
+            <input  type="file" (change)="getPathImage($event)" #ev
+              style=" position: absolute; height: 100%; width: 100%; border-radius: 50%; opacity: 0; z-index: 1000; top: 0; bottom: 0; left: 0; right: 0;">
+      </ion-col>
+
+      <ion-col *ngIf="galeryDisabled" size="4">
+        <ion-icon color="medium" style="width: 25vw;" size="large" name="image-outline"></ion-icon>
+      </ion-col>
+    </ng-container>
+
+    <ng-container *ngIf="hideOrShow">
+      <ion-col size="4">
+        <ion-buttons>
+          <ion-button>
+            <ion-icon class="ping" color="danger" style="width: 25vw;" name="time-outline" size="large"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col size="4">
+        <div style="width: 25vw; text-align: center;">
+          <ion-text>
+            <h2 style="margin-top: 0px;">
+              <span [hidden]="minute > 9">0</span>
+              <span>{{ minute }}</span>:
+              <span [hidden]="second > 9">0</span>
+              <span>{{ second }}</span>
+            </h2>
+          </ion-text>
+        </div>
+      </ion-col>
+    </ng-container>
+
+    <ion-col size="4" class="relative">
+          <ion-icon (touchstart)="record()" (touchend)="stop()" style="width: 25vw;" color="dark" class="record"  size="large" name="mic-outline"></ion-icon>  
+          <ion-icon *ngIf="hideOrShow" color="danger" class="recording"  size="large" name="mic-outline"></ion-icon>  
+    </ion-col>
+  </ion-row>
+</ion-buttons>

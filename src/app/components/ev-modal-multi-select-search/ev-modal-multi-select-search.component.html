@@ -1,0 +1,45 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>{{selectTitle}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="setValues()"><strong>Pronto</strong></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-searchbar #search type="text" placeholder="Buscar" [(ngModel)]="searchTerm" (ionChange)="getValues()">
+  </ion-searchbar>
+  <ion-list *ngIf="list?.length > 0">
+    <ion-item *ngFor="let item of list">
+      <ion-icon color="{{iconColor ? iconColor : 'primary'}}" slot="start" src="{{icon}}"></ion-icon>
+      <ion-label>{{item.getAttribute(this.showField)}}</ion-label>
+      <ion-checkbox  (ionChange)="changeSelect(item)" slot="end" [(ngModel)]="item.isChecked"></ion-checkbox>
+      {{checkIsSelected(item)}}
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-row *ngIf="list?.length == 0">
+
+    <ion-col style="height: 100%;">
+
+      <ion-card style="height: 100%;" mode="ios" style="text-align: center;">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-card-content>
+
+          <ion-icon style="font-size: 80px;" color="primary" name="arrow-up-outline"></ion-icon>
+          <ion-text color="dark">
+            <h2><strong>Informe na busca o que deseja</strong></h2>
+          </ion-text>
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+
+</ion-content>
