@@ -3,12 +3,9 @@ import { ModalController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { environment } from 'src/environments/environment';
-import { OneSignal } from '@ionic-native/onesignal/ngx';
-import { DatabaseService } from './worker/database/database.service';
-import { CodePush, InstallMode } from '@ionic-native/code-push/ngx';
 import { RoleService } from './services/role/role.service';
 import { LogoutService } from './shared-services/logout/logout.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
     selector: 'app-root',
@@ -25,6 +22,7 @@ export class AppComponent {
     private androidPermissions: AndroidPermissions,
     private logoutService: LogoutService,
     public roleService: RoleService,
+    private screenOrientation: ScreenOrientation
   ) {
       this.initializeApp();
   }
@@ -35,6 +33,9 @@ export class AppComponent {
               this.requestAllPermissions();
           }
 
+          // set to landscape
+          this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
           this.roleService.updateRoles();
 
           setInterval(() => {
@@ -42,6 +43,10 @@ export class AppComponent {
           }, 1000);
           this.splashScreen.hide();
       });
+  }
+
+  public cacheApp() {
+
   }
 
   public logout() {

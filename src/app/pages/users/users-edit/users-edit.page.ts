@@ -2,9 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { CostCenterModel } from 'src/app/coloquent-model/cost-center/cost-center.model';
+import { DepartmentModel } from 'src/app/coloquent-model/department/department.model';
 import { RoleModel } from 'src/app/coloquent-model/role/role.model';
 import { UserResourceModel } from 'src/app/coloquent-model/user/user.model';
-import { EvMediaPopoverComponent } from 'src/app/components/ev-media/ev-media-popover/ev-media-popover.component';
+import { EvMediaPopoverColoquentComponent } from 'src/app/components/ev-media/ev-media-popover-coloquent/ev-media-popover-coloquent.component';
+import { CostCenterService } from 'src/app/resources/cost-center/cost-center.service';
+import { DepartmentService } from 'src/app/resources/department/department.service';
 import { RoleService } from 'src/app/resources/role/role.service';
 import { UserService } from 'src/app/resources/user/user.service';
 import { LoadingService } from 'src/app/shared-services/loading/loading.service';
@@ -25,6 +29,13 @@ export class UsersEditPage implements OnInit {
     public submitted = false;
 
     public roles: Array<RoleModel>;
+
+    public department: DepartmentModel;
+    public selectedDepartmentId;
+
+    public costCenter: CostCenterModel;
+    public selectedCostCenterId;
+
     public selectedRoles;
     public passwordParams = {
         password: null,
@@ -38,10 +49,12 @@ export class UsersEditPage implements OnInit {
         private route: ActivatedRoute,
         private userService: UserService,
         private modalController: ModalController,
-        private roleService: RoleService,
+        public roleService: RoleService,
         private popoverController: PopoverController,
         private loadingService: LoadingService,
-        private toasterService: ToasterService
+        private toasterService: ToasterService,
+        public departmentService: DepartmentService,
+        public costCenterService: CostCenterService
     ) { }
 
     public ngOnInit() {
@@ -56,6 +69,8 @@ export class UsersEditPage implements OnInit {
                 this.userService.onlyOffline().get(filters).subscribe((resp) => {
                     this.user = resp.data[0];
                     this.setRoles(this.user);
+                    this.setDepartment(this.user);
+                    this.setCostCenter(this.user);
                     this.editing = true;
                 });
             } else {
@@ -73,7 +88,7 @@ export class UsersEditPage implements OnInit {
         }
 
         const popoverOptions = {
-            component: EvMediaPopoverComponent,
+            component: EvMediaPopoverColoquentComponent,
             translucent: true,
             event: ev,
             componentProps: {
@@ -98,8 +113,34 @@ export class UsersEditPage implements OnInit {
         this.roles = user.getRelation('roles');
     }
 
+    public setDepartment(user) {
+        this.department = user.getRelation('department');
+
+        if (user.getRelation('department')) {
+            this.selectedDepartmentId = user.getRelation('department').getApiId();
+        }
+    }
+
+    public setCostCenter(user) {
+        this.costCenter = user.getRelation('costCenter');
+
+        if (user.getRelation('costCenter')) {
+            this.selectedCostCenterId = user.getRelation('costCenter').getApiId();
+        }
+    }
+
     public selectChange(event) {
-        this.user.elementRelations.roles = event;
+        if (event && event.jsonApiType) {
+            if (event.jsonApiType == 'departments') {
+                this.user.elementRelations.department = event;
+            }
+
+            if (event && event.jsonApiType == 'cost-centers') {
+                this.user.elementRelations.costCenter = event;
+            }
+        } else {
+            this.user.elementRelations.roles = event;
+        }
     }
 
     public backToList() {

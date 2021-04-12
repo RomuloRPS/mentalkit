@@ -3,109 +3,103 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Editar Informe</ion-title>
+    <ion-title *ngIf="editing">Editar Informe de Despesa</ion-title>
+    <ion-title *ngIf="!editing">Criar Infome de Despesa</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
 
-  <form class="mt-6" #loginForm="ngForm" novalidate>
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngIf="expenseReport?.getRelation('avatar')" (click)="openOptions($event)">
+      <img style="height: 150px;" class="rounded-md h-full m-4"  [src]="expenseReport.getRelation('avatar')?.getAttribute('token') | attachmentToken">
+    </ion-slide>
+    <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
+      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
+    </ion-slide>
+    <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
+      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
+    </ion-slide>
+    <ion-slide (click)="openOptions($event)">
+      <div class="h-40 border-2 border-dotted border-ultramarine-500 w-full m-2 rounded-md">
+        <ion-icon color="primary" class="text-6xl m-auto mt-2" src="/assets/fontawesome/solid/images.svg"></ion-icon>
+        <p class="font-bold text-ultramarine-500">Incluir foto</p>
+        <p class="text-sm text-ultramarine-500">JPG, GIF e PNG somente</p>
+      </div>
+      <!-- <img style="height: 150px;" *ngIf="expenseReport?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(expenseReport?.getRelation('avatar')?.getAttribute('token'))" /> -->
+    </ion-slide>
+  </ion-slides>
+
+  <form *ngIf="expenseReport" class="mt-6" #expenseReportForm="ngForm" name="expenseReportForm">
     <ion-row class="flex justify-center ">
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="pencil"></ion-icon>
-          <ion-input placeholder="Título" name="username" value="Despesas de Março" type="text" 
+          <ion-icon slot="start" color="tertiary" name="pencil-outline"></ion-icon>
+          <ion-label>Motivo/Descrição: </ion-label>
+          <ion-input #name="ngModel"  [(ngModel)]="expenseReport.elements.name" name="name" type="text" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="name.valid || submitted == false" class="ion-padding-start">
+            Campo Obrigatório
+          </p>
+        </ion-text>
       </ion-col>
 
       <ion-col size="11">
-        <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary"  name="document-outline"></ion-icon>
-          <ion-label position="floating">Política de Despesas</ion-label>
-          <ion-select value="c" interface="popover" placeholder="">
-            <ion-select-option value="f">Política 1</ion-select-option>
-            <ion-select-option value="c">Política 2</ion-select-option>
-            <ion-select-option value="m">Política 3</ion-select-option>
-          </ion-select>
-        </ion-item>
+        <app-ev-select [value]="policy" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Política"
+        (valueChange)="selectPolicy($event)" [(valueId)]="selectedPolicyId" inputName='Política' [baseService]="policyService"
+        #roleSelect></app-ev-select>
+        <ion-text color="danger">
+          <p [hidden]="this.expenseReport.getRelation('policy') || submitted == false" class="ion-padding-start">
+            Campo Obrigatório
+          </p>
+        </ion-text>
       </ion-col>
+
+      <ion-col size="11">
+        <app-ev-select [value]="department" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Departamento"
+        (valueChange)="selectDepartment($event)" [(valueId)]="selectedDepartmentId" inputName='Departamento' [baseService]="departmentService"
+        #roleSelect></app-ev-select>
+      </ion-col>
+
+      <ion-col size="11">
+        <app-ev-select [value]="costCenter" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Centro de Custo"
+        (valueChange)="selectCostCenter($event)" [(valueId)]="selectedCostCenterId" inputName='Centro de Custo' [baseService]="costCenterService"
+        #roleSelect></app-ev-select>
+      </ion-col>
+
+      <ion-col size="11">
+        <app-ev-multi-select-expenses [filters]="expenseFilters" [values]="expenses" iconColor="tertiary" icon="../../../assets/fontawesome/solid/cash-register.svg" showField="name" placeholder="Despesas"
+        (valueChange)="selectExpenses($event)" [(valueId)]="selectedExpenses" inputName='Expenses' [baseService]="expenseService"
+        #roleSelect></app-ev-multi-select-expenses>
+      </ion-col>
+
     </ion-row>
   </form>
 
-  <ion-row class="flex justify-center ">
-    <ion-col size="11" >
-      <ion-card class="card-no-border card-no-margin">
-        <ion-list>
-          <ion-list-header>
-            <ion-title>Despesas</ion-title>
-          </ion-list-header>
-        
-          <ion-item lines="none">
-            <ion-checkbox slot="start" [checked]="true" ></ion-checkbox>
-              <ion-label>POSTO RODAO</ion-label>
-              <ion-badge color="warning">
-                150,320 COP
-              </ion-badge>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-checkbox slot="start" [checked]="true" ></ion-checkbox>
-              <ion-label>ELOVERDE</ion-label>
-              <ion-badge color="warning">
-                200,303 COP
-              </ion-badge>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-checkbox slot="start" [checked]="false" ></ion-checkbox>
-              <ion-label>APPLE</ion-label>
-              <ion-badge color="warning">
-                600,500 COP
-              </ion-badge>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-checkbox slot="start" [checked]="true" ></ion-checkbox>
-              <ion-label>POSTO RODAO</ion-label>
-              <ion-badge color="warning">
-                120,232 COP
-              </ion-badge>
-          </ion-item>
-
-
-        </ion-list>
-      </ion-card>
-
-      <ion-card  class="card-no-border card-no-margin">
-        <ion-item lines="none">
-          <ion-label position="floating">Nota</ion-label>
-          <ion-textarea></ion-textarea>
-        </ion-item>
-      </ion-card>
-      
-    </ion-col>
-  
-  </ion-row>
-  
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-row>
       <ion-col size="6">
-        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+        <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
           Cancelar
         </ion-button>
       </ion-col>
-      <ion-col size="6">
-        <ion-button (click)="toReportView()"  expand="block">
+      <ion-col *ngIf="!editing" size="6">
+        <ion-button (click)="create(expenseReportForm)"  expand="block">
+          Criar
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="editing" size="6">
+        <ion-button (click)="save(expenseReportForm)"  expand="block">
           Salvar
         </ion-button>
       </ion-col>
     </ion-row>
-    
-   
   </ion-toolbar>
 </ion-footer>
+

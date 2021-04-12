@@ -1,17 +1,14 @@
 
-<ion-row>
-  <ion-col size="12">
-    <ion-item class="rounded-md mt-2" lines="none" [disabled] = "disabled"  (click)="chooseOption()">
+    <ion-item class="rounded-md" lines="none" [disabled] = "disabled"  (click)="chooseOption()">
       <ion-icon color="{{iconColor ? iconColor : 'primary'}}" slot="start" src="{{icon}}"></ion-icon>
-          <ng-container *ngIf="!value?.id || valueId != value?.id">
-            <ion-label class="text-right" color="medium">{{placeholder}}</ion-label>
+          <ng-container *ngIf="!value?.getApiId() || valueId != value?.id">
+            <ion-label position="start" class="text-right" color="medium">{{placeholder}}</ion-label>
             <ion-icon slot="end" color="medium" size="small" name="caret-down-outline"></ion-icon>
           </ng-container>
-          <ng-container *ngIf="value?.id && valueId == value?.id">
-            <ion-label *ngIf="!indexField" class="text-right">{{value[showField]}}</ion-label>
-            <ion-label *ngIf="indexField" class="text-right">{{value[indexField]}} - {{value[showField]}}</ion-label>
+          <ng-container *ngIf="value?.getApiId() && valueId == value?.getApiId()">
+            <ion-label position="start" color="medium">{{placeholder}}</ion-label>
+            <ion-label position="fixed"  *ngIf="!indexField" class="text-right">{{value?.getAttribute(showField)}}</ion-label>
+            <ion-label *ngIf="indexField" class="text-right">{{value?.getAttribute(indexField)}} - {{value?.getAttribute(showField)}}</ion-label>
             <ion-icon slot="end" color="medium" size="small" name="caret-down-outline"></ion-icon>
           </ng-container>
       </ion-item>
-  </ion-col>
-</ion-row>

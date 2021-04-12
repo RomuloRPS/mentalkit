@@ -1,4 +1,6 @@
 export const UserRelations = [
     'roles',
-    'avatar'
+    'avatar',
+    'department',
+    'costCenter'
 ];

@@ -1,0 +1,69 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-title>{{selectTitle}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="setValues()"><strong>Pronto</strong></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="light" fullscreen>
+  <ion-searchbar #search type="text" placeholder="Buscar" [(ngModel)]="searchTerm" (ionChange)="getValues()">
+  </ion-searchbar>
+  <ng-container *ngIf="list?.length > 0">
+    <ion-card *ngFor="let item of list" class="card-no-border card-no-margin">
+      <ion-item  lines="none">
+        <ion-thumbnail size="large" slot="start">
+          <img *ngIf="item.getRelation('avatar')?.getAttribute('token')" [src]="item.getRelation('avatar')?.getAttribute('token') | attachmentToken">
+          <ion-icon color="primary" class="text-5xl"  *ngIf="!item.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/image.svg"></ion-icon>
+        </ion-thumbnail>
+       
+        <ion-label class="text-xs ">
+          <p style="font-size: 13px;" class="mt-2 w-12/12">
+            <span class="font-bold text-base" style="font-size: 15px;">{{item.getAttribute('name')}} - {{item.getAttribute('provider')}}</span>
+          </p>
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+            <strong>{{item.getRelation('category')?.getAttribute('name')}}</strong>
+          </p>
+  
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+             <span>{{item.getAttribute('issue_date') | dateTimeFormat: 'dd/MM/yyyy'}}</span>
+          </p>
+
+          <p style="font-size: 13px;" class="mt-2">
+            <ion-badge class="mt-2" color="warning">
+              <ion-label>{{item.getAttribute('value') | currency:'COP ':true }}</ion-label>
+            </ion-badge>
+         </p>
+        </ion-label>
+        <ion-checkbox (ionChange)="changeSelect(item)" [(ngModel)]="item.isChecked" slot="end"></ion-checkbox>
+        
+      </ion-item>
+    </ion-card>
+  </ng-container>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-row *ngIf="list?.length == 0">
+
+    <ion-col style="height: 100%;">
+     
+      
+      <ion-card style="height: 100%;" mode="ios" style="text-align: center;">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-card-content>
+
+          <ion-icon style="font-size: 80px;" color="primary" name="arrow-up-outline"></ion-icon>
+          <ion-text color="dark">
+            <h2><strong>Informe na busca o que deseja</strong></h2>
+          </ion-text>
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+
+</ion-content>

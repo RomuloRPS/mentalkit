@@ -18,8 +18,7 @@ import { LoadingService } from 'src/app/shared-services/loading/loading.service'
     styleUrls: ['./ev-media-popover.component.scss'],
 })
 export class EvMediaPopoverComponent implements OnInit {
-    @Input() public galeryDisabled;
-    @Input() public pathImage: File;
+    @Input() public image;
     @Output() public ImgSelect: EventEmitter<any> = new EventEmitter();
 
     public resource = {
@@ -36,8 +35,6 @@ export class EvMediaPopoverComponent implements OnInit {
         imageUri: ''
     };
 
-    public image = [];
-
     public active = false;
     public toogleCamera = true;
     public idItem;
@@ -46,7 +43,6 @@ export class EvMediaPopoverComponent implements OnInit {
     public filterArray = [];
 
     public showAttachment = true;
-    public items = [];
 
     public constructor(
         public keyboard: Keyboard,
@@ -65,15 +61,16 @@ export class EvMediaPopoverComponent implements OnInit {
     public ngOnInit() {
     }
 
+    public hasImage() {
+        return this.image;
+    }
+
     public keyboardIsOpen() {
         return this.keyboard.isVisible;
     }
 
     public removeImage() {
-        this.items = [];
-        this.ImgSelect.emit(this.items);
-        this.mediaService.setImages(this.items);
-        this.popoverController.dismiss(null);
+        this.popoverController.dismiss('delete');
     }
 
     public uploadImage(event?) {
@@ -104,29 +101,12 @@ export class EvMediaPopoverComponent implements OnInit {
             fReader.readAsDataURL(this.selectedFile);
 
             setTimeout(() => {
-                this.items = this.mediaService.getImages();
-
                 const itemToSave = {
                     file: this.container.image,
                     name: this.selectedFile.name
                 };
 
-                this.items.push(itemToSave);
-
-                this.upload(this.selectedFile).then((resp) => {
-                    const avatarResource = new SingularResponse(
-                        AvatarModel.query().getQuery(),
-                        null,
-                        AvatarModel,
-                        resp.axiosResponse.data
-                    ).getData();
-
-                    this.ImgSelect.emit(this.items);
-                    this.mediaService.setImages(this.items);
-                    this.popoverController.dismiss(avatarResource);
-                }).catch((error) => {
-                    console.log(error);
-                });
+                this.popoverController.dismiss(itemToSave);
             }, 500);
         } else {
             if (sizeImg > 5000000) {
@@ -178,13 +158,10 @@ export class EvMediaPopoverComponent implements OnInit {
         document.addEventListener('deviceready', () => {
             this.camera.getPicture(options).then((imageData) => {
                 this.loadingController.dismiss();
-                console.log(imageData);
 
                 const base64Image = 'data:image/jpeg;base64,' + imageData;
 
-                console.log(base64Image);
-
-                this.verifyBase64String(imageData);
+                this.verifyBase64String(base64Image);
             }, (err) => {
                 this.loadingController.dismiss();
             });
@@ -194,52 +171,18 @@ export class EvMediaPopoverComponent implements OnInit {
     public verifyBase64String(base64Data) {
         let type = null;
 
-        // if (base64Data.includes('jpeg')) {
-        //     type = base64Data.substr(11, 4);
-        // } else {
-        //     type = base64Data.substr(11, 3);
-        // }
-
-        this.items = this.mediaService.getImages();
-
-        const imageName = 'imagem.jpeg';
-        const bin = this.dataURItoBin(base64Data);
-        // const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-
-        // console.log(imageFile);
-        this.loadingService.show('Subindo foto');
-        this.upload(bin).then((resp) => {
-            this.loadingService.dismiss();
-
-            const avatarResource = new SingularResponse(
-                AvatarModel.query().getQuery(),
-                null,
-                AvatarModel,
-                resp.axiosResponse.data
-            ).getData();
-
-            this.ImgSelect.emit(this.items);
-            this.mediaService.setImages(this.items);
-            this.popoverController.dismiss(avatarResource);
-        }).catch((error) => {
-            this.loadingService.dismiss();
-            this.popoverController.dismiss();
-            console.log(error);
-        });
-    }
-
-    public dataURItoBin(dataURI) {
-        const byteString = window.atob(dataURI);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const int8Array = new Uint8Array(arrayBuffer);
-
-        for (let i = 0; i < byteString.length; i++) {
-            int8Array[i] = byteString.charCodeAt(i);
+        if (base64Data.includes('jpeg')) {
+            type = base64Data.substr(11, 4);
+        } else {
+            type = base64Data.substr(11, 3);
         }
 
-        // const blob = new Blob([int8Array], { type: 'image/jpeg' });
+        const itemToSave = {
+            file: base64Data,
+            name: 'imagem.' + type
+        };
 
-        return int8Array;
+        this.popoverController.dismiss(itemToSave);
     }
 
     public async presentToast(message) {

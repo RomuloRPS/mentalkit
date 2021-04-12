@@ -8,13 +8,15 @@ import { ExpenseReportViewPageRoutingModule } from './expense-report-view-routin
 
 import { ExpenseReportViewPage } from './expense-report-view.page';
 import { ExpenseReportPopoverComponent } from './menu-popover/menu-popover.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        ExpenseReportViewPageRoutingModule
+        ExpenseReportViewPageRoutingModule,
+        PipesModule
     ],
     declarations: [ExpenseReportViewPage, ExpenseReportPopoverComponent],
     entryComponents: [

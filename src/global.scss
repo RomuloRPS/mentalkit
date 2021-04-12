@@ -26,6 +26,15 @@
 @import "~@ionic/angular/css/flex-utils.css";
 @import "./tailwind.dist.css";
 
+.ion-color-warning-light {
+  --ion-color-base: var(--ion-color-warning-light);
+  --ion-color-base-rgb: var(--ion-color-warning-light-rgb);
+  --ion-color-contrast: var(--ion-color-warning-light-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-warning-light-contrast-rgb);
+  --ion-color-shade: var(--ion-color-warning-light-shade);
+  --ion-color-tint: var(--ion-color-warning-light-tint);
+}
+
 .card-no-border {
   box-shadow: none !important;
 }

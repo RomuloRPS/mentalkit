@@ -4,18 +4,22 @@
       <ion-header class="ion-no-border">
         <ion-toolbar color="primary">
           <ion-title>Kampo App</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cacheApp()" name="refresh-outline"></ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content >
-        <!-- <div style="background-color: #0205A1;" class=" h-24 relative"> -->
+      <ion-content>
           <ion-list *ngFor="let role of roleService.getRoles()"  id="inbox-list">
             <ion-list-header>{{role.getAttribute('description')}}</ion-list-header>
-            <ion-menu-toggle auto-hide="false" *ngFor="let menu of role.getRelation('menus'); let i = index">
-              <ion-item routerDirection="root" [routerLink]="[menu.getAttribute('action')]" lines="none" detail="false" routerLinkActive="selected">
-                <ion-icon color="tertiary" slot="start" [src]="getIcon(menu)" ></ion-icon>
-                <ion-label>{{ menu.getAttribute('name') }}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
+            <ng-container *ngFor="let menu of role.getRelation('menus'); let i = index">
+              <ion-menu-toggle auto-hide="false" *ngIf="menu.getAttribute('application_type') == 'WEB_APP'">
+                <ion-item routerDirection="root" [routerLink]="[menu.getAttribute('action')]" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon color="tertiary" slot="start" [src]="getIcon(menu)" ></ion-icon>
+                  <ion-label>{{ menu.getAttribute('name') }}</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ng-container> 
             <div class="h-1 w-2/6 mt-2 mb-2 m-auto rounded-md" style="background-color: #0205A1;"></div>
           </ion-list>
           <ion-list>
@@ -26,10 +30,6 @@
               </ion-item>
             </ion-menu-toggle>
           </ion-list>
-
-
-        <!-- </div> -->
-        
       </ion-content>
       <ion-footer>
         <img style="height: 100px;" class="rounded-md m-auto mb-6" src="./assets/logo-white.jpeg" />

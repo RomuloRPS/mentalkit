@@ -25,6 +25,9 @@ import { EvModalAppVersionComponent } from './ev-modal-app-version/ev-modal-app-
 import { EvModalEloDocumentViewerComponent } from './ev-modal-elo-document-viewer/ev-modal-elo-document-viewer.component';
 import { EvMediaPopoverComponent } from './ev-media/ev-media-popover/ev-media-popover.component';
 import { HttpClientService } from '../services/http/http-client.service';
+import { EvMediaPopoverColoquentComponent } from './ev-media/ev-media-popover-coloquent/ev-media-popover-coloquent.component';
+import { EvMultiSelectExpensesComponent } from './ev-multi-select-expenses/ev-multi-select-expenses.component';
+import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-select-expense-search/ev-modal-multi-select-expense-search.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -32,6 +35,7 @@ import { HttpClientService } from '../services/http/http-client.service';
         IonicModule,
         PipesModule,
         SignaturePadModule,
+        PipesModule
     ],
     declarations: [
         EvMediaComponent,
@@ -46,7 +50,10 @@ import { HttpClientService } from '../services/http/http-client.service';
         EvModalSignatureComponent,
         EvModalAppVersionComponent,
         EvModalEloDocumentViewerComponent,
-        EvMediaPopoverComponent
+        EvMediaPopoverComponent,
+        EvMediaPopoverColoquentComponent,
+        EvMultiSelectExpensesComponent,
+        EvModalMultiSelectExpenseSearchComponent
     ],
     entryComponents: [
         EvModalSearchComponent,
@@ -57,7 +64,10 @@ import { HttpClientService } from '../services/http/http-client.service';
         EvModalSignatureComponent,
         EvModalAppVersionComponent,
         EvModalEloDocumentViewerComponent,
-        EvMediaPopoverComponent
+        EvMediaPopoverComponent,
+        EvMediaPopoverColoquentComponent,
+        EvMultiSelectExpensesComponent,
+        EvModalMultiSelectExpenseSearchComponent
     ],
     exports: [
         EvMediaComponent,
@@ -70,7 +80,10 @@ import { HttpClientService } from '../services/http/http-client.service';
         EvModalMultiSelectSearchComponent,
         EvLongPressComponent,
         EvModalEloDocumentViewerComponent,
-        EvMediaPopoverComponent
+        EvMediaPopoverComponent,
+        EvMediaPopoverColoquentComponent,
+        EvMultiSelectExpensesComponent,
+        EvModalMultiSelectExpenseSearchComponent
     ],
     providers: [
         Keyboard,

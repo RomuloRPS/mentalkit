@@ -7,13 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { ExpenseEditPageRoutingModule } from './expense-edit-routing.module';
 
 import { ExpenseEditPage } from './expense-edit.page';
+import { SharedServicesModule } from 'src/app/shared-services/shared-services.module';
+import { EvComponentsModule } from 'src/app/components/ev-components';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        ExpenseEditPageRoutingModule
+        ExpenseEditPageRoutingModule,
+        EvComponentsModule,
+        PipesModule
     ],
     declarations: [ExpenseEditPage]
 })

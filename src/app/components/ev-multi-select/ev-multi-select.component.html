@@ -8,7 +8,9 @@
             <ion-icon slot="end" color="medium" size="small" name="caret-down-outline"></ion-icon>
           </ng-container>
           <ng-container *ngIf="values?.length > 0">
-            <ion-label *ngIf="!indexField" color="primary" class="text-right text-xs">
+            <ion-label position="stacked" color="medium">{{placeholder}}</ion-label>
+
+            <ion-label  *ngIf="!indexField" color="primary" class="text-right text-xs">
               <ng-container *ngFor="let value of values; let i = index">
                {{value?.getAttribute(showField)}}{{i == values.length-1 ? '' : ','}}
               </ng-container>
@@ -19,7 +21,7 @@
                {{value?.getAttribute(indexField)}} - {{value.getAttribute(showField)}} {{i == values.length-1 ? '' : ','}}
               </ng-container>
             </ion-label>
-            <ion-icon slot="end" color="medium" size="small" name="caret-down-outline"></ion-icon>
+            <!-- <ion-icon slot="end" color="medium" size="small" name="caret-down-outline"></ion-icon> -->
           </ng-container>
       </ion-item>
   </ion-col>

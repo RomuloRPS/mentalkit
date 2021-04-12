@@ -131,15 +131,17 @@ export class UsersListPage implements OnInit {
         this.router.navigate(['users-edit' + '/' + id]);
     }
 
-    public trySelect(task) {
+    public trySelect(user) {
         if (this.selecteds.length == 0) {
+            this.toUserEdit(user.getApiId());
+
             return;
         }
 
-        if (task.selected && this.selecteds.length > 1) {
-            this.removeSelectedTask(task);
-        } else if(!task.selected) {
-            this.selectTask(task);
+        if (user.selected && this.selecteds.length > 1) {
+            this.removeSelectedTask(user);
+        } else if(!user.selected) {
+            this.selectTask(user);
         }
     }
 

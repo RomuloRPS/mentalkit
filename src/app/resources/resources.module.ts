@@ -6,13 +6,25 @@ import { GenericCollectionModel } from './generic-collection.model';
 import { HttpUtil } from './http.util';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
+import { ExpenseModule } from './expense/expense.module';
+import { CategoryModule } from './category/category.module';
+import { DepartmentModule } from './department/department.module';
+import { CostCenterModule } from './cost-center/cost-center.module';
+import { ExpenseReportModule } from './expense-report/expense-report.module';
+import { PolicyModule } from './policy/policy.module';
 
 @NgModule({
     declarations: [],
     entryComponents: [],
     imports: [
         UserModule,
-        RoleModule
+        RoleModule,
+        ExpenseModule,
+        CategoryModule,
+        DepartmentModule,
+        CostCenterModule,
+        ExpenseReportModule,
+        PolicyModule
     ],
     providers: [
         StorageUtil,

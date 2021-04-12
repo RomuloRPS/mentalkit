@@ -26,28 +26,44 @@ const routes: Routes = [
         loadChildren: () => import('./pages/register-user/register-user.module').then(m => m.RegisterUserPageModule)
     },
     {
-        path: 'expense-report-list',
+        path: 'informe-de-despesas',
         loadChildren: () => import('./pages/expense-report/expense-report-list/expense-report-list.module').then( m => m.ExpenseReportListPageModule)
     },
     {
-        path: 'expense-report-view',
+        path: 'informe-de-despesas/:update',
+        loadChildren: () => import('./pages/expense-report/expense-report-list/expense-report-list.module').then( m => m.ExpenseReportListPageModule)
+    },
+    {
+        path: 'expense-report-view/:id',
         loadChildren: () => import('./pages/expense-report/expense-report-view/expense-report-view.module').then( m => m.ExpenseReportViewPageModule)
     },
     {
-        path: 'expense-report-create',
-        loadChildren: () => import('./pages/expense-report/expense-report-create/expense-report-create.module').then( m => m.ExpenseReportCreatePageModule)
+        path: 'expense-create',
+        loadChildren: () => import('./pages/expenses/expense-edit/expense-edit.module').then( m => m.ExpenseEditPageModule)
     },
     {
-        path: 'expense-create',
-        loadChildren: () => import('./pages/expenses/expense-create/expense-create.module').then( m => m.ExpenseCreatePageModule)
+        path: 'expense-create/:expense-report-id',
+        loadChildren: () => import('./pages/expenses/expense-edit/expense-edit.module').then( m => m.ExpenseEditPageModule)
+    },
+    {
+        path: 'expense-edit/:id',
+        loadChildren: () => import('./pages/expenses/expense-edit/expense-edit.module').then( m => m.ExpenseEditPageModule)
+    },
+    {
+        path: 'expense-view/:id',
+        loadChildren: () => import('./pages/expenses/expense-view/expense-view.module').then( m => m.ExpenseViewPageModule)
+    },
+    {
+        path: 'expense-report-edit/:id',
+        loadChildren: () => import('./pages/expense-report/expense-report-edit/expense-report-edit.module').then( m => m.ExpenseReportEditPageModule)
+    },
+    {
+        path: 'expense-report-create/:expense-ids',
+        loadChildren: () => import('./pages/expense-report/expense-report-edit/expense-report-edit.module').then( m => m.ExpenseReportEditPageModule)
     },
     {
         path: 'expense-report-edit',
         loadChildren: () => import('./pages/expense-report/expense-report-edit/expense-report-edit.module').then( m => m.ExpenseReportEditPageModule)
-    },
-    {
-        path: 'expense-edit',
-        loadChildren: () => import('./pages/expenses/expense-edit/expense-edit.module').then( m => m.ExpenseEditPageModule)
     },
     {
         path: 'usuarios',
@@ -58,22 +74,6 @@ const routes: Routes = [
         loadChildren: () => import('./pages/users/users-list/users-list.module').then( m => m.UsersListPageModule)
     },
     {
-        path: 'revisions-list',
-        loadChildren: () => import('./pages/revisions-list/revisions-list.module').then( m => m.RevisionsListPageModule)
-    },
-    {
-        path: 'revisions-edit',
-        loadChildren: () => import('./pages/revisions-edit/revisions-edit.module').then( m => m.RevisionsEditPageModule)
-    },
-    {
-        path: 'revisions-view',
-        loadChildren: () => import('./pages/revisions-view/revisions-view.module').then( m => m.RevisionsViewPageModule)
-    },
-    {
-        path: 'revisions-expense-view',
-        loadChildren: () => import('./pages/revisions-expense-view/revisions-expense-view.module').then( m => m.RevisionsExpenseViewPageModule)
-    },
-    {
         path: 'users-create',
         loadChildren: () => import('./pages/users/users-edit/users-edit.module').then( m => m.UsersEditPageModule)
     },
@@ -82,7 +82,23 @@ const routes: Routes = [
         loadChildren: () => import('./pages/users/users-edit/users-edit.module').then( m => m.UsersEditPageModule)
     },
     {
+        path: 'revisao',
+        loadChildren: () => import('./pages/revisions/revisions-list/revisions-list.module').then( m => m.RevisionsListPageModule)
+    },
+    {
+        path: 'revisions/:update',
+        loadChildren: () => import('./pages/revisions/revisions-list/revisions-list.module').then( m => m.RevisionsListPageModule)
+    },
+    {
+        path: 'revision-view/:id',
+        loadChildren: () => import('./pages/revisions/revisions-view/revisions-view.module').then( m => m.RevisionViewPageModule)
+    },
+    {
         path: 'despesas',
+        loadChildren: () => import('./pages/expenses/expense-list/expense-list.module').then( m => m.ExpenseListPageModule)
+    },
+    {
+        path: 'despesas/:update',
         loadChildren: () => import('./pages/expenses/expense-list/expense-list.module').then( m => m.ExpenseListPageModule)
     },
     {

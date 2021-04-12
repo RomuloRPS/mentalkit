@@ -1,8 +1,11 @@
 <ion-header translucent>
-  <ion-toolbar color="medium">
+  <ion-toolbar color="primary">
+    <ion-buttons *ngIf="value" slot="start">
+      <ion-button (click)="clear()"><strong>Limpar</strong></ion-button>
+    </ion-buttons>
     <ion-title>{{selectTitle}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="close()">Cancelar</ion-button>
+      <ion-button (click)="close()">Fechar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -12,11 +15,11 @@
   
   <ion-list *ngIf="list?.length > 0">
     <ion-item *ngFor="let item of list" (click)="setValue(item)">
-      <ng-container *ngIf="item[indexField] || item[showField]">
-        <ion-text class="py-2" *ngIf="!indexField">{{item[showField]}}</ion-text>
-        <ion-text class="py-2" *ngIf="indexField">{{item[indexField]}} - {{item[showField] ? item[showField] : 'Não informado'}}</ion-text>
+      <ng-container *ngIf="item.getAttribute(indexField) || item.getAttribute(showField)">
+        <ion-text class="py-2" *ngIf="!indexField">{{item.getAttribute(showField)}}</ion-text>
+        <ion-text class="py-2" *ngIf="indexField">{{item.getAttribute(indexField)}} - {{item.getAttribute(showField) ? item.getAttribute(showField) : 'Não informado'}}</ion-text>
       </ng-container>
-      <ng-container *ngIf="!item[indexField] && !item[showField]">
+      <ng-container *ngIf="!item.getAttribute(indexField) && !item.getAttribute(showField)">
         <ion-text class="font-bold">{{notFound}}</ion-text>
       </ng-container>
 

@@ -15,6 +15,7 @@ export class EvModalSearchComponent implements OnInit {
   @Input() public resource;
   @Input() public showField;
   @Input() public indexField;
+  @Input() public value;
   @Input() public selectTitle = "Selecione";
   @Input() public notFound = "Não Informar";
 
@@ -71,6 +72,10 @@ export class EvModalSearchComponent implements OnInit {
 
   public close() {
       this.modalCtrl.dismiss(null);
+  }
+
+  public clear() {
+      this.modalCtrl.dismiss('clear');
   }
 
   public loadMoreData(event) {

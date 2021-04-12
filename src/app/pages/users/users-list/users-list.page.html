@@ -101,22 +101,27 @@
           <ion-card [color]="getCardColor(user)" class="card-no-border card-no-margin">
             <ion-item [color]="getCardColor(user)" lines="none">
               <ion-avatar size="large" slot="start">
-                <img *ngIf="user?.getRelation('avatar')?.getAttribute('token')"  style="height: 40px; width: 40px;" [src]="getIconUrl(user?.getRelation('avatar')?.getAttribute('token'))" />
+                <img *ngIf="user?.getRelation('avatar')?.getAttribute('token')"  style="height: 40px; width: 40px;" [src]="user?.getRelation('avatar')?.getAttribute('token') | attachmentToken" />
                 <ion-icon *ngIf="!user?.getRelation('avatar')?.getAttribute('token')" color="primary" class="text-4xl m-auto" src="/assets/fontawesome/solid/user.svg"></ion-icon>
               </ion-avatar>
         
               <ion-text class="text-xs ">
                 <p style="font-size: 13px;" class="mt-2 w-12/12">
-                  <span class="ml-1 font-bold text-base" style="font-size: 15px;">{{user.getAttribute('name')}}</span>
+                  <span class="font-bold text-base" style="font-size: 15px;">{{user.getAttribute('name')}}</span>
                 </p>
                 <p style="font-size: 13px;" class="mt-2">
-                  <strong class="ml-1">{{user.getAttribute('email')}}</strong>
-                </p>
-              
-              </ion-text>
+                  <strong>{{user.getAttribute('email')}}</strong>
+                </p> 
+                <p style="font-size: 13px;" >
+                  {{user.getRelation('department').getAttribute('name')}}
+                </p> 
+                <p style="font-size: 13px;">
+                  {{user.getRelation('costCenter').getAttribute('name')}}
+                </p> 
+              </ion-text>  
         
               <ion-buttons  slot="end">
-                <ion-button [disabled]="user.selected" (click)="toUserEdit(user.getApiId())" color="primary">
+                <ion-button [disabled]="user.selected" color="primary">
                   <ion-icon name="chevron-forward-outline"></ion-icon>
                 </ion-button>
               </ion-buttons>

@@ -1,0 +1,15 @@
+export const ExpenseReportRelations = [
+    'avatar',
+    'attachments',
+    'expenses',
+    'department',
+    'costCenter',
+    'policy',
+    'policy.categories',
+    'policy.requiredFields',
+    'expenses.disapprovedExpense',
+    'expenses.category',
+    'expenses.avatar',
+    'currentExpenseReportState',
+    'expenseReportStates',
+];

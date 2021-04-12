@@ -1,0 +1,27 @@
+<ion-card class="card-no-border card-no-margin">
+  <ion-label><p class="mt-2 text-center text-4xl font-bold">Despesas</p></ion-label>
+    <ion-list>
+      <ng-container *ngFor="let item of values; let i = index">
+        <ion-item lines="full" *ngIf="i < 3" [disabled]="disabled">
+          <ion-avatar slot="start">
+            <img style="height: 30px; width: 30px;" *ngIf="item.getRelation('avatar')?.getAttribute('token')" [src]="item.getRelation('avatar')?.getAttribute('token') | attachmentToken">
+            <img color="primary" style="height: 30px; width: 30px;" *ngIf="!item.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/image.svg">
+          </ion-avatar>
+          <ion-label>{{item?.getAttribute('name')}}</ion-label>
+          <ion-badge color="warning">{{item?.getAttribute('value') | currency:'COP ':true }}</ion-badge>
+        </ion-item>
+      </ng-container>
+      <div class="m-auto text-center mt-2">
+        <ion-badge *ngIf="values?.length > 3"  color="primary" >
+          <ion-label class="text-center font-bold">Mais {{values.length - 3}}...</ion-label>
+        </ion-badge>
+      </div>
+    </ion-list>
+    
+    <div style="text-align: center;" >
+      <ion-button class="mt-2 mb-2 text-center m-auto" color="primary" fill="outline" size="small" (click)="chooseOption()">
+        <ion-label class="text-center font-bold">Clique para escolher</ion-label>
+      </ion-button>
+    </div>
+</ion-card>
+

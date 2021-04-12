@@ -9,7 +9,7 @@
     <input  type="file" (change)="getPathImage($event)" #ev
               style=" position: absolute; height: 100%; width: 100%; border-radius: 50%; opacity: 0; z-index: 1000; top: 0; bottom: 0; left: 0; right: 0;">
   </ion-item>
-  <ion-item *ngIf="items.length > 0" (click)="removeImage()" button>
+  <ion-item *ngIf="hasImage()" (click)="removeImage()" button>
     <ion-icon color="danger" slot="start" name="trash"></ion-icon>Excluir foto
   </ion-item>
 </ion-list>

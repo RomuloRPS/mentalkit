@@ -19,10 +19,9 @@ export class EvSelectComponent implements OnInit {
   @Input() public resource;
   @Input() public showField;
   @Input() public indexField;
+  @Input() public value;
   @Output() public valueIdChange = new EventEmitter();
   @Output() public valueChange = new EventEmitter();
-
-  public value;
 
   public constructor(
     private modalController: ModalController
@@ -41,12 +40,21 @@ export class EvSelectComponent implements OnInit {
               baseService: this.baseService,
               resource: this.resource,
               filters: this.filters,
-              showField: this.showField
+              showField: this.showField,
+              value: this.value
           }
       });
 
       modalPage.onDidDismiss().then((resp: any) => {
           if (resp.data) {
+              if (resp.data == 'clear') {
+                  this.valueIdChange.emit(null);
+                  this.value = null;
+                  this.valueChange.emit(this.value);
+
+                  return;
+              }
+
               this.valueIdChange.emit(resp.data.id);
               this.value = resp.data;
               this.valueChange.emit(this.value);

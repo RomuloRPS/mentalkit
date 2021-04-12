@@ -20,6 +20,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
 import { CodePush } from '@ionic-native/code-push/ngx';
 import { SharedServicesModule } from './shared-services/shared-services.module';
 import { ModelsModule } from './models/models.module';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -31,7 +32,7 @@ import { ModelsModule } from './models/models.module';
         PipesModule,
         SignaturePadModule,
         SharedServicesModule,
-        ModelsModule.forRoot(),
+        ModelsModule.forRoot()
     ],
     providers: [
         CodePush,
@@ -47,6 +48,7 @@ import { ModelsModule } from './models/models.module';
         BarcodeScanner,
         OneSignal,
         SQLite,
+        ScreenOrientation,
         {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig}
     ],
     bootstrap: [AppComponent]

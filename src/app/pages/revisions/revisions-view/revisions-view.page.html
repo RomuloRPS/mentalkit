@@ -1,0 +1,115 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar [color]="status == 'aprobado' ? 'success' : 'primary'">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Revisão de informe
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-toolbar *ngIf="status == 'revision'" color="warning">
+    <p class="ml-2">Este informe está em revisão. O encarregado atual é <strong>André Fraga</strong></p>
+  </ion-toolbar>
+  <div [style.background-color]="status == 'aprobado' ? '#1acc8d' : '#0205A1'"  class="relative">
+    <div class="pt-4">
+      <ion-text >
+        <p style="color: white;" class="text-center text-base font-bold">{{expenseReport?.getAttribute('name')}}</p>
+      </ion-text>
+      <p style="color: white;" class="text-center font-extrabold text-3xl">{{expenseReport ?.getAttribute('value') | currency:'COP ':true }}</p>
+      <!-- <p style="color: white;" class="text-center font-light">Aprovado: 0 COP</p> -->
+  
+    </div>
+  
+    <div class="w-10/12 h-1 rounded-md m-auto mt-4" style="background-color: white;"></div>
+    <div class="ml-4 mt-8 mr-4 relative">
+      <br>
+      <br>
+      <div class="absolute top-0 right-0">
+        <ion-badge [color]="expenseReport?.getStatusBadgeColor()"  class="mt-2" color="success">
+          <ion-icon slot="start" name="elo-information"></ion-icon>
+          {{this.expenseReport?.getStatusLabel()}}
+        </ion-badge>
+      </div>
+      <p style="color: white;" class="text-left"><strong>Enviado em:</strong> {{this.expenseReport?.getAttribute('send_date') | dateTimeFormat}}</p>
+      <p style="color: white;" class="text-left" *ngIf="this.expenseReport?.getAttribute('observation')"><strong>Descrição:</strong><ion-text> {{this.expenseReport?.getAttribute('observation')}}</ion-text></p>
+    </div>
+    
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+      <defs>
+        <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+      </path></defs>
+      <g class="wave1">
+        <use xlink:href="#wave-path" x="50" y="3" fill="rgba(244,245,248, .1)">
+      </use></g>
+      <g class="wave2">
+        <use xlink:href="#wave-path" x="50" y="0" fill="rgba(244,245,248, .2)">
+      </use></g>
+      <g class="wave3">
+        <use xlink:href="#wave-path" x="50" y="9" fill="#F4F5F8">
+      </use></g>
+    </svg>
+  </div>
+
+  <ng-container *ngIf="expenseReport && expenseReport.getRelation('expenses')">
+    <ion-card *ngFor="let expense of expenseReport.getRelation('expenses'); let i = index"  class="card-no-border card-no-margin">
+      <ion-item [disabled]="expense.disapproved" lines="none">
+  
+        <ion-thumbnail size="large" slot="start">
+          <img *ngIf="expense.getRelation('avatar')?.getAttribute('token')" [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
+          <ion-icon color="primary" class="text-5xl"  *ngIf="!expense.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/image.svg"></ion-icon>
+        </ion-thumbnail>
+  
+        <ion-label class="text-xs ">
+          <p style="font-size: 13px;" class="mt-2 w-12/12">
+            <span class="font-bold text-base" style="font-size: 15px;">{{expense.getAttribute('name')}}</span>
+          </p>
+          <p style="font-size: 13px;" class="mt-2 w-12/12">
+            <span class="font-bold text-base" style="font-size: 15px;">{{expense.getAttribute('provider')}}</span>
+          </p>
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+            <strong>{{expense.getRelation('category')?.getAttribute('name')}}</strong>
+          </p>
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+              <span>{{expense.getAttribute('issue_date') | dateTimeFormat: 'dd/MM/yyyy'}}</span>
+          </p>
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+            <ion-badge color="warning">
+              <ion-label>{{expense?.getAttribute('value') | currency:'COP ':true }}</ion-label>
+            </ion-badge>
+          </p>
+        </ion-label>
+        <ion-buttons *ngIf="expense.disapproved" (click)="approveExpense(i)" slot="end">
+          <ion-button>
+            <ion-icon color="success" src="../../../../assets/fontawesome/solid/plus-circle.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+        <ion-buttons *ngIf="!expense.disapproved" (click)="presentPromptDisapproveExpense(i)" slot="end">
+          <ion-button>
+            <ion-icon color="danger" src="../../../../assets/fontawesome/solid/minus-circle.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+  </ng-container>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="notApprove()" fill="outline" color="warning" expand="block">
+          Solicitar Edição
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="approve()" expand="block">
+          Aprovar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

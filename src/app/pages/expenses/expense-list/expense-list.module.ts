@@ -8,13 +8,17 @@ import { ExpenseListPageRoutingModule } from './expense-list-routing.module';
 
 import { ExpenseListPage } from './expense-list.page';
 import { ExpenseListPopoverComponent } from './expense-list-popover/expense-list-popover.component';
+import { EvComponentsModule } from 'src/app/components/ev-components';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        ExpenseListPageRoutingModule
+        ExpenseListPageRoutingModule,
+        EvComponentsModule,
+        PipesModule
     ],
     declarations: [ExpenseListPage, ExpenseListPopoverComponent],
     entryComponents: [ExpenseListPopoverComponent]

@@ -1,11 +1,11 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar [color]="status == 'aprobado' ? 'success' : 'primary'">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Informe de despesas</ion-title>
     <ion-buttons slot="end">
-      <ion-button [disabled]="status != 'open'"  (click)="openOptions($event)">
+      <ion-button [disabled]="!isEditable()"  (click)="openOptions($event)">
         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -13,33 +13,31 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-toolbar *ngIf="status == 'revision'" color="warning">
-    <p class="ml-2">Este informe está em revisão. O encarregado atual é <strong>André Fraga</strong></p>
+  <ion-toolbar *ngIf="expenseReport?.getRelation('currentExpenseReportState')?.getAttribute('observation')" color="warning">
+    <p class="ml-2"><strong>Observação: </strong>{{expenseReport?.getRelation('currentExpenseReportState')?.getAttribute('observation')}}</p>
   </ion-toolbar>
-  <div [style.background-color]="status == 'aprobado' ? '#1acc8d' : '#0205A1'"  class="relative">
+  <div style="background-color:#0205A1"  class="relative">
     <div class="pt-4">
       <ion-text >
-        <p style="color: white;" class="text-center text-base font-bold">Despedas de Março</p>
+        <p style="color: white;" class="text-center text-base font-bold">{{expenseReport?.getAttribute('name')}}</p>
       </ion-text>
-      <p style="color: white;" class="text-center font-extrabold text-3xl">448,370 COP</p>
-      <p style="color: white;" class="text-center font-light">Aprovado: 0 COP</p>
+      <p style="color: white;" class="text-center font-extrabold text-3xl">{{expenseReport ?.getAttribute('value') | currency:'COP ':true }}</p>
+      <!-- <p style="color: white;" class="text-center font-light">Aprovado: 0 COP</p> -->
   
     </div>
   
     <div class="w-10/12 h-1 rounded-md m-auto mt-4" style="background-color: white;"></div>
-    <div class="ml-4 mt-4 mr-4 relative">
+    <div class="ml-4 mt-8 mr-4 relative">
+      <br>
+      <br>
       <div class="absolute top-0 right-0">
-        <ion-badge *ngIf="status == 'revision'" class="mt-2" color="warning">
+        <ion-badge [color]="expenseReport?.getStatusBadgeColor()"  class="mt-2" color="success">
           <ion-icon slot="start" name="elo-information"></ion-icon>
-          Em Revisão
-        </ion-badge>
-        <ion-badge *ngIf="status == 'aprobado'" class="mt-2" color="success">
-          <ion-icon slot="start" name="elo-information"></ion-icon>
-          Aprobado
+          <strong>{{this.expenseReport?.getStatusLabel()}}</strong>
         </ion-badge>
       </div>
-      <p style="color: white;" class="text-left"><strong>Envio:</strong> 2021-02-11</p>
-      <p style="color: white;" class="text-left"><strong>Nota:</strong><ion-text> Revisar as despesas referentes ao mês de Março</ion-text></p>
+      <p *ngIf="this.expenseReport?.getAttribute('send_date')" style="color: white;" class="text-left"><strong>Enviado em:</strong> {{this.expenseReport?.getAttribute('send_date') | dateTimeFormat}}</p>
+      <p style="color: white;" class="text-left" *ngIf="this.expenseReport?.getAttribute('observation')"><strong>Descrição:</strong><ion-text> {{this.expenseReport?.getAttribute('observation')}}</ion-text></p>
     </div>
     
     <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
@@ -58,130 +56,56 @@
     </svg>
   </div>
 
-  <div *ngIf="status == 'open'" class="m-auto text-center mt-3 px-3 mb-3">
-    <ion-button (click)="toReportList()" color="success" expand="block">Enviar informe</ion-button>
-  </div>
-
-  <div *ngIf="status == 'open'" class="m-auto text-center mt-3 px-3 mb-3">
-    <ion-button (click)="toExpenseListAdd()" size="small" fill="outline" color="primary" expand="block">
-      <ion-icon name="add" slot="start"></ion-icon>
-      Adicionar despesa
-    </ion-button>
-  </div>
-
-  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
-    <ion-item  lines="none">
-
-      <ion-thumbnail slot="start">
-        <img src="./assets/nf.jpeg">
-      </ion-thumbnail>
-
-      <ion-label class="text-xs ">
-        <p style="font-size: 13px;" class="mt-2 w-12/12">
-          <span class="font-bold text-base" style="font-size: 15px;">POSTO RODAO</span>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <strong > 2021-02-06</strong>
-        </p>
-
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-           <span>Combustível</span>
-        </p>
-      </ion-label>
-
-      <ion-badge color="warning" slot="end">
-        <ion-label>150,320 COP</ion-label>
-      </ion-badge>
-    </ion-item>
-  </ion-card>
-
-  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
-    <ion-item  lines="none">
-
-      <ion-thumbnail slot="start">
-        <img src=".">
-      </ion-thumbnail>
-
-      <ion-label class="text-xs ">
-        <p style="font-size: 13px;" class="mt-2 w-12/12">
-          <span class="font-bold text-base" style="font-size: 15px;">ELOVERDE</span>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <strong > 2021-02-06</strong>
-        </p>
-
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-           <span>Suporte</span>
-        </p>
-      </ion-label>
-
-      <ion-badge color="warning" slot="end">
-        <ion-label>200,303 COP</ion-label>
-      </ion-badge>
-    </ion-item>
-  </ion-card>
-
-  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
-    <ion-item [disabled]="true" lines="none">
-
-      <ion-thumbnail slot="start">
-        <img src="./assets/nf.jpeg">
-      </ion-thumbnail>
-
-      <ion-text class="text-xs ">
-        <p style="font-size: 13px;" class="mt-2 w-12/12">
-          <span class="font-bold text-base" style="font-size: 15px;">APPLE</span>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <strong > 2021-02-06</strong>
-        </p>
-
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-           <span>Conserto de celular</span>
-        </p>
-
-      </ion-text>
-
-      <ion-badge color="danger" slot="end">
-        <ion-label>600,500 COP</ion-label>
-      </ion-badge>
-    </ion-item>
-    <p style="font-size: 13px;" class="ml-1 mt-2 font-light text-center">
-      <ion-icon color="danger"  name="information-circle-outline"></ion-icon>
-      <ion-text>
-          Valor não corresponde com as nossas diretrizes
-      </ion-text>
-   </p>
-  </ion-card>
-
-  <ion-card (click)="toExpenseEdit()" class="card-no-border card-no-margin">
-    <ion-item  lines="none">
-
-      <ion-thumbnail slot="start">
-        <img src="./assets/nf.jpeg">
-      </ion-thumbnail>
-
-      <ion-label class="text-xs ">
-        <p style="font-size: 13px;" class="mt-2 w-12/12">
-          <span class="font-bold text-base" style="font-size: 15px;">POSTO RODAO</span>
-        </p>
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-          <strong > 2021-02-06</strong>
-        </p>
-
-        <p style="font-size: 13px;" class="ml-1 mt-2">
-           <span>Combustível</span>
-        </p>
-      </ion-label>
-
-      <ion-badge color="warning" slot="end">
-        <ion-label>120,232 COP</ion-label>
-      </ion-badge>
-    </ion-item>
-  </ion-card>
+  <ng-container *ngIf="isEditable()">
+    <div class="m-auto text-center mt-3 px-3 mb-3">
+      <ion-button (click)="send(expenseReport.getApiId())" color="success" expand="block">Enviar informe</ion-button>
+    </div>
+  
+    <div class="m-auto text-center mt-3 px-3 mb-3">
+      <ion-button (click)="chooseExpenses()" size="small" fill="outline" color="primary" expand="block">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Escolher despesas
+      </ion-button>
+    </div>
+  </ng-container>
 
 
-  <ion-fab (click)="toExpenseCreate()" *ngIf="status == 'open'" vertical="bottom" horizontal="end" slot="fixed">
+  <ng-container *ngIf="expenseReport && expenseReport.getRelation('expenses')">
+    <ion-card [color]="getCardColor(expense)" *ngFor="let expense of expenseReport.getRelation('expenses')" (click)="toExpenseEdit(expense.getApiId())" class="card-no-border card-no-margin">
+      <ion-item [color]="getCardColor(expense)" lines="none">
+  
+        <ion-thumbnail size="large" slot="start">
+          <img *ngIf="expense.getRelation('avatar')?.getAttribute('token')" [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
+          <ion-icon color="primary" class="text-5xl"  *ngIf="!expense.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/image.svg"></ion-icon>
+        </ion-thumbnail>
+  
+        <ion-label class="text-xs ">
+          <p style="font-size: 13px;" class="mt-2 w-12/12">
+            <span class="font-bold text-base" style="font-size: 15px;">{{expense.getAttribute('name')}}</span>
+          </p>
+          <p style="font-size: 13px;" class="mt-2 w-12/12">
+            <span class="font-bold text-base" style="font-size: 15px;">{{expense.getAttribute('provider')}}</span>
+          </p>
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+            <strong>{{expense.getRelation('category')?.getAttribute('name')}}</strong>
+          </p>
+          <p style="font-size: 13px;" class="ml-1 mt-2">
+              <span>{{expense.getAttribute('issue_date') | dateTimeFormat: 'dd/MM/yyyy'}}</span>
+          </p>
+        </ion-label>
+  
+        <ion-badge color="warning" slot="end">
+          <ion-label>{{expense?.getAttribute('value') | currency:'COP ':true }}</ion-label>
+        </ion-badge>
+      </ion-item>
+      <div *ngIf="expense.getRelation('disapprovedExpense') && isApproved()" class="bg-orange-500 w-full text-center text-white font-bold">
+        <p>Despesa Reprovada</p>
+      </div>
+    </ion-card>
+  </ng-container>
+
+
+  <ion-fab *ngIf="isEditable()" (click)="toExpenseCreate()"  vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button  color="secondary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

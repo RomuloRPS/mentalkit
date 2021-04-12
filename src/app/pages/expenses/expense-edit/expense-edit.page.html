@@ -3,107 +3,222 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title *ngIf="status == 'open'">Editar Despesa</ion-title>
-    <ion-title *ngIf="status != 'open'">Visualizar Despesa</ion-title>
+    <ion-title *ngIf="editing">Editar Despesa</ion-title>
+    <ion-title *ngIf="!editing">Criar Despesa</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
-  <img style="border-color: #0205A1;"  src="./assets/nf.jpeg" />
-  <form class="mt-6" #loginForm="ngForm" novalidate>
+
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngIf="expense?.getRelation('avatar')" (click)="openOptions($event)">
+      <img style="height: 150px;" class="rounded-md h-full m-4"  [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
+    </ion-slide>
+    <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
+      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
+    </ion-slide>
+    <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
+      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
+    </ion-slide>
+    <ion-slide (click)="openOptions($event)">
+      <div class="h-40 border-2 border-dotted border-ultramarine-500 w-full m-2 rounded-md">
+        <ion-icon color="primary" class="text-6xl m-auto mt-2" src="/assets/fontawesome/solid/images.svg"></ion-icon>
+        <p class="font-bold text-ultramarine-500">Incluir foto</p>
+        <p class="text-sm text-ultramarine-500">JPG, GIF e PNG somente</p>
+      </div>
+      <!-- <img style="height: 150px;" *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(expense?.getRelation('avatar')?.getAttribute('token'))" /> -->
+    </ion-slide>
+  </ion-slides>
+
+  <form *ngIf="expense" class="mt-6" #expenseForm="ngForm" name="expenseForm">
     <ion-row class="flex justify-center ">
+
       <ion-col size="11">
-        <ion-item  lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="file-tray-full-outline"></ion-icon>
-          <ion-label>Informe de Despesa: </ion-label>
-          <ion-select disabled="true"interface="action-sheet" value="cs" placeholder="">
-            <ion-select-option value="cs"><ion-text>Despesas de Março</ion-text></ion-select-option>
-            <ion-select-option value="cd">Despesas de Fevereiro</ion-select-option>
-            <ion-select-option value="f">Despesas de Janeiro</ion-select-option>
-          </ion-select>
-        </ion-item>
+        <app-ev-select [filters]="expenseReportFilter" [value]="expenseReport" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Informe de despesa"
+        (valueChange)="expenseReportChange($event)" [(valueId)]="selectedExpenseReportId" inputName='Roles' [baseService]="expenseReportService"
+        #roleSelect></app-ev-select>
       </ion-col>
 
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="pencil"></ion-icon>
-          <ion-label>Fornecedor: </ion-label>
-          <ion-input value="POSTO RODAO" name="username" type="text" 
+          <ion-icon slot="start" color="tertiary" name="pencil-outline"></ion-icon>
+          <ion-label position="stacked">Motivo/Descrição: <span class="text-red-500">*</span></ion-label>
+          <ion-input #name="ngModel"  [(ngModel)]="expense.elements.name" name="name" type="text" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="name.valid || submitted == false" class="ion-padding-start">
+            Informe o Motivo/Descrição da despesa
+          </p>
+        </ion-text>
       </ion-col>
 
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="receipt"></ion-icon>
-          <ion-label>Valor: </ion-label>
-          <ion-input value="150.320" required="true"  name="username" type="number" 
+          <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
+          <ion-label position="stacked">Valor (COP): <span class="text-red-500">*</span></ion-label>
+          <ion-input #value="ngModel"  [(ngModel)]="expense.elements.value" name="value" type="number" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="(value.valid)|| submitted == false" class="ion-padding-start">
+            Informe um valor válido
+          </p>
+        </ion-text>
       </ion-col>
-      <div class="h-2 w-7/12 mt-6 rounded-md mb-6" style="background-color: #0205A1;"></div>
 
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="document-text"></ion-icon>
-          <ion-label>Nr. documento: </ion-label>
-          <ion-input required="true"  name="username" type="number" 
-            spellcheck="false" autocapitalize="off" required>
+          <ion-icon slot="start" color="tertiary" name="calendar-outline"></ion-icon>
+          <ion-label position="stacked">Data Emissão: </ion-label>
+          <ion-datetime #issue_date="ngModel" [(ngModel)]="date" name="issue_date" cancelText="Cancelar" doneText="Ok" displayFormat="DD/MM/YYYY"></ion-datetime>
+        </ion-item>
+        <ion-text color="danger">
+          <p [hidden]="(issue_date.valid)|| submitted == false" class="ion-padding-start">
+            Informe uma data válida
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col *ngIf="isRequired('expense_time')" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="timer-outline"></ion-icon>
+          <ion-label position="stacked">Hora: <span *ngIf="isRequired('expense_time')" class="text-red-500">*</span></ion-label>
+          <ion-datetime [required]="isRequired('expense_time')" #time="ngModel" [(ngModel)]="expense.elements.time" name="time" displayFormat="HH:mm"></ion-datetime>
+        </ion-item>
+        <ion-text *ngIf="isRequired('expense_time')" color="danger">
+          <p [hidden]="(time.valid)|| submitted == false" class="ion-padding-start">
+            Informe uma horário válido
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="11">
+        <app-ev-select [filters]="filterCategory" [value]="category" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Categoria"
+        (valueChange)="categoryChange($event)" [(valueId)]="selectedCategoryId" inputName='Categories' [baseService]="categoryService"
+        #roleSelect></app-ev-select>
+        <ion-text color="danger">
+          <p [hidden]="this.expense.getRelation('category') || submitted == false" class="ion-padding-start">
+            Informe a categoria
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col *ngIf="isRequired('expense_provider')" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="business-outline"></ion-icon>
+          <ion-label position="stacked">Fornecedor: <span *ngIf="isRequired('expense_provider')" class="text-red-500">*</span></ion-label>
+          <ion-input #provider="ngModel" [(ngModel)]="expense.elements.provider" name="provider" type="text" 
+            spellcheck="false" autocapitalize="off" [required]="isRequired('expense_provider')">
           </ion-input>
         </ion-item>
+        <ion-text *ngIf="isRequired('expense_provider')" color="danger">
+          <p [hidden]="provider.valid || submitted == false" class="ion-padding-start">
+            Informe o fornecedor
+          </p>
+        </ion-text>
       </ion-col>
 
-      <ion-col size="11">
+      <ion-col *ngIf="isRequired('expense_locale')" size="11">
         <ion-item lines="none" class="rounded-lg">
-          <ion-icon slot="start" color="tertiary" name="albums"></ion-icon>
-          <ion-label>Categoria: </ion-label>
-          <ion-select value="c" interface="popover" placeholder="">
-            <ion-select-option value="f">Comida</ion-select-option>
-            <ion-select-option value="c">Combustível</ion-select-option>
-            <ion-select-option value="m">Serviço</ion-select-option>
-          </ion-select>
+          <ion-icon slot="start" color="tertiary" name="business-outline"></ion-icon>
+          <ion-label position="stacked">Local: <span *ngIf="isRequired('expense_locale')" class="text-red-500">*</span></ion-label>
+          <ion-input [required]="isRequired('expense_locale')" #locale="ngModel" [(ngModel)]="expense.elements.locale" name="locale" type="text" 
+            spellcheck="false" autocapitalize="off">
+          </ion-input>
         </ion-item>
+        <ion-text *ngIf="isRequired('expense_locale')" color="danger">
+          <p [hidden]="(locale.valid)|| submitted == false" class="ion-padding-start">
+            Informe um local válido
+          </p>
+        </ion-text>
       </ion-col>
 
-      <ion-col size="11">
+      <ion-col *ngIf="isRequired('expense_document_number')" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="document-outline"></ion-icon>
+          <ion-label position="stacked">Nº Documento: <span *ngIf="isRequired('expense_document_number')" class="text-red-500">*</span></ion-label>
+          <ion-input [required]="isRequired('expense_document_number')"  #document_number="ngModel" [(ngModel)]="expense.elements.document_number" name="document_number" type="text" 
+            spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <ion-text *ngIf="isRequired('expense_document_number')" color="danger">
+          <p [hidden]="document_number.valid || submitted == false" class="ion-padding-start">
+            Informe o Nº Documento
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col *ngIf="isRequired('expense_quantity')" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
+          <ion-label position="stacked">Quantidade: <span *ngIf="isRequired('expense_quantity')" class="text-red-500">*</span></ion-label>
+          <ion-input [required]="isRequired('expense_quantity')" #quantity="ngModel" [(ngModel)]="expense.elements.quantity" name="quantity" type="number" 
+            spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <ion-text *ngIf="isRequired('expense_quantity')" color="danger">
+          <p [hidden]="(quantity.valid)|| submitted == false" class="ion-padding-start">
+            Informe uma quantidade válida
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col *ngIf="isRequired('expense_unity_value')" size="11">
+        <ion-item lines="none" class="rounded-lg">
+          <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
+          <ion-label position="stacked">Valor Unitário: <span *ngIf="isRequired('expense_unity_value')" class="text-red-500">*</span></ion-label>
+          <ion-input [required]="isRequired('expense_unity_value')" #unity_value="ngModel"  [(ngModel)]="expense.elements.unity_value" name="unity_value" type="number" 
+            spellcheck="false" autocapitalize="off">
+          </ion-input>
+        </ion-item>
+        <ion-text *ngIf="isRequired('expense_unity_value')" color="danger">
+          <p [hidden]="(unity_value.valid)|| submitted == false" class="ion-padding-start">
+            Informe uma unidade válida
+          </p>
+        </ion-text>
+      </ion-col>
+
+      <ion-col *ngIf="isRequired('expense_observations')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="information-circle-outline"></ion-icon>
-          <ion-label position="floating">Observação: </ion-label>
-          <ion-textarea value="Abastecido com gasolina comum"></ion-textarea>
+          <ion-label position="stacked">Observação: <span *ngIf="isRequired('expense_observations')" class="text-red-500">*</span></ion-label>
+          <ion-textarea #observation="ngModel" [(ngModel)]="expense.elements.observations" name="observation" [required]="isRequired('expense_observations')"  type="text" 
+            spellcheck="false" autocapitalize="off">
+          </ion-textarea>
         </ion-item>
+        <ion-text *ngIf="isRequired('expense_observations')" color="danger">
+          <p [hidden]="(observation.valid) || submitted == false" class="ion-padding-start">
+            Informe uma observação válida
+          </p>
+        </ion-text>
       </ion-col>
-
     </ion-row>
   </form>
-  
+
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-row *ngIf="status == 'open'">
+    <ion-row>
       <ion-col size="6">
-        <ion-button (click)="toReportView()" fill="outline" color="danger" expand="block">
+        <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
           Cancelar
         </ion-button>
       </ion-col>
-      <ion-col size="6">
-        <ion-button (click)="toReportView()"  expand="block">
+      <ion-col *ngIf="!editing" size="6">
+        <ion-button (click)="create(expenseForm)"  expand="block">
+          Criar
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="editing" size="6">
+        <ion-button (click)="save(expenseForm)"  expand="block">
           Salvar
         </ion-button>
       </ion-col>
     </ion-row>
-
-
-    <ion-row *ngIf="status != 'open'">
-      <ion-col size="12">
-        <ion-button (click)="toReportView()"  expand="block">
-          Voltar
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    
-   
   </ion-toolbar>
 </ion-footer>
+

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController, LoadingController } from '@ionic/angular';
+import { ExpenseReportModel } from 'src/app/coloquent-model/expense-report/expense-report.model';
+import { ExpenseReportService } from 'src/app/resources/expense-report/expense-report.service';
 
 @Component({
     selector: 'app-menu-popover',
@@ -9,11 +11,14 @@ import { PopoverController, LoadingController } from '@ionic/angular';
 })
 
 export class ExpenseReportPopoverComponent implements OnInit {
+  @Input() public expenseReport: ExpenseReportModel;
+
   public tenancies;
 
   public constructor(
     private router: Router,
     private popoverController: PopoverController,
+    private expenseReportService: ExpenseReportService
   ) { }
 
   public ngOnInit() {
@@ -22,13 +27,15 @@ export class ExpenseReportPopoverComponent implements OnInit {
 
   public deleteReport() {
       this.popoverController.dismiss().then(() => {
-          this.router.navigate(['expense-report-list']);
+          this.expenseReportService.delete(this.expenseReport.getApiId()).then((resp) => {
+              this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+          });
       });
   }
 
   public edit() {
       this.popoverController.dismiss().then(() => {
-          this.router.navigate(['expense-report-edit']);
+          this.router.navigate(['expense-report-edit/' +  this.expenseReport.getApiId()]);
       });
   }
 }
