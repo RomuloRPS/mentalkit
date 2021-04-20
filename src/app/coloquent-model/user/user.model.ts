@@ -6,16 +6,18 @@ import { BaseModel } from '../coloquent.model';
 import { CostCenterModel } from '../cost-center/cost-center.model';
 import { DepartmentModel } from '../department/department.model';
 import { RoleModel } from '../role/role.model';
+import { TenancyModel } from '../tenancy/tenancy.model';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class UserResourceModel extends BaseModel {
-   protected jsonApiType = "users";
+   protected jsonApiType = "tenancies/:tenancy_id/users";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public getJsonApiBaseUrl() {
@@ -36,6 +38,10 @@ export class UserResourceModel extends BaseModel {
 
    public costCenter() {
        return this.hasOne(CostCenterModel, 'centerCost');
+   }
+
+   public tenancies() {
+       return this.hasMany(TenancyModel, 'tenancies');
    }
 
    public avatar() {

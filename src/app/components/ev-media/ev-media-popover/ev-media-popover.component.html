@@ -1,15 +1,18 @@
 
 
 <ion-list lines="none">
-  <ion-item (click)="cameraCapture()"  button>
+  <ion-item *ngIf="!viewOnly" (click)="cameraCapture()"  button>
     <ion-icon color="primary" slot="start" name="camera-outline"></ion-icon>Tirar foto
   </ion-item>
-  <ion-item button>
+  <ion-item *ngIf="!viewOnly" button>
     <ion-icon color="primary" slot="start" name="image-outline"></ion-icon>Galeria
     <input  type="file" (change)="getPathImage($event)" #ev
               style=" position: absolute; height: 100%; width: 100%; border-radius: 50%; opacity: 0; z-index: 1000; top: 0; bottom: 0; left: 0; right: 0;">
   </ion-item>
-  <ion-item *ngIf="hasImage()" (click)="removeImage()" button>
+  <ion-item *ngIf="hasImage()" (click)="viewImage()"  button>
+    <ion-icon color="primary" slot="start" name="eye-outline"></ion-icon>Ver Foto
+  </ion-item>
+  <ion-item *ngIf="hasImage() && !viewOnly" (click)="removeImage()" button>
     <ion-icon color="danger" slot="start" name="trash"></ion-icon>Excluir foto
   </ion-item>
 </ion-list>

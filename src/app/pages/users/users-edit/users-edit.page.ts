@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { forkJoin } from 'rxjs';
 import { CostCenterModel } from 'src/app/coloquent-model/cost-center/cost-center.model';
 import { DepartmentModel } from 'src/app/coloquent-model/department/department.model';
 import { RoleModel } from 'src/app/coloquent-model/role/role.model';
@@ -29,6 +30,9 @@ export class UsersEditPage implements OnInit {
     public submitted = false;
 
     public roles: Array<RoleModel>;
+
+    public departmentModel: DepartmentModel = new DepartmentModel();
+    public costCenterModel: CostCenterModel = new CostCenterModel();
 
     public department: DepartmentModel;
     public selectedDepartmentId;
@@ -61,22 +65,24 @@ export class UsersEditPage implements OnInit {
         this.route.paramMap.subscribe(params => {
             this.submitted = false;
 
-            if (params.get('id')) {
-                let filters = {
-                    id: params.get('id')
-                };
+            this.updateInfos().then(() => {
+                if (params.get('id')) {
+                    let filters = {
+                        id: params.get('id')
+                    };
 
-                this.userService.onlyOffline().get(filters).subscribe((resp) => {
-                    this.user = resp.data[0];
-                    this.setRoles(this.user);
-                    this.setDepartment(this.user);
-                    this.setCostCenter(this.user);
-                    this.editing = true;
-                });
-            } else {
-                this.user = new UserResourceModel();
-                this.editing = false;
-            }
+                    this.userService.onlyOffline().get(filters).subscribe((resp) => {
+                        this.user = resp.data[0];
+                        this.setRoles(this.user);
+                        this.setDepartment(this.user);
+                        this.setCostCenter(this.user);
+                        this.editing = true;
+                    });
+                } else {
+                    this.user = new UserResourceModel();
+                    this.editing = false;
+                }
+            });
         });
     }
 
@@ -114,28 +120,32 @@ export class UsersEditPage implements OnInit {
     }
 
     public setDepartment(user) {
-        this.department = user.getRelation('department');
-
         if (user.getRelation('department')) {
+            this.department = user.getRelation('department');
             this.selectedDepartmentId = user.getRelation('department').getApiId();
+        } else {
+            this.department = new DepartmentModel();
         }
     }
 
     public setCostCenter(user) {
-        this.costCenter = user.getRelation('costCenter');
-
         if (user.getRelation('costCenter')) {
+            this.costCenter = user.getRelation('costCenter');
             this.selectedCostCenterId = user.getRelation('costCenter').getApiId();
+        } else {
+            this.costCenter = new CostCenterModel();
         }
     }
 
     public selectChange(event) {
         if (event && event.jsonApiType) {
-            if (event.jsonApiType == 'departments') {
+            const type = event.jsonApiType.split('/')[2];
+
+            if (type == 'departments') {
                 this.user.elementRelations.department = event;
             }
 
-            if (event && event.jsonApiType == 'cost-centers') {
+            if (type == 'cost-centers') {
                 this.user.elementRelations.costCenter = event;
             }
         } else {
@@ -144,7 +154,7 @@ export class UsersEditPage implements OnInit {
     }
 
     public backToList() {
-        this.router.navigate(['usuarios/update' + new Date().toISOString()]);
+        this.router.navigate(['users/update' + new Date().toISOString()]);
     }
 
     public getIconUrl(token): string {
@@ -191,7 +201,7 @@ export class UsersEditPage implements OnInit {
             this.user.save().then(() => {
                 this.submitted = false;
                 this.loadingService.dismiss();
-                this.router.navigate(['usuarios/update' + new Date().toISOString()]);
+                this.router.navigate(['users/update' + new Date().toISOString()]);
             }).catch((error) => {
                 this.loadingService.dismiss();
                 this.toasterService.error('Não foi possível salvar as alterações!');
@@ -220,7 +230,7 @@ export class UsersEditPage implements OnInit {
             this.user.create().then(() => {
                 this.submitted = false;
                 this.loadingService.dismiss();
-                this.router.navigate(['usuarios/update' + new Date().toISOString()]);
+                this.router.navigate(['users/update' + new Date().toISOString()]);
             }).catch((error) => {
                 this.loadingService.dismiss();
                 this.toasterService.error('Não foi possível criar usuário!');
@@ -232,6 +242,16 @@ export class UsersEditPage implements OnInit {
         if (this.user && this.user.getAttribute('email')) {
             return this.user.getAttribute('email').match("[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}");
         }
+    }
+
+    private updateInfos() {
+        const servicesToCache = [
+            this.departmentService.cache(),
+            this.costCenterService.cache(),
+            this.roleService.cache()
+        ];
+
+        return forkJoin(servicesToCache).toPromise();
     }
 
     private checkRoles() {

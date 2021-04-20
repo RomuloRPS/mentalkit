@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { BaseResourceService } from 'src/app/resources/base-resource.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class EvModalMultiSelectSearchComponent implements OnInit {
 
   @Input() public baseService: BaseResourceService;
   @Input() public filters;
-  @Input() public selectTitle = "Selecione";
+  @Input() public selectTitle;
   @Input() public showField;
   @Input() public indexField;
   @Input() public icon;
@@ -22,15 +23,24 @@ export class EvModalMultiSelectSearchComponent implements OnInit {
   public listOriginal = [];
   public searchTerm;
 
+  public creatable = false;
+
   public selecteds;
 
   public listLength = 20;
 
   public constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private translate: TranslateService
   ) { }
 
   public ngOnInit() {
+      if (!this.selectTitle) {
+          this.translate.get('DEFAULT_SELECT_PLACEHOLDER').subscribe((value) => {
+              this.selectTitle = value;
+          });
+      }
+
       this.baseService.onlyOffline().get(this.filters).subscribe((resp: any) => {
           this.list = resp.data.slice(0, 20);
           this.listOriginal = resp.data;

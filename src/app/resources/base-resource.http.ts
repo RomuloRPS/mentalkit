@@ -32,10 +32,10 @@ export abstract class BaseResourceHttp {
 
       this.userModel.load();
 
-      const tenancy = this.userModel.get('selectedTenancy');
+      const tenancy = this.userModel.get('selectedTenancyId');
 
       if (tenancy) {
-          tenancyId = tenancy.id;
+          tenancyId = tenancy;
       }
 
       return url.replace(':tenancy_id', tenancyId);

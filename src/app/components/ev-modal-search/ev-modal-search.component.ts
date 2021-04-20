@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { BaseModel } from 'src/app/coloquent-model/coloquent.model';
 import { BaseResourceService } from 'src/app/resources/base-resource.service';
+import { LoadingService } from 'src/app/shared-services/loading/loading.service';
+import { ToasterService } from 'src/app/shared-services/toaster/toaster.service';
 
 @Component({
     selector: 'app-ev-modal-search',
@@ -11,12 +15,15 @@ export class EvModalSearchComponent implements OnInit {
   @ViewChild('search', {static: false}) public search;
 
   @Input() public baseService: BaseResourceService;
+  @Input() public baseModel: BaseModel;
   @Input() public filters;
   @Input() public resource;
   @Input() public showField;
   @Input() public indexField;
   @Input() public value;
-  @Input() public selectTitle = "Selecione";
+  @Input() public selectTitle;
+  @Input() public name = "Item";
+  @Input() public creatable = true;
   @Input() public notFound = "Não Informar";
 
   public list = [];
@@ -26,10 +33,20 @@ export class EvModalSearchComponent implements OnInit {
   public listLength = 20;
 
   public constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertController: AlertController,
+    private toasterService: ToasterService,
+    private loadingService: LoadingService,
+    private translate: TranslateService
   ) { }
 
   public ngOnInit() {
+      if (!this.selectTitle) {
+          this.translate.get('DEFAULT_SELECT_PLACEHOLDER').subscribe((value) => {
+              this.selectTitle = value;
+          });
+      }
+
       if (!this.resource) {
           this.baseService.onlyOffline().get(this.filters).subscribe((resp: any) => {
               this.list = resp.data.slice(0, 20);
@@ -41,17 +58,30 @@ export class EvModalSearchComponent implements OnInit {
       }
   }
 
+  public refresh() {
+      this.baseService.cache().toPromise().then((resp) => {
+          this.baseService.onlyOffline().get(this.filters).subscribe((resp: any) => {
+              this.loadingService.dismiss();
+              this.list = resp.data.slice(0, 20);
+              this.listOriginal = resp.data;
+          });
+      }).catch(() => {
+          this.toasterService.error('Erro ao carregar ' + this.name);
+          this.loadingService.dismiss();
+      });
+  }
+
   public getValues() {
       if (this.searchTerm.length >= 3) {
           this.listLength = 20;
           this.list = this.listOriginal.filter((value) => {
-              const descriptionUpperCaseValue = value[this.showField].toLowerCase();
+              const descriptionUpperCaseValue = value.getAttribute(this.showField).toLowerCase();
               const descriptionExist = descriptionUpperCaseValue.indexOf(this.searchTerm.toString().toLowerCase());
 
               let indexExist = -1;
 
               if (this.indexField) {
-                  const indexUpperCaseValue = value[this.indexField].toLowerCase();
+                  const indexUpperCaseValue = value.getAttribute(this.indexField).toLowerCase();
 
                   indexExist = indexUpperCaseValue.indexOf(this.searchTerm.toString().toLowerCase());
               }
@@ -76,6 +106,52 @@ export class EvModalSearchComponent implements OnInit {
 
   public clear() {
       this.modalCtrl.dismiss('clear');
+  }
+
+  public newItem() {
+      this.presentNewPromptDisapproveExpense();
+  }
+
+  public async presentNewPromptDisapproveExpense() {
+      let alert = await this.alertController.create({
+          header: 'Criar novo item',
+          inputs: [
+              {
+                  name: 'value',
+                  placeholder: this.name,
+              },
+          ],
+          buttons: [
+              {
+
+                  text: 'Cancelar',
+                  role: 'cancel',
+                  handler: data => {
+                      console.log('Cancel clicked');
+                  }
+              },
+              {
+                  text: 'Confirmar',
+                  handler: data => {
+                      if (data.value) {
+                          this.loadingService.show('Criando ' + this.name);
+                          this.baseModel.setAttribute(this.showField, data.value);
+                          this.baseModel.create().then((resp) => {
+                              this.refresh();
+                          }).catch(() => {
+                              this.loadingService.dismiss();
+
+                              this.toasterService.error('Erro ao criar ' + this.name);
+                          });
+                      } else {
+                          this.toasterService.error('Informe ' + this.name + ' para confirmar');
+                      }
+                  }
+              }
+          ]
+      });
+
+      return alert.present();
   }
 
   public loadMoreData(event) {

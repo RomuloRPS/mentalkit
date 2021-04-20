@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Model } from 'coloquent';
 import { environment } from 'src/environments/environment';
 import { AvatarModel } from '../avatar/avatar.model';
@@ -26,35 +27,15 @@ export enum ExpenseReportStatusEnum {
 })
 
 export class ExpenseReportModel extends BaseModel {
-   protected jsonApiType = "expense-reports";
+   protected jsonApiType = "tenancies/:tenancy_id/expense-reports";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public getJsonApiBaseUrl() {
        return environment.api;
-   }
-
-   public getStatusLabel() {
-       switch (this.getAttribute('status')) {
-           case ExpenseReportStatusEnum.APPROVED:
-               return 'Aprovado';
-           case ExpenseReportStatusEnum.APPROVED_WITH_EXCEPTIONS:
-               return 'Aprovado com excessões';
-           case ExpenseReportStatusEnum.EDITION_REQUEST:
-               return 'Edição requisitada';
-           case ExpenseReportStatusEnum.IN_APPROVING_PROCESS:
-               return 'Em aprovação';
-           case ExpenseReportStatusEnum.OPEN:
-               return 'Aberto';
-           case ExpenseReportStatusEnum.PAID:
-               return 'Pago';
-           case ExpenseReportStatusEnum.SENT:
-               return 'Enviado';
-           case ExpenseReportStatusEnum.VISUALIZED:
-               return 'Visualizado';
-       }
    }
 
    public getStatusBadgeColor() {

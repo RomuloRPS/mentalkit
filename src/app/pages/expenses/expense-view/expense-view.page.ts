@@ -30,6 +30,8 @@ export class ExpenseViewPage implements OnInit {
     @ViewChild('expenseForm', {static: false}) public expenseForm: NgForm;
     public expense: ExpenseModel;
 
+    public avatar;
+
     public category: CategoryModel;
     public selectedCategoryId;
 
@@ -136,32 +138,21 @@ export class ExpenseViewPage implements OnInit {
         });
     }
 
-    public async openOptions(ev, index?) {
-        let image;
-
-        if (index || index == 0) {
-            image = this.attachments[index];
-        }
-
+    public async openOptions(ev, image) {
         const popoverOptions = {
             component: EvMediaPopoverComponent,
             translucent: true,
             event: ev,
             componentProps: {
-                image
+                image,
+                viewOnly: true
             }
         };
 
         const popover = await this.popoverController.create(popoverOptions);
 
         popover.onDidDismiss().then((resp: any) => {
-            if (resp.data) {
-                if (resp.data == 'delete') {
-                    this.attachments.splice(index, 1);
-                } else {
-                    this.attachments.push(resp.data);
-                }
-            }
+
         });
 
         return await popover.present();
@@ -169,13 +160,13 @@ export class ExpenseViewPage implements OnInit {
 
     public backToList() {
         if (this.expense.getRelation('expenseReport')) {
-            if (this.expense.getRelation('expenseReport').getStatusLabel() == ExpenseReportStatusEnum.SENT) {
+            if (this.expense.getRelation('expenseReport').getAttribute('status') == ExpenseReportStatusEnum.SENT) {
                 this.router.navigate(['revision-view/' + this.expense.getRelation('expenseReport').getApiId()]);
             } else {
                 this.router.navigate(['revision-view/' + this.expense.getRelation('expenseReport').getApiId()]);
             }
         } else {
-            this.router.navigate(['despesas/update' + new Date().toISOString()]);
+            this.router.navigate(['expenses/update' + new Date().toISOString()]);
         }
     }
 
@@ -276,9 +267,9 @@ export class ExpenseViewPage implements OnInit {
 
     private next() {
         if (this.expense.getRelation('expenseReport')) {
-            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId()]);
+            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId() + '/update' + new Date().toISOString()]);
         } else {
-            this.router.navigate(['despesas']);
+            this.router.navigate(['expenses/update' + new Date().toISOString()]);
         }
     }
 }

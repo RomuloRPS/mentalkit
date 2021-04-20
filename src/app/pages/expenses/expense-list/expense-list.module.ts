@@ -10,6 +10,7 @@ import { ExpenseListPage } from './expense-list.page';
 import { ExpenseListPopoverComponent } from './expense-list-popover/expense-list-popover.component';
 import { EvComponentsModule } from 'src/app/components/ev-components';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
         IonicModule,
         ExpenseListPageRoutingModule,
         EvComponentsModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ],
     declarations: [ExpenseListPage, ExpenseListPopoverComponent],
     entryComponents: [ExpenseListPopoverComponent]

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Informe de despesas</ion-title>
+    <ion-title>{{'EXPENSE_REPORT.CAPTION' | translate}}</ion-title>
     <ion-buttons slot="end">
       <ion-button [disabled]="!isEditable()"  (click)="openOptions($event)">
         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
@@ -14,7 +14,7 @@
 
 <ion-content color="light">
   <ion-toolbar *ngIf="expenseReport?.getRelation('currentExpenseReportState')?.getAttribute('observation')" color="warning">
-    <p class="ml-2"><strong>Observação: </strong>{{expenseReport?.getRelation('currentExpenseReportState')?.getAttribute('observation')}}</p>
+    <p class="ml-2"><strong>{{'OBSERVATION_LABEL' | translate}}: </strong>{{expenseReport?.getRelation('currentExpenseReportState')?.getAttribute('observation')}}</p>
   </ion-toolbar>
   <div style="background-color:#0205A1"  class="relative">
     <div class="pt-4">
@@ -33,11 +33,11 @@
       <div class="absolute top-0 right-0">
         <ion-badge [color]="expenseReport?.getStatusBadgeColor()"  class="mt-2" color="success">
           <ion-icon slot="start" name="elo-information"></ion-icon>
-          <strong>{{this.expenseReport?.getStatusLabel()}}</strong>
+          <strong>{{'EXPENSE_REPORT_STATUS.' + expenseReport?.getAttribute('status') | translate}}</strong>
         </ion-badge>
       </div>
-      <p *ngIf="this.expenseReport?.getAttribute('send_date')" style="color: white;" class="text-left"><strong>Enviado em:</strong> {{this.expenseReport?.getAttribute('send_date') | dateTimeFormat}}</p>
-      <p style="color: white;" class="text-left" *ngIf="this.expenseReport?.getAttribute('observation')"><strong>Descrição:</strong><ion-text> {{this.expenseReport?.getAttribute('observation')}}</ion-text></p>
+      <p *ngIf="expenseReport?.getAttribute('send_date')" style="color: white;" class="text-left"><strong>{{'EXPENSE_REPORT.SENT_AT' | translate}}:</strong> {{this.expenseReport?.getAttribute('send_date') | dateTimeFormat}}</p>
+      <p style="color: white;" class="text-left" *ngIf="expenseReport?.getAttribute('observation')"><strong>Descrição:</strong><ion-text> {{this.expenseReport?.getAttribute('observation')}}</ion-text></p>
     </div>
     
     <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
@@ -58,7 +58,7 @@
 
   <ng-container *ngIf="isEditable()">
     <div class="m-auto text-center mt-3 px-3 mb-3">
-      <ion-button (click)="send(expenseReport.getApiId())" color="success" expand="block">Enviar informe</ion-button>
+      <ion-button (click)="send(expenseReport.getApiId())" color="success" expand="block">{{'EXPENSE_REPORT_DETAILS.SEND_TO_REVIEW' | translate}}</ion-button>
     </div>
   
     <div class="m-auto text-center mt-3 px-3 mb-3">
@@ -99,7 +99,7 @@
         </ion-badge>
       </ion-item>
       <div *ngIf="expense.getRelation('disapprovedExpense') && isApproved()" class="bg-orange-500 w-full text-center text-white font-bold">
-        <p>Despesa Reprovada</p>
+        <p>{{'EXPENSE_REPORT_DETAILS.REPROVED_EXPENSE' | translate}}</p>
       </div>
     </ion-card>
   </ng-container>

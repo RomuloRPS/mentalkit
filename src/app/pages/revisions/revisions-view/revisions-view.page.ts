@@ -73,14 +73,14 @@ export class RevisionViewPage implements OnInit {
 
     public send(id) {
         this.expenseReportService.sendExpenseReport([id]);
-        this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+        this.router.navigate(['expense-reports/update' + new Date().toISOString()]);
     }
 
     public toExpenseListAdd() {
         this.router.navigate(['expense-add-to-expense-report']);
     }
 
-    public toExpenseEdit(id) {
+    public toExpenseView(id) {
         this.router.navigate(['expense-view/' + id]);
     }
 
@@ -156,5 +156,9 @@ export class RevisionViewPage implements OnInit {
         });
 
         return alert.present();
+    }
+
+    public back() {
+        this.router.navigate(['revisions/:update' + new Date().toISOString()]);
     }
 }

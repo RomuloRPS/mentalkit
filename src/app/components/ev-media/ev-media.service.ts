@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { EvMediaViewComponent } from './ev-media-view/ev-media-view.component';
 
 @Injectable({
     providedIn: 'root'
@@ -9,8 +11,23 @@ export class EvMediaService {
     private images = [];
     private audioOption = false;
 
-    public constructor() {
+    public constructor(private modalController: ModalController) {
 
+    }
+
+    public async openImage(image) {
+        const modalPage = await this.modalController.create({
+            component: EvMediaViewComponent,
+            componentProps: {
+                image
+            }
+        });
+
+        modalPage.onDidDismiss().then((resp: any) => {
+            console.log(resp);
+        });
+
+        return await modalPage.present();
     }
 
     public getImages() {

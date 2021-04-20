@@ -192,7 +192,7 @@ export class ExpenseReportEditPage implements OnInit {
     }
 
     public backToList() {
-        this.router.navigate(['despesas/update' + new Date().toISOString()]);
+        this.router.navigate(['expenses/update' + new Date().toISOString()]);
     }
 
     public selectPolicy(event) {
@@ -230,11 +230,11 @@ export class ExpenseReportEditPage implements OnInit {
                 this.updateInfos().then(() => {
                     this.submitted = false;
                     this.loadingService.dismiss();
-                    this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+                    this.router.navigate(['expense-reports/update' + new Date().toISOString()]);
                 }).catch((error) => {
                     this.submitted = false;
                     this.loadingService.dismiss();
-                    this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+                    this.router.navigate(['expense-reports/update' + new Date().toISOString()]);
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
@@ -256,11 +256,11 @@ export class ExpenseReportEditPage implements OnInit {
                 this.updateInfos().then(() => {
                     this.submitted = false;
                     this.loadingService.dismiss();
-                    this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+                    this.router.navigate(['expense-reports/update' + new Date().toISOString()]);
                 }).catch((error) => {
                     this.submitted = false;
                     this.loadingService.dismiss();
-                    this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+                    this.router.navigate(['expense-reports/update' + new Date().toISOString()]);
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();

@@ -67,7 +67,7 @@ export class RevisionListPage implements OnInit {
     }
 
     public filter(event) {
-        if (event && event.jsonApiType == 'categories') {
+        if (event && event.jsonApiType.split('/')[2] == 'categories') {
             this.menuFilters.category = event;
         }
 

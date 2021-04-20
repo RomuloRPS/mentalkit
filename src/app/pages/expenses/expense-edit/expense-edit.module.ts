@@ -10,6 +10,7 @@ import { ExpenseEditPage } from './expense-edit.page';
 import { SharedServicesModule } from 'src/app/shared-services/shared-services.module';
 import { EvComponentsModule } from 'src/app/components/ev-components';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
         IonicModule,
         ExpenseEditPageRoutingModule,
         EvComponentsModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ],
     declarations: [ExpenseEditPage]
 })

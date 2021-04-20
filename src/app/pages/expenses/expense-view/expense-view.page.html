@@ -3,96 +3,100 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Visualizar Despesa</ion-title>
+    <ion-title>{{'EXPENSE.VIEW_CAPTION' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
-
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide *ngIf="expense?.getRelation('avatar')">
-      <img style="height: 150px;" class="rounded-md h-full m-4"  [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
-    </ion-slide>
-    <ion-slide *ngFor="let attachment of attachments; let i = index">
-      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
-    </ion-slide>
-    <ion-slide *ngFor="let attachment of attachments; let i = index" >
-      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
-    </ion-slide>
-    <ion-slide >
-      <div class="h-40 border-2 border-dotted border-ultramarine-500 w-full m-2 rounded-md">
-        <ion-icon color="primary" class="text-6xl m-auto mt-2" src="/assets/fontawesome/solid/images.svg"></ion-icon>
-        <p class="font-bold text-ultramarine-500">Incluir foto</p>
-        <p class="text-sm text-ultramarine-500">JPG, GIF e PNG somente</p>
-      </div>
-      <!-- <img style="height: 150px;" *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(expense?.getRelation('avatar')?.getAttribute('token'))" /> -->
-    </ion-slide>
-  </ion-slides>
+  <div style="border-color: gray;" class="circular m-auto mt-6 relative border-2">
+    <img (click)="openOptions($event, expense?.getRelation('avatar'))" *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken" />
+    <div class="w-full text-center absolute bottom-0 mb-8 justify-center">
+      <ion-icon color="primary" class="text-6xl m-auto" *ngIf="!expense?.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/images.svg"></ion-icon>
+    </div>
+  </div>
 
   <form *ngIf="expense" class="mt-6" #expenseForm="ngForm" name="expenseForm">
       <ion-list>
         <ion-item *ngIf="expense.getAttribute('name')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="pencil-outline"></ion-icon>
-          <ion-text >Motivo/Descrição: {{expense.getAttribute('name')}}</ion-text>
+          <ion-text >{{'EXPENSE.NAME' | translate}}: {{expense.getAttribute('name')}}</ion-text>
         </ion-item>
   
         <ion-item *ngIf="expense.getAttribute('provider')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="business-outline"></ion-icon>
-          <ion-text >Fornecedor: {{expense.getAttribute('provider')}}</ion-text>
+          <ion-text >{{'EXPENSE_REQUIRED_FIELDS.PROVIDER' | translate}}: {{expense.getAttribute('provider')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('locale')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="business-outline"></ion-icon>
-          <ion-text >Local: {{expense.getAttribute('locale')}}</ion-text>
+          <ion-text >{{'EXPENSE_REQUIRED_FIELDS.LOCALE' | translate}}: {{expense.getAttribute('locale')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('document_number')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="document-outline"></ion-icon>
-          <ion-text >Nº Documento: {{expense.getAttribute('document_number')}}</ion-text>
+          <ion-text >{{'EXPENSE_REQUIRED_FIELDS.DOCUMENT_NUMBER' | translate}}: {{expense.getAttribute('document_number')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('value')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
-          <ion-text >Valor (COP): {{expense.getAttribute('value')}}</ion-text>
+          <ion-text >{{'EXPENSE.VALUE' | translate}} (COP): {{expense.getAttribute('value')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('quantity')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
-          <ion-text >Quantidade: {{expense.getAttribute('quantity')}}</ion-text>
+          <ion-text >{{'EXPENSE_REQUIRED_FIELDS.QUANTITY' | translate}}: {{expense.getAttribute('quantity')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('unity')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
-          <ion-text >Unidade: {{expense.getAttribute('unity')}}</ion-text>
+          <ion-text >{{'EXPENSE_REQUIRED_FIELDS.UNITY_VALUE' | translate}}: {{expense.getAttribute('unity')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('issue_date')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="calendar-outline"></ion-icon>
-          <ion-text >Data Emissão: {{expense.getAttribute('issue_date')}}</ion-text>
+          <ion-text >{{'EXPENSE.ISSUE_DATE' | translate}}: {{expense.getAttribute('issue_date')}}</ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getAttribute('observation')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="information-circle-outline"></ion-icon>
           <ion-text>
-            Observação: {{expense.getAttribute('observation')}}
+            {{'OBSERVATION_LABEL' | translate}}: {{expense.getAttribute('observation')}}
           </ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getRelation('expenseReport').getAttribute('name')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" src="../../../assets/fontawesome/solid/bars.svg"></ion-icon>
           <ion-text>
-            Informe de Despesa: {{expense.getRelation('expenseReport').getAttribute('name')}}
+            {{'EXPENSE_REPORT.CAPTION' | translate}}: {{expense.getRelation('expenseReport').getAttribute('name')}}
           </ion-text>
         </ion-item>
 
         <ion-item *ngIf="expense.getRelation('category').getAttribute('name')" lines="full" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" src="../../../assets/fontawesome/solid/bars.svg"></ion-icon>
           <ion-text>
-            Categoria: {{expense.getRelation('category').getAttribute('name')}}
+            {{'CATEGORY_LABEL' | translate}}: {{expense.getRelation('category').getAttribute('name')}}
           </ion-text>
         </ion-item>
       </ion-list>
   </form>
+
+  <ion-row>
+    <ion-col class="m-auto" size="11">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, attachment)">
+          <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
+        </ion-slide>
+        <ion-slide *ngIf="attachments.length == 0">
+          <div class="h-40 border-2 border-dotted border-ultramarine-500 w-full m-2 rounded-md">
+            <ion-icon color="primary" class="text-6xl m-auto mt-2" src="/assets/fontawesome/solid/images.svg"></ion-icon>
+            <p class="font-bold text-ultramarine-500">Sem foto</p>
+            <p class="text-sm text-ultramarine-500">Nenhuma foto informada</p>
+          </div>
+          <!-- <img style="height: 150px;" *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(expense?.getRelation('avatar')?.getAttribute('token'))" /> -->
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+  </ion-row>
 
 </ion-content>
 
@@ -101,7 +105,7 @@
     <ion-row>
       <ion-col size="12">
         <ion-button (click)="backToList()" fill="outline" color="primary" expand="block">
-          Voltar
+          {{'BACK_BUTTON' | translate}}
         </ion-button>
       </ion-col>
     </ion-row>

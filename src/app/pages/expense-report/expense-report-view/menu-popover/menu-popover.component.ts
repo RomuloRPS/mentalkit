@@ -28,7 +28,7 @@ export class ExpenseReportPopoverComponent implements OnInit {
   public deleteReport() {
       this.popoverController.dismiss().then(() => {
           this.expenseReportService.delete(this.expenseReport.getApiId()).then((resp) => {
-              this.router.navigate(['informe-de-despesas/update' + new Date().toISOString()]);
+              this.router.navigate(['expense-reports/update' + new Date().toISOString()]);
           });
       });
   }

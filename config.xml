@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget defaultlocale="pt-BR" id="br.com.eloverde.kampo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Kampo App</name>
-    <description>App do kampo</description>
-    <author email="romulo.rps@hotmail.com" href="http://web.eloverde.com.br">Rômulo Ramos de Siqueira</author>
+    <description>Aplicativo Kampo</description>
+    <author email="contato@eloverde.com.br" href="http://web.eloverde.com.br">Rômulo Ramos de Siqueira</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

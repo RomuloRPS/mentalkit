@@ -7,10 +7,11 @@ import { BaseModel } from '../coloquent.model';
 })
 
 export class CostCenterModel extends BaseModel {
-   protected jsonApiType = "cost-centers";
+   protected jsonApiType = "tenancies/:tenancy_id/cost-centers";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public getJsonApiBaseUrl() {

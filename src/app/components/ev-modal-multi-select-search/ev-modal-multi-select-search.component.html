@@ -2,12 +2,12 @@
   <ion-toolbar color="primary">
     <ion-title>{{selectTitle}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="setValues()"><strong>Pronto</strong></ion-button>
+      <ion-button (click)="setValues()"><strong>{{'READY' | translate}}</strong></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <ion-searchbar #search type="text" placeholder="Buscar" [(ngModel)]="searchTerm" (ionChange)="getValues()">
+  <ion-searchbar #search type="text" placeholder="{{'INPUT_SEARCH_PLACEHOLDER' | translate}}" [(ngModel)]="searchTerm" (ionChange)="getValues()">
   </ion-searchbar>
   <ion-list *ngIf="list?.length > 0">
     <ion-item *ngFor="let item of list">
@@ -19,7 +19,7 @@
   </ion-list>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
@@ -33,7 +33,7 @@
 
           <ion-icon style="font-size: 80px;" color="primary" name="arrow-up-outline"></ion-icon>
           <ion-text color="dark">
-            <h2><strong>Informe na busca o que deseja</strong></h2>
+            <h2><strong>{{'INPUT_SEARCH_PLACEHOLDER' | translate}}</strong></h2>
           </ion-text>
 
         </ion-card-content>

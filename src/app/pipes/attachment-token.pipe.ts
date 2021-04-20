@@ -9,6 +9,8 @@ export class AttachmentTokenPipe implements PipeTransform {
     public constructor(private sanitizer: DomSanitizer) { }
 
     public transform(token) {
-        return `${environment.api}/attachments/${token}/preview`;
+        const tenancyId = localStorage.getItem('selectedTenancyId');
+
+        return `${environment.api}/tenancies/${tenancyId}/attachments/${token}/thumbnail`;
     }
 }

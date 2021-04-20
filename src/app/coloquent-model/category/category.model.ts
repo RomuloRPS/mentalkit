@@ -11,10 +11,11 @@ import { UserResourceModel } from '../user/user.model';
 })
 
 export class CategoryModel extends BaseModel {
-   protected jsonApiType = "categories";
+   protected jsonApiType = "tenancies/:tenancy_id/categories";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public getJsonApiBaseUrl() {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Model } from 'coloquent';
 import { environment } from 'src/environments/environment';
 import { HttpClientService } from '../services/http/http-client.service';
@@ -12,7 +13,8 @@ export abstract class BaseModel extends Model {
 
    protected jsonApiType = "";
 
-   public constructor() {
+   public constructor(
+   ) {
        super();
        this.initHttpApi();
    }
@@ -23,6 +25,10 @@ export abstract class BaseModel extends Model {
        }
 
        return this.httpClientService;
+   }
+
+   protected static getSelectedTenancyId() {
+       return localStorage.getItem('selectedTenancyId');
    }
 
    public get elements() {
@@ -45,6 +51,12 @@ export abstract class BaseModel extends Model {
        this.elements = attributes;
 
        return this;
+   }
+
+   public bindUrlForTenancy(url: string) {
+       if (url && BaseModel.getSelectedTenancyId()) {
+           return (url + '').replace(':tenancy_id', BaseModel.getSelectedTenancyId());
+       }
    }
 
    public getJsonApiBaseUrl() {
@@ -75,6 +87,10 @@ export abstract class BaseModel extends Model {
        } else {
            throw new Error('ApiId must to be present to execute action');
        }
+   }
+
+   protected getSelectedTenancyId() {
+       return localStorage.getItem('selectedTenancyId');
    }
 
    private initHttpApi() {

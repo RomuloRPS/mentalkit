@@ -9,6 +9,7 @@ import { ExpenseReportEditPageRoutingModule } from './expense-report-edit-routin
 import { ExpenseReportEditPage } from './expense-report-edit.page';
 import { EvComponentsModule } from 'src/app/components/ev-components';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
         IonicModule,
         ExpenseReportEditPageRoutingModule,
         EvComponentsModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ],
     declarations: [ExpenseReportEditPage]
 })

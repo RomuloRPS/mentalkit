@@ -3,5 +3,6 @@ export const ExpenseRelations = [
     'expenseReport',
     'category',
     'avatar',
-    'attachments'
+    'attachments',
+    'disapprovedExpense'
 ];

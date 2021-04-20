@@ -4,7 +4,7 @@ import { BaseResourceHttp } from '../base-resource.http';
 
 @Injectable()
 export class UserHttp extends BaseResourceHttp {
-  protected resourceUrl = 'users';
+  protected resourceUrl = 'tenancies/:tenancy_id/users';
 
   public constructor(injector: Injector) {
       super(injector);

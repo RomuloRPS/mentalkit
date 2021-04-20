@@ -45,7 +45,7 @@
     <ion-title *ngIf="!isSearchable">Despesas avulsas</ion-title>
 
     <ion-searchbar (ionBlur)="checkBlur()" #search [hidden]="!isSearchable" color="light" [(ngModel)]="searchTerm"
-      (ionChange)="searchTask()" placeholder="Pesquisar"></ion-searchbar>
+      (ionChange)="searchTask()" placeholder="{{'INPUT_SEARCH_PLACEHOLDER' | translate}}"></ion-searchbar>
   </ion-toolbar>
 
 
@@ -150,7 +150,7 @@
   </ion-card>
 
   <ion-infinite-scroll id="infiniteScroll" #infiniteScroll threshold="100px" (ionInfinite)="loadMoreData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" >
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

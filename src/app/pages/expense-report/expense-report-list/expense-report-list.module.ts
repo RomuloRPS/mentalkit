@@ -8,6 +8,7 @@ import { ExpenseReportListPageRoutingModule } from './expense-report-list-routin
 import { ExpenseReportListPage } from './expense-report-list.page';
 import { EvComponentsModule } from 'src/app/components/ev-components';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
         ExpenseReportListPageRoutingModule,
         EvComponentsModule,
         PipesModule,
-        FormsModule
+        FormsModule,
+        TranslateModule
     ],
     declarations: [ExpenseReportListPage]
 })

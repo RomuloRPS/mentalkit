@@ -1,0 +1,188 @@
+{
+    "NAME_LABEL": "Nombre",
+    "EMAIL_LABEL": "Email",
+    "USER_LABEL": "Usuario",
+    "PASSWORD_LABEL": "Contraseña",
+    "OBSERVATION_LABEL": "Observaciones",
+    "SELECT_IMAGE_LABEL": "Seleccionar una imagen",
+    "AVATAR_PLACEHOLDER": "Selecione uma imagem ou clique para ampliar",
+    "LAST_UPDATE_LABEL": "Actualizado a",
+
+    "ACTIVE_LABEL": "Activo",
+    "ACTIONS_LABEL": "Acciones",
+    "INACTIVE_LABEL": "Inactivo",
+    "ACTIVE_SLASH_INACTIVE_LABEL": "Activar/Inactivar",
+
+    "CATEGORY_LABEL": "Categoría",
+    "DEPARTMENT_LABEL": "Departamento",
+    "COST_CENTER_LABEL": "Centro de costos",
+
+    "BACK_BUTTON": "Vuelver",
+    "SAVE_BUTTON": "Guardar",
+    "CLOSE_BUTTON": "Cerrar",
+    "CLEAR_BUTTON": "Limpiar",
+    "DELETE_BUTTON": "Eliminar",
+    "NEW_REGISTER_BUTTON": "Agregar",
+    "INPUT_SEARCH_PLACEHOLDER": "Buscar",
+    "DEFAULT_SELECT_PLACEHOLDER": "Seleccione...",
+    "SELECTED": "Seleccionado",
+    "SELECTEDS": "Seleccionados",
+    "NAVIGATE_TO_LIST_BUTTON": "Volver a listado",
+
+    "PLUS": "Más",
+    "LOADING": "Cargando",
+    "REQUIRED_FIELD": "Campo obligatorio",
+    "READY": "Listo",
+    "COMPANY": {
+        "COMPANY_CAPTION": "Empresa"
+    },
+
+    "LOGIN": {
+        "SIGN_UP_LABEL": "Regístrese",
+        "NEW_HERE_LABEL": "¿Nuevo aquí?",
+        "LOGIN_BUTTON_TEXT": "Continuar",
+        "CONTINUE_WITH_LABEL": "O continuar con",
+        "FORGOT_PASSWORD_LABEL": "¿Olvidó su contraseña?",
+        "PASSWORD_INPUT_PLACEHOLDER": "Escriba su contraseña...",
+        "USER_INPUT_PLACEHOLDER": "Escriba su nombre de usuario o e-mail..."
+    },
+
+    "USER": {
+        "USER": "Usuario",
+        "USERS": "Usuarios",
+        "ROLES_LABEL": "Permisos",
+        "NEW_USER": "Nuevo usuario",
+        "EDIT_USER": "Editar usuario",
+        "DELETE_USER": "Eliminar usuario",
+        "LOGIN_LABEL": "Nombre de usuario",
+        "CONFIRM_PASSWORD": "Repetir contraseña",
+        "CONFIRM_PASSWORD_PLACEHOLDER": "Escriba su contraseña",
+        "CHANGE_PASSWORD": "Cambiar la contraseña",
+        "NAME_PLACEHOLDER": "Escriba el nombre...",
+        "EMAIL_PLACEHOLDER": "Escriba su email...",
+        "ROLES_PLACEHOLDER": "Seleccione los permisos...",
+        "LOGIN_PLACEHOLDER": "Escriba el nombre de usuario...",
+        "IMPORT_USERS_LABEL": "Actualizar/importar varios usuarios",
+        "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
+        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
+    },
+
+    "POLICY": {
+        "CATEGORIES_LABEL": "Categorías",
+        "LIST_CAPTION": "Políticas de gastos",
+        "NEW_POLICY": "Nueva Política de Gastos",
+        "EDIT_POLICY": "Editar Política de Gastos",
+        "APPROVAL_GROUP_LABEL": "Grupo de aprobación",
+        "REQUIRED_FIELDS_LABEL": "Campos obligatorios",
+        "APPROVAL_GROUPS_LABEL": "Grupos de aprobación (gestores)",
+        "REFUNDER_USERS_LABEL": "Usuarios que efectuarán los gastos"
+    },
+
+    "APPROVAL_GROUPS": {
+        "ADD_GROUP": "Agregar grupo",
+        "ADD_USER": "Agregar usuario al grupo",
+        "DELETE_GROUP": "Eliminar Grupo de aprobación",
+        "GROUP_NAME_PLACEHOLDER": "Nombre del grupo...",
+        "SELECT_USER_PLACEHOLDER": "Seleccione un usuario..."
+    },
+
+    "EXPENSE": {
+        "TIME": "Hora",
+        "VALUE": "Valor",
+        "REPORT": "Informe",
+        "LIST_CAPTION": "Gastos",
+        "VIEW_CAPTION": "Visualizar gasto",
+        "NAME": "Motivo/descripción",
+        "NEW_EXPENSE": "Nuevo Gasto",
+        "EDIT_EXPENSE": "Editar Gasto",
+        "ISSUE_DATE": "Fecha de rendición",
+        "VALUE_PLACEHOLDER": "Escriba el valor...",
+        "LOCALE_PLACEHOLDER": "Escriba la sucursal",
+        "QUANTITY_PLACEHOLDER": "Escriba el Cantidad...",
+        "ISSUE_DATE_PLACEHOLDER": "Seleccione una fecha...",
+        "TIME_PLACEHOLDER": "Seleccione una hora...",
+        "NAME_PLACEHOLDER": "Escriba el motivo/descripción...",
+        "PROVIDER_PLACEHOLDER": "Escriba nombre del proveedor...",
+        "UNITY_VALUE_PLACEHOLDER": "Escriba el valor unitario...",
+        "DOCUMENT_NUMBER_PLACEHOLDER": "Escriba el N° de documento...",
+        "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando."
+    },
+
+    "EXPENSE_REQUIRED_FIELDS": {
+        "LOCALE": "Sucursal",
+        "PROVIDER": "Proveedor",
+        "QUANTITY": "Cantidad",
+        "TIME": "Hora del gasto",
+        "IMAGE": "Imagen del gasto",
+        "UNITY_VALUE": "Valor unitario",
+        "DOCUMENT_NUMBER": "Número de documento"
+    },
+
+    "EXPENSE_REPORT": {
+        "SENT_AT": "Enviado",
+        "STATUS": "Estado",
+        "POLICY": "Política",
+        "VALUE": "Valor",
+        "DEPARTMENT": "Departamento",
+        "NAME": "Motivo/descripción",
+        "CAPTION": "Informe de gastos",
+        "NEW_REPORT": "Nuevo Informe de Gastos",
+        "EDIT_REPORT": "Editar Informe de Gastos",
+        "SELECTED_EXPENSES_LABEL": "Gastos seleccionados"
+    },
+
+
+    "EXPENSE_REPORT_DETAILS": {
+        "DESCRIPTION": "Descripción",
+        "SEND_DATE": "Fecha de envío",
+        "REPROVED_EXPENSE": "Gasto rechazado",
+        "EXPENSES_LENGTH": "Gastos declarados",
+        "SEND_TO_REVIEW": "Enviar para revisión",
+        "CAPTION": "Visualizar informe de gastos",
+        "REFUNDER_USER": "Usuario que realiza el gasto",
+        "CLICK_TO_SHOW": "haga clic para ver el motivo",
+        "CLICK_TO_HIDE": "haga clic para ocultar el motivo"
+    },
+
+    "EXPENSE_REPORT_STATUS": {
+        "PAID": "Pagado",
+        "OPEN": "Abierto",
+        "SENT": "Enviado",
+        "VISUALIZED": "Visto",
+        "APPROVED": "Aprobado",
+        "IN_APPROVING_PROCESS": "En revisión",
+        "EDITION_REQUEST": "Edição Requisitada",
+        "APPROVED_WITH_EXCEPTIONS": "Aprobado con excepción"
+    },
+
+    "REVIEW": {
+        "THERE_IS": "Hay",
+        "CANCEL_BUTTON": "Cancelar",
+        "APPROVE_BUTTON": "Aprobar",
+        "NAME": "Motivo/descripción",
+        "POLICY": "Política de gastos",
+        "REFUNDER": "Responsable del gasto",
+        "REPROVED_EXPENSES": "gastos rechazados",
+        "MARK_AS_PAID_BUTTON": "Marcar como pago",
+        "CAPTION": "Revisión de informes de gastos",
+        "REQUEST_EDITION_BUTTON": "Solicitar modificación",
+        "EXPENSES_AND_REPORT": "gasto en el informe y ",
+        "SHOW_EXPENSES_ALL": "Mostrar gastos en informe",
+        "SHOW_REPROVED_EXPENSES": "Mostrar gastos rechazados",
+        "APPROVING_MODAL_CAPTION": "Aprobación de informe de gastos",
+        "REQUEST_EDITION_CAPTION": "Solicitar modificación del informe?",
+        "REQUEST_EDITION_PLACEHOLDER": "Motivo del rechazo?",
+        "REQUEST_EDITION_MESSAGE": "Al solicitar la modificación del informe, el responsable de su elaboración deberá modificar los gastos de acuerdo con la información que se ingresa a continuación."
+    },
+
+    "THEME": {
+        "EXIT": "Salir",
+        "SHOW_MENU": "menú abierto",
+        "HIDE_MENU": "Ocultar el menú",
+        "CONFIGURATIONS": "Configuración",
+        "NOTIFICATIONS_LABEL": "Notificaciones",
+        "MANAGE_YOUR_ACCOUNT": "Administrar su cuenta",
+        "MARK_ALL_AS_READ_LABEL": "Marcar todas como leídas",
+        "NO_NOTIFICATIONS_LABEL": "Sin nuevas notificaciones"
+    }
+}

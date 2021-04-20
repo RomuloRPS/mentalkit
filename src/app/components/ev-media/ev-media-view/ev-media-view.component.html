@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-text class="text-center font-bold" *ngIf="image?.filename">image?.filename</ion-text>
+    <ion-text class="text-center font-bold" *ngIf="coloquent &&  image?.getAttribute('file_name')" >{{image?.getAttribute('file_name')}}</ion-text>
+    <ion-buttons slot="end">
+      <ion-buttons>
+        <ion-button (click)="close()">
+          <strong>Fechar</strong>
+        </ion-button>
+      </ion-buttons>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="medium">
+  <div class="flex flex-wrap content-center h-full">
+    <img *ngIf="coloquent && image?.getAttribute('token')" [src]="image.getAttribute('token') | attachmentToken" />
+    <img *ngIf="image?.file"  [src]="image.file | safeHtml">
+  </div>
+</ion-content>

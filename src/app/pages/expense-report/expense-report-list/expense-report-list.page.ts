@@ -4,6 +4,7 @@ import { MenuController, PopoverController } from '@ionic/angular';
 import { CategoryService } from 'src/app/resources/category/category.service';
 import { ExpenseReportRelations } from 'src/app/resources/expense-report/expense-report-relations';
 import { ExpenseReportService } from 'src/app/resources/expense-report/expense-report.service';
+import { EvTranslateService } from 'src/app/services/translate/translate.service';
 import { OfflineCacheService } from 'src/app/shared-services/offline-cache.service';
 import { ToasterService } from 'src/app/shared-services/toaster/toaster.service';
 import { environment } from 'src/environments/environment';
@@ -41,7 +42,8 @@ export class ExpenseReportListPage implements OnInit {
         private toasterService: ToasterService,
         private menuController: MenuController,
         private popoverController: PopoverController,
-        public categoryService: CategoryService
+        public categoryService: CategoryService,
+        private translateService: EvTranslateService
     ) { }
 
     public async openOptions(ev) {
@@ -60,13 +62,17 @@ export class ExpenseReportListPage implements OnInit {
         this.selectOn = option;
     }
 
+    public getStatusLabel(key) {
+        // return this.translateService.get(key);
+    }
+
     public ngOnInit() {
         this.refresh();
         this.getExpensesLength();
     }
 
     public filter(event) {
-        if (event && event.jsonApiType == 'categories') {
+        if (event && event.jsonApiType.split('/')[2] == 'categories') {
             this.menuFilters.category = event;
         }
 
@@ -93,7 +99,6 @@ export class ExpenseReportListPage implements OnInit {
         this.expenseReportService.onlyOffline().get(filter).subscribe((resp) => {
             this.loadingFirstTime = false;
             this.expenses = resp.data;
-            console.log(resp.data);
             this.loading = false;
         });
     }
@@ -283,7 +288,7 @@ export class ExpenseReportListPage implements OnInit {
     }
 
     public toExpenseReportView(id) {
-        this.router.navigate(['expense-report-view/' + id]);
+        this.router.navigate(['expense-report-view/' + id + '/update' + new Date().toISOString()]);
     }
 
     public loadMoreData(event) {

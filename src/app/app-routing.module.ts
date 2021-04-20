@@ -26,15 +26,15 @@ const routes: Routes = [
         loadChildren: () => import('./pages/register-user/register-user.module').then(m => m.RegisterUserPageModule)
     },
     {
-        path: 'informe-de-despesas',
+        path: 'expense-reports',
         loadChildren: () => import('./pages/expense-report/expense-report-list/expense-report-list.module').then( m => m.ExpenseReportListPageModule)
     },
     {
-        path: 'informe-de-despesas/:update',
+        path: 'expense-reports/:update',
         loadChildren: () => import('./pages/expense-report/expense-report-list/expense-report-list.module').then( m => m.ExpenseReportListPageModule)
     },
     {
-        path: 'expense-report-view/:id',
+        path: 'expense-report-view/:id/:update',
         loadChildren: () => import('./pages/expense-report/expense-report-view/expense-report-view.module').then( m => m.ExpenseReportViewPageModule)
     },
     {
@@ -66,11 +66,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/expense-report/expense-report-edit/expense-report-edit.module').then( m => m.ExpenseReportEditPageModule)
     },
     {
-        path: 'usuarios',
+        path: 'users',
         loadChildren: () => import('./pages/users/users-list/users-list.module').then( m => m.UsersListPageModule)
     },
     {
-        path: 'usuarios/:update',
+        path: 'users/:update',
         loadChildren: () => import('./pages/users/users-list/users-list.module').then( m => m.UsersListPageModule)
     },
     {
@@ -82,7 +82,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/users/users-edit/users-edit.module').then( m => m.UsersEditPageModule)
     },
     {
-        path: 'revisao',
+        path: 'review',
         loadChildren: () => import('./pages/revisions/revisions-list/revisions-list.module').then( m => m.RevisionsListPageModule)
     },
     {
@@ -94,11 +94,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/revisions/revisions-view/revisions-view.module').then( m => m.RevisionViewPageModule)
     },
     {
-        path: 'despesas',
+        path: 'expenses',
         loadChildren: () => import('./pages/expenses/expense-list/expense-list.module').then( m => m.ExpenseListPageModule)
     },
     {
-        path: 'despesas/:update',
+        path: 'expenses/:update',
         loadChildren: () => import('./pages/expenses/expense-list/expense-list.module').then( m => m.ExpenseListPageModule)
     },
     {

@@ -3,38 +3,32 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title *ngIf="editing">Editar Despesa</ion-title>
-    <ion-title *ngIf="!editing">Criar Despesa</ion-title>
+    <ion-title *ngIf="editing">{{'EXPENSE.EDIT_EXPENSE' | translate}}</ion-title>
+    <ion-title *ngIf="!editing">{{'EXPENSE.NEW_EXPENSE' | translate}}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="expense?.getRelation('disapprovedExpense')" color="warning">
+    <ion-text>{{'OBSERVATION_LABEL' | translate}}: {{expense?.getRelation('disapprovedExpense')?.getAttribute('observation')}}</ion-text>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
-
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide *ngIf="expense?.getRelation('avatar')" (click)="openOptions($event)">
-      <img style="height: 150px;" class="rounded-md h-full m-4"  [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
-    </ion-slide>
-    <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
-      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
-    </ion-slide>
-    <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
-      <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
-    </ion-slide>
-    <ion-slide (click)="openOptions($event)">
-      <div class="h-40 border-2 border-dotted border-ultramarine-500 w-full m-2 rounded-md">
-        <ion-icon color="primary" class="text-6xl m-auto mt-2" src="/assets/fontawesome/solid/images.svg"></ion-icon>
-        <p class="font-bold text-ultramarine-500">Incluir foto</p>
-        <p class="text-sm text-ultramarine-500">JPG, GIF e PNG somente</p>
-      </div>
-      <!-- <img style="height: 150px;" *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(expense?.getRelation('avatar')?.getAttribute('token'))" /> -->
-    </ion-slide>
-  </ion-slides>
+  <div style="border-color: gray;" (click)="openOptionsAvatar($event)" class="circular m-auto mt-6 relative border-2">
+    <img *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken" />
+    <img *ngIf="avatar?.file" style="height: 150px;"  [src]="avatar.file | safeHtml">
+    <div class="w-full text-center absolute bottom-0 mb-12 justify-center">
+      <ion-icon color="primary" class="text-6xl m-auto" *ngIf="!expense?.getRelation('avatar')?.getAttribute('token') && !avatar?.file" src="/assets/fontawesome/solid/images.svg"></ion-icon>
+    </div>
+    <div style="background-color: black;" class="absolute bottom-0 pb-6 h-12 w-full opacity-50 text-center"></div>
+    <div class="absolute bottom-0 mb-6 w-full text-center">
+      <span style="color: white;" class="text-sm font-bold">Alterar imagem</span>
+    </div>
+  </div>
 
   <form *ngIf="expense" class="mt-6" #expenseForm="ngForm" name="expenseForm">
     <ion-row class="flex justify-center ">
 
       <ion-col size="11">
-        <app-ev-select [filters]="expenseReportFilter" [value]="expenseReport" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Informe de despesa"
+        <app-ev-select [filters]="expenseReportFilter" [value]="expenseReport" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="{{'EXPENSE.REPORT' | translate}}"
         (valueChange)="expenseReportChange($event)" [(valueId)]="selectedExpenseReportId" inputName='Roles' [baseService]="expenseReportService"
         #roleSelect></app-ev-select>
       </ion-col>
@@ -42,14 +36,14 @@
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="pencil-outline"></ion-icon>
-          <ion-label position="stacked">Motivo/Descrição: <span class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE.NAME' | translate}}: <span class="text-red-500">*</span></ion-label>
           <ion-input #name="ngModel"  [(ngModel)]="expense.elements.name" name="name" type="text" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
         <ion-text color="danger">
           <p [hidden]="name.valid || submitted == false" class="ion-padding-start">
-            Informe o Motivo/Descrição da despesa
+            {{'EXPENSE.NAME_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -57,14 +51,14 @@
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
-          <ion-label position="stacked">Valor (COP): <span class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE.VALUE' | translate}} (COP): <span class="text-red-500">*</span></ion-label>
           <ion-input #value="ngModel"  [(ngModel)]="expense.elements.value" name="value" type="number" 
             spellcheck="false" autocapitalize="off" required>
           </ion-input>
         </ion-item>
         <ion-text color="danger">
           <p [hidden]="(value.valid)|| submitted == false" class="ion-padding-start">
-            Informe um valor válido
+            {{'EXPENSE.UNITY_VALUE_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -72,12 +66,12 @@
       <ion-col size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="calendar-outline"></ion-icon>
-          <ion-label position="stacked">Data Emissão: </ion-label>
+          <ion-label position="stacked">{{'EXPENSE.ISSUE_DATE' | translate}}: </ion-label>
           <ion-datetime #issue_date="ngModel" [(ngModel)]="date" name="issue_date" cancelText="Cancelar" doneText="Ok" displayFormat="DD/MM/YYYY"></ion-datetime>
         </ion-item>
         <ion-text color="danger">
           <p [hidden]="(issue_date.valid)|| submitted == false" class="ion-padding-start">
-            Informe uma data válida
+            {{'EXPENSE.ISSUE_DATE_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -85,23 +79,23 @@
       <ion-col *ngIf="isRequired('expense_time')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="timer-outline"></ion-icon>
-          <ion-label position="stacked">Hora: <span *ngIf="isRequired('expense_time')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE.TIME' | translate}}: <span *ngIf="isRequired('expense_time')" class="text-red-500">*</span></ion-label>
           <ion-datetime [required]="isRequired('expense_time')" #time="ngModel" [(ngModel)]="expense.elements.time" name="time" displayFormat="HH:mm"></ion-datetime>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_time')" color="danger">
           <p [hidden]="(time.valid)|| submitted == false" class="ion-padding-start">
-            Informe uma horário válido
+            {{'EXPENSE.TIME_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
 
       <ion-col size="11">
-        <app-ev-select [filters]="filterCategory" [value]="category" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="Categoria"
+        <app-ev-select [filters]="filterCategory" [value]="category" iconColor="tertiary" icon="../../../assets/fontawesome/solid/bars.svg" showField="name" placeholder="{{'CATEGORY_LABEL' | translate}}"
         (valueChange)="categoryChange($event)" [(valueId)]="selectedCategoryId" inputName='Categories' [baseService]="categoryService"
         #roleSelect></app-ev-select>
         <ion-text color="danger">
           <p [hidden]="this.expense.getRelation('category') || submitted == false" class="ion-padding-start">
-            Informe a categoria
+            {{'REQUIRED_FIELD' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -109,14 +103,14 @@
       <ion-col *ngIf="isRequired('expense_provider')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="business-outline"></ion-icon>
-          <ion-label position="stacked">Fornecedor: <span *ngIf="isRequired('expense_provider')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE_REQUIRED_FIELDS.PROVIDER' | translate}}: <span *ngIf="isRequired('expense_provider')" class="text-red-500">*</span></ion-label>
           <ion-input #provider="ngModel" [(ngModel)]="expense.elements.provider" name="provider" type="text" 
             spellcheck="false" autocapitalize="off" [required]="isRequired('expense_provider')">
           </ion-input>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_provider')" color="danger">
           <p [hidden]="provider.valid || submitted == false" class="ion-padding-start">
-            Informe o fornecedor
+            {{'EXPENSE.PROVIDER_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -124,14 +118,14 @@
       <ion-col *ngIf="isRequired('expense_locale')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="business-outline"></ion-icon>
-          <ion-label position="stacked">Local: <span *ngIf="isRequired('expense_locale')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE_REQUIRED_FIELDS.LOCALE' | translate}}: <span *ngIf="isRequired('expense_locale')" class="text-red-500">*</span></ion-label>
           <ion-input [required]="isRequired('expense_locale')" #locale="ngModel" [(ngModel)]="expense.elements.locale" name="locale" type="text" 
             spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_locale')" color="danger">
           <p [hidden]="(locale.valid)|| submitted == false" class="ion-padding-start">
-            Informe um local válido
+            {{'EXPENSE.LOCALE_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -139,14 +133,14 @@
       <ion-col *ngIf="isRequired('expense_document_number')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="document-outline"></ion-icon>
-          <ion-label position="stacked">Nº Documento: <span *ngIf="isRequired('expense_document_number')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE_REQUIRED_FIELDS.DOCUMENT_NUMBER' | translate}}: <span *ngIf="isRequired('expense_document_number')" class="text-red-500">*</span></ion-label>
           <ion-input [required]="isRequired('expense_document_number')"  #document_number="ngModel" [(ngModel)]="expense.elements.document_number" name="document_number" type="text" 
             spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_document_number')" color="danger">
           <p [hidden]="document_number.valid || submitted == false" class="ion-padding-start">
-            Informe o Nº Documento
+            {{'EXPENSE.DOCUMENT_NUMBER_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -154,14 +148,14 @@
       <ion-col *ngIf="isRequired('expense_quantity')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
-          <ion-label position="stacked">Quantidade: <span *ngIf="isRequired('expense_quantity')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE_REQUIRED_FIELDS.QUANTITY' | translate}}: <span *ngIf="isRequired('expense_quantity')" class="text-red-500">*</span></ion-label>
           <ion-input [required]="isRequired('expense_quantity')" #quantity="ngModel" [(ngModel)]="expense.elements.quantity" name="quantity" type="number" 
             spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_quantity')" color="danger">
           <p [hidden]="(quantity.valid)|| submitted == false" class="ion-padding-start">
-            Informe uma quantidade válida
+            {{'EXPENSE.QUANTITY_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -169,14 +163,14 @@
       <ion-col *ngIf="isRequired('expense_unity_value')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon>
-          <ion-label position="stacked">Valor Unitário: <span *ngIf="isRequired('expense_unity_value')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'EXPENSE_REQUIRED_FIELDS.UNITY_VALUE' | translate}}: <span *ngIf="isRequired('expense_unity_value')" class="text-red-500">*</span></ion-label>
           <ion-input [required]="isRequired('expense_unity_value')" #unity_value="ngModel"  [(ngModel)]="expense.elements.unity_value" name="unity_value" type="number" 
             spellcheck="false" autocapitalize="off">
           </ion-input>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_unity_value')" color="danger">
           <p [hidden]="(unity_value.valid)|| submitted == false" class="ion-padding-start">
-            Informe uma unidade válida
+            {{'EXPENSE.UNITY_VALUE_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -184,19 +178,38 @@
       <ion-col *ngIf="isRequired('expense_observations')" size="11">
         <ion-item lines="none" class="rounded-lg">
           <ion-icon slot="start" color="tertiary" name="information-circle-outline"></ion-icon>
-          <ion-label position="stacked">Observação: <span *ngIf="isRequired('expense_observations')" class="text-red-500">*</span></ion-label>
+          <ion-label position="stacked">{{'OBSERVATION_LABEL' | translate}}: <span *ngIf="isRequired('expense_observations')" class="text-red-500">*</span></ion-label>
           <ion-textarea #observation="ngModel" [(ngModel)]="expense.elements.observations" name="observation" [required]="isRequired('expense_observations')"  type="text" 
             spellcheck="false" autocapitalize="off">
           </ion-textarea>
         </ion-item>
         <ion-text *ngIf="isRequired('expense_observations')" color="danger">
           <p [hidden]="(observation.valid) || submitted == false" class="ion-padding-start">
-            Informe uma observação válida
+            {{'REQUIRED_FIELD' | translate}}
           </p>
         </ion-text>
       </ion-col>
     </ion-row>
   </form>
+
+  <ion-row>
+    <ion-col class="m-auto" size="11">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let attachment of attachments; let i = index" (click)="openOptions($event, i)">
+          <img *ngIf="attachment.file" style="height: 150px;" class="rounded-md h-full m-4"  [src]="attachment.file | safeHtml">
+        </ion-slide>
+        <ion-slide (click)="openOptions($event)">
+          <div class="h-40 border-2 border-dotted border-ultramarine-500 w-full m-2 rounded-md">
+            <ion-icon color="primary" class="text-6xl m-auto mt-2" src="/assets/fontawesome/solid/images.svg"></ion-icon>
+            <p class="font-bold text-ultramarine-500">Incluir foto</p>
+            <p class="text-sm text-ultramarine-500">JPG, GIF e PNG somente</p>
+          </div>
+          <!-- <img style="height: 150px;" *ngIf="expense?.getRelation('avatar')?.getAttribute('token')" [src]="getIconUrl(expense?.getRelation('avatar')?.getAttribute('token'))" /> -->
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+
 
 </ion-content>
 
@@ -205,17 +218,17 @@
     <ion-row>
       <ion-col size="6">
         <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
-          Cancelar
+          {{'BACK_BUTTON' | translate}}
         </ion-button>
       </ion-col>
       <ion-col *ngIf="!editing" size="6">
         <ion-button (click)="create(expenseForm)"  expand="block">
-          Criar
+          {{'NEW_REGISTER_BUTTON' | translate}}
         </ion-button>
       </ion-col>
       <ion-col *ngIf="editing" size="6">
         <ion-button (click)="save(expenseForm)"  expand="block">
-          Salvar
+          {{'SAVE_BUTTON' | translate}}
         </ion-button>
       </ion-col>
     </ion-row>

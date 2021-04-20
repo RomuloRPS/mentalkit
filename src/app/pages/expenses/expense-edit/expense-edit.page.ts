@@ -37,6 +37,7 @@ export class ExpenseEditPage implements OnInit {
     public selectedExpenseReportId;
 
     public attachments = [];
+    public avatar;
 
     public filterCategory = {
         categoryFilterIds: null
@@ -136,6 +137,40 @@ export class ExpenseEditPage implements OnInit {
         });
     }
 
+    public async openOptionsAvatar(ev) {
+        let image;
+
+        image = this.avatar;
+
+        if (this.expense.getRelation('avatar')) {
+            image = this.expense.getRelation('avatar');
+        }
+
+        const popoverOptions = {
+            component: EvMediaPopoverComponent,
+            translucent: true,
+            event: ev,
+            componentProps: {
+                image
+            }
+        };
+
+        const popover = await this.popoverController.create(popoverOptions);
+
+        popover.onDidDismiss().then((resp: any) => {
+            if (resp.data) {
+                if (resp.data == 'delete') {
+                    this.avatar = null;
+                    this.expense.setRelation('avatar', null);
+                } else {
+                    this.avatar = resp.data;
+                }
+            }
+        });
+
+        return await popover.present();
+    }
+
     public async openOptions(ev, index?) {
         let image;
 
@@ -169,9 +204,9 @@ export class ExpenseEditPage implements OnInit {
 
     public backToList() {
         if (this.expense.getRelation('expenseReport')) {
-            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId()]);
+            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId() + '/update' + new Date().toISOString()]);
         } else {
-            this.router.navigate(['despesas/update' + new Date().toISOString()]);
+            this.router.navigate(['expenses/update' + new Date().toISOString()]);
         }
     }
 
@@ -208,6 +243,13 @@ export class ExpenseEditPage implements OnInit {
             this.loadingService.show('Salvando despesa');
             this.expense.elements.issue_date = (new DateTimeFormatPipe()).transform(this.date, 'yyyy-MM-dd HH:mm:ss');
 
+            if (!this.expense.getRelation('avatar')) {
+                this.expense.elements.avatar = this.avatar;
+            }
+
+            this.expense.elements.from_app = true;
+            this.expense.elements.attachments = this.attachments;
+
             this.expense.save().then(() => {
                 this.category = null;
                 this.date = new Date().toISOString();
@@ -233,8 +275,8 @@ export class ExpenseEditPage implements OnInit {
         if (form.valid) {
             this.loadingService.show('Criando despesa');
             this.expense.elements.attachments = this.attachments;
-            this.expense.elements.avatar = this.attachments[0];
-            this.expense.elements.from_app =
+            this.expense.elements.avatar = this.avatar;
+            this.expense.elements.from_app = true;
             this.expense.elements.issue_date = (new DateTimeFormatPipe()).transform(this.date, 'yyyy-MM-dd HH:mm:ss');
             this.expense.create().then(() => {
                 this.submitted = false;
@@ -272,9 +314,9 @@ export class ExpenseEditPage implements OnInit {
 
     private next() {
         if (this.expense.getRelation('expenseReport')) {
-            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId()]);
+            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId() + '/update' + new Date().toISOString()]);
         } else {
-            this.router.navigate(['despesas']);
+            this.router.navigate(['expenses/update' + new Date().toISOString()]);
         }
     }
 }

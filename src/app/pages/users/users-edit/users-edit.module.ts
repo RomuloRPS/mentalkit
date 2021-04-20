@@ -9,6 +9,7 @@ import { UsersEditPageRoutingModule } from './users-edit-routing.module';
 import { UsersEditPage } from './users-edit.page';
 import { ChangePasswordModalComponent } from './change-password-modal/change-password-modal.component';
 import { EvComponentsModule } from 'src/app/components/ev-components';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { EvComponentsModule } from 'src/app/components/ev-components';
         FormsModule,
         IonicModule,
         UsersEditPageRoutingModule,
-        EvComponentsModule
+        EvComponentsModule,
+        TranslateModule
     ],
     entryComponents: [
         ChangePasswordModalComponent

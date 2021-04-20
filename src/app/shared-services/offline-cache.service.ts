@@ -76,18 +76,12 @@ export class OfflineCacheService {
                 include: UserRelations,
                 page: {limit: 99999}
             }),
-            this.roleService.cache({
-                page: {limit: 99999}
-            }),
             this.categoryService.cache({
                 page: {limit: 99999}
             }),
-            this.costCenterService.cache({
-                page: {limit: 99999}
-            }),
-            this.departmentService.cache({
-                page: {limit: 99999}
-            }),
+            this.roleService.cache(),
+            this.costCenterService.cache(),
+            this.departmentService.cache(),
             this.expenseService.cache({
                 include: ExpenseRelations,
                 page: {limit: 99999}

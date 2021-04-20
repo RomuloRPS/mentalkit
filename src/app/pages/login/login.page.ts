@@ -14,6 +14,7 @@ import { UserModel } from 'src/app/models/user.model';
 import { PluralResponse, SingularResponse } from 'coloquent';
 import { RoleService } from 'src/app/services/role/role.service';
 import { OfflineCacheService } from 'src/app/shared-services/offline-cache.service';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
     selector: 'app-login',
@@ -40,13 +41,27 @@ export class LoginPage implements OnInit {
         private toasterService: ToasterService,
         private userModel: UserModel,
         private roleService: RoleService,
-        private offlineCacheSercice: OfflineCacheService
+        private offlineCacheSercice: OfflineCacheService,
+        private googlePlus: GooglePlus
     ) {
         this.version = environment.version;
     }
 
     public ngOnInit() {
         this.statusBar.backgroundColorByHexString('#6C9F23');
+    }
+
+    public loginWithGoogle() {
+        this.googlePlus.login({
+            'scopes': 'profile, email', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+		    'webClientId': '886871057560-t722145pt0j9oiuttt9si6ecnobmnori.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+        }).then((resp) => {
+            console.log(resp);
+            alert(JSON.stringify(resp));
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        });
     }
 
     public onLogin(form: NgForm) {
@@ -129,6 +144,8 @@ export class LoginPage implements OnInit {
 
     private saveUserParams(user, resp) {
         localStorage.setItem('JWT', user.getAttribute('token'));
+        localStorage.setItem('selectedTenancyId', user.getRelation('tenancies')[0].getApiId());
+
         this.userModel
             .set("id", user.getApiId())
             .set("JWT", user.getAttribute('token'))
@@ -136,6 +153,7 @@ export class LoginPage implements OnInit {
             .set("name", user.getAttribute('name'))
             .set("email", user.getAttribute('email'))
             .set("user", JSON.stringify(resp))
+            .set("selectedTenancyId", user.getRelation('tenancies')[0].getApiId())
             .save();
 
         this.roleService.updateRoles();

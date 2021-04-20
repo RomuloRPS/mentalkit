@@ -59,7 +59,7 @@ export class EvMediaPopoverColoquentComponent implements OnInit {
         private loadingController: LoadingController,
         private popoverController: PopoverController,
         private httpService: HttpClientService,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
     ) { }
 
     public ngOnInit() {
@@ -67,6 +67,10 @@ export class EvMediaPopoverColoquentComponent implements OnInit {
 
     public keyboardIsOpen() {
         return this.keyboard.isVisible;
+    }
+
+    public viewImage() {
+        this.mediaService.openImage(this.items[0]);
     }
 
     public removeImage() {
@@ -143,6 +147,10 @@ export class EvMediaPopoverColoquentComponent implements OnInit {
         formData.append("file", file);
 
         return this.httpService.post(environment.api + '/attachments/upload', formData);
+    }
+
+    public vieImage() {
+
     }
 
     public fillFilterArray(value) {

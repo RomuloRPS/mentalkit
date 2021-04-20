@@ -8,10 +8,11 @@ import { MenuModel } from '../menu/menu.model';
 })
 
 export class RoleModel extends BaseModel {
-   protected jsonApiType = "roles";
+   protected jsonApiType = "tenancies/:tenancy_id/roles";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public menus() {

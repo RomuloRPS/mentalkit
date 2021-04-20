@@ -19,6 +19,7 @@ import { LoadingService } from 'src/app/shared-services/loading/loading.service'
 })
 export class EvMediaPopoverComponent implements OnInit {
     @Input() public image;
+    @Input() public viewOnly = false;
     @Output() public ImgSelect: EventEmitter<any> = new EventEmitter();
 
     public resource = {
@@ -59,6 +60,10 @@ export class EvMediaPopoverComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
+    }
+
+    public viewImage() {
+        this.mediaService.openImage(this.image);
     }
 
     public hasImage() {

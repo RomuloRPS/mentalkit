@@ -14,10 +14,11 @@ import { RoleModel } from '../role/role.model';
 })
 
 export class ExpenseReportStateModel extends BaseModel {
-   protected jsonApiType = "expense-report-state";
+   protected jsonApiType = "tenancies/:tenancy_id/expense-report-state";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public getJsonApiBaseUrl() {

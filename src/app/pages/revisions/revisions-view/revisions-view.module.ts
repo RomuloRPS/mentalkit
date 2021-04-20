@@ -8,6 +8,7 @@ import { RevisionViewPageRoutingModule } from './revisions-view-routing.module';
 
 import { RevisionViewPage } from './revisions-view.page';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
         FormsModule,
         IonicModule,
         RevisionViewPageRoutingModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ],
     declarations: [RevisionViewPage],
 })

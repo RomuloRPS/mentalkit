@@ -7,9 +7,10 @@ import { BaseModel } from '../coloquent.model';
 })
 
 export class AvatarModel extends BaseModel {
-   protected jsonApiType = "avatar";
+   protected jsonApiType = "tenancies/:tenancy_id/avatar";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 }

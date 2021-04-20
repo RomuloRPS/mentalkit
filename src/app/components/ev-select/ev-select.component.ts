@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { BaseModel } from 'src/app/coloquent-model/coloquent.model';
 import { EvModalSearchComponent } from '../ev-modal-search/ev-modal-search.component';
 
 @Component({
@@ -10,6 +11,9 @@ import { EvModalSearchComponent } from '../ev-modal-search/ev-modal-search.compo
 export class EvSelectComponent implements OnInit {
   @Input() public inputName;
   @Input() public baseService;
+  @Input() public baseModel: BaseModel;
+  @Input() public creatable;
+  @Input() public name;
   @Input() public valueId;
   @Input() public disabled;
   @Input() public filters;
@@ -41,7 +45,10 @@ export class EvSelectComponent implements OnInit {
               resource: this.resource,
               filters: this.filters,
               showField: this.showField,
-              value: this.value
+              value: this.value,
+              creatable: this.creatable,
+              baseModel: this.baseModel,
+              name: this.name
           }
       });
 

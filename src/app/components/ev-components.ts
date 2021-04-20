@@ -28,6 +28,8 @@ import { HttpClientService } from '../services/http/http-client.service';
 import { EvMediaPopoverColoquentComponent } from './ev-media/ev-media-popover-coloquent/ev-media-popover-coloquent.component';
 import { EvMultiSelectExpensesComponent } from './ev-multi-select-expenses/ev-multi-select-expenses.component';
 import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-select-expense-search/ev-modal-multi-select-expense-search.component';
+import { EvMediaViewComponent } from './ev-media/ev-media-view/ev-media-view.component';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
     imports: [
         CommonModule,
@@ -35,7 +37,8 @@ import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-selec
         IonicModule,
         PipesModule,
         SignaturePadModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ],
     declarations: [
         EvMediaComponent,
@@ -53,7 +56,8 @@ import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-selec
         EvMediaPopoverComponent,
         EvMediaPopoverColoquentComponent,
         EvMultiSelectExpensesComponent,
-        EvModalMultiSelectExpenseSearchComponent
+        EvModalMultiSelectExpenseSearchComponent,
+        EvMediaViewComponent
     ],
     entryComponents: [
         EvModalSearchComponent,
@@ -67,7 +71,8 @@ import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-selec
         EvMediaPopoverComponent,
         EvMediaPopoverColoquentComponent,
         EvMultiSelectExpensesComponent,
-        EvModalMultiSelectExpenseSearchComponent
+        EvModalMultiSelectExpenseSearchComponent,
+        EvMediaViewComponent
     ],
     exports: [
         EvMediaComponent,
@@ -83,7 +88,8 @@ import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-selec
         EvMediaPopoverComponent,
         EvMediaPopoverColoquentComponent,
         EvMultiSelectExpensesComponent,
-        EvModalMultiSelectExpenseSearchComponent
+        EvModalMultiSelectExpenseSearchComponent,
+        EvMediaViewComponent
     ],
     providers: [
         Keyboard,

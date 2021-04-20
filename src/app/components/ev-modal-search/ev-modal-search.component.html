@@ -1,16 +1,16 @@
 <ion-header translucent>
   <ion-toolbar color="primary">
     <ion-buttons *ngIf="value" slot="start">
-      <ion-button (click)="clear()"><strong>Limpar</strong></ion-button>
+      <ion-button (click)="clear()"><strong>{{'CLEAR_BUTTON' | translate}}</strong></ion-button>
     </ion-buttons>
     <ion-title>{{selectTitle}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="close()">Fechar</ion-button>
+      <ion-button (click)="close()">{{'CLOSE_BUTTON' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <ion-searchbar #search type="text" placeholder="Buscar" [(ngModel)]="searchTerm" (ionChange)="getValues()">
+  <ion-searchbar #search type="text" placeholder="{{'INPUT_SEARCH_PLACEHOLDER' | translate}}" [(ngModel)]="searchTerm" (ionChange)="getValues()">
   </ion-searchbar>
   
   <ion-list *ngIf="list?.length > 0">
@@ -28,7 +28,7 @@
   </ion-list>
 
   <ion-infinite-scroll *ngIf="!resource" threshold="100px" (ionInfinite)="loadMoreData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
@@ -42,7 +42,7 @@
 
           <ion-icon style="font-size: 80px;" color="primary" name="arrow-up-outline"></ion-icon>
           <ion-text color="dark">
-            <h2><strong>Informe na busca o que deseja</strong></h2>
+            <h1><strong>{{'INPUT_SEARCH_PLACEHOLDER' | translate}}</strong></h1>
           </ion-text>
 
         </ion-card-content>
@@ -50,5 +50,11 @@
 
     </ion-col>
   </ion-row>
+
+  <ion-fab *ngIf="creatable" (click)="newItem()" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button  color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

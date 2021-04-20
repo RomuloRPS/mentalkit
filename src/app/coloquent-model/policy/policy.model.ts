@@ -13,10 +13,11 @@ import { UserResourceModel } from '../user/user.model';
 })
 
 export class PolicyModel extends BaseModel {
-   protected jsonApiType = "policies";
+   protected jsonApiType = "tenancies/:tenancy_id/policies";
 
    public constructor() {
        super();
+       this.jsonApiType = this.bindUrlForTenancy(this.jsonApiType);
    }
 
    public getJsonApiBaseUrl() {

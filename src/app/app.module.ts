@@ -1,7 +1,7 @@
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
@@ -21,6 +21,16 @@ import { CodePush } from '@ionic-native/code-push/ngx';
 import { SharedServicesModule } from './shared-services/shared-services.module';
 import { ModelsModule } from './models/models.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
+import { HttpClient } from '@angular/common/http';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+export function HttpLoaderFactory(httpClient: HttpClient) {
+    return new TranslateHttpLoader(httpClient);
+}
+
+export const DEFAULT_LANGUAGE = 'pt-br';
 
 @NgModule({
     declarations: [AppComponent],
@@ -32,7 +42,15 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
         PipesModule,
         SignaturePadModule,
         SharedServicesModule,
-        ModelsModule.forRoot()
+        ModelsModule.forRoot(),
+        TranslateModule.forRoot({
+            defaultLanguage: 'pt-br',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
     ],
     providers: [
         CodePush,
@@ -49,11 +67,18 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
         OneSignal,
         SQLite,
         ScreenOrientation,
+        GooglePlus,
         {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig}
     ],
     bootstrap: [AppComponent]
 })
 
 export class AppModule {
-
+    public constructor(private platform: Platform, private translate: TranslateService) {
+        platform.ready().then( () => {
+            translate.setDefaultLang(DEFAULT_LANGUAGE);
+            // translate.use(window.navigator.language.toLowerCase());
+            translate.use('es-419');
+        });
+    }
 }

@@ -9,6 +9,7 @@ import { UsersListPageRoutingModule } from './users-list-routing.module';
 import { UsersListPage } from './users-list.page';
 import { EvComponentsModule } from 'src/app/components/ev-components';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
         IonicModule,
         UsersListPageRoutingModule,
         EvComponentsModule,
-        PipesModule
+        PipesModule,
+        TranslateModule
     ],
     declarations: [UsersListPage]
 })

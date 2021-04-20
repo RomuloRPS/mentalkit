@@ -1,0 +1,188 @@
+{
+    "NAME_LABEL": "Nome",
+    "EMAIL_LABEL": "Email",
+    "USER_LABEL": "Usuário",
+    "PASSWORD_LABEL": "Senha",
+    "OBSERVATION_LABEL": "Observação",
+    "SELECT_IMAGE_LABEL": "Selecione uma imagem",
+    "AVATAR_PLACEHOLDER": "Selecione uma imagem ou clique para ampliar",
+
+    "ACTIONS_LABEL": "Ações",
+    "ACTIVE_LABEL": "Ativo",
+    "INACTIVE_LABEL": "Inativo",
+    "ACTIVE_SLASH_INACTIVE_LABEL": "Ativar/Desativar",
+    "LAST_UPDATE_LABEL": "Atualizado a",
+
+    "CATEGORY_LABEL": "Categoria",
+    "DEPARTMENT_LABEL": "Departamento",
+    "COST_CENTER_LABEL": "Centro de custo",
+
+    "BACK_BUTTON": "Voltar",
+    "SAVE_BUTTON": "Salvar",
+    "CLEAR_BUTTON": "Limpar",
+    "DELETE_BUTTON": "Excluir",
+    "CLOSE_BUTTON": "Fechar",
+    "NEW_REGISTER_BUTTON": "Incluir",
+    "INPUT_SEARCH_PLACEHOLDER": "Pesquisar",
+    "DEFAULT_SELECT_PLACEHOLDER": "Selecione...",
+    "SELECTED": "Selecionado",
+    "SELECTEDS": "Selecionados",
+    "NAVIGATE_TO_LIST_BUTTON": "Voltar à listagem",
+
+    "PLUS": "Mais",
+    "LOADING": "Carregando",
+    "REQUIRED_FIELD": "Campo Obrigatório",
+    "READY": "Pronto",
+    "COMPANY": {
+        "COMPANY_CAPTION": "Empresa"
+    },
+
+    "LOGIN": {
+        "SIGN_UP_LABEL": "Cadastre-se",
+        "NEW_HERE_LABEL": "Novo Aqui?",
+        "LOGIN_BUTTON_TEXT": "Continuar",
+        "CONTINUE_WITH_LABEL": "ou continuar com",
+        "FORGOT_PASSWORD_LABEL": "Esqueceu sua senha?",
+        "PASSWORD_INPUT_PLACEHOLDER": "Digite sua senha...",
+        "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail..."
+    },
+
+    "USER": {
+        "USER": "Usuário",
+        "USERS": "Usuários",
+        "LOGIN_LABEL": "Login",
+        "NEW_USER": "Novo Usuário",
+        "ROLES_LABEL": "Permissões",
+        "EDIT_USER": "Editar usuário",
+        "DELETE_USER": "Excluir usuário",
+        "LOGIN_PLACEHOLDER": "Digite o login",
+        "CONFIRM_PASSWORD": "Confirmar senha",
+        "CONFIRM_PASSWORD_PLACEHOLDER": "Digite sua confirmação de senha",
+        "CHANGE_PASSWORD": "Trocar senha",
+        "EMAIL_PLACEHOLDER": "Digite o e-mail",
+        "NAME_PLACEHOLDER": "Digite o nome...",
+        "ROLES_PLACEHOLDER": "Selecione as permissões...",
+        "IMPORT_USERS_LABEL": "Atualizar/Importar vários usuários",
+        "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
+        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
+    },
+
+    "POLICY": {
+        "CATEGORIES_LABEL": "Categorias",
+        "LIST_CAPTION": "Políticas de Despesas",
+        "NEW_POLICY": "Nova Política de Despesas",
+        "EDIT_POLICY": "Editar Política de Despesas",
+        "REQUIRED_FIELDS_LABEL": "Campos Obrigatórios",
+        "APPROVAL_GROUPS_LABEL": "Grupos de Aprovação",
+        "APPROVAL_GROUP_LABEL": "Grupo de Aprovação",
+        "REFUNDER_USERS_LABEL": "Usuários Restituidores"
+    },
+
+    "APPROVAL_GROUPS": {
+        "ADD_GROUP": "Adicionar Grupo",
+        "ADD_USER": "Adicionar usuário ao grupo",
+        "DELETE_GROUP": "Remover Grupo de Aprovação",
+        "GROUP_NAME_PLACEHOLDER": "Nome do grupo...",
+        "SELECT_USER_PLACEHOLDER": "Selecione um usuário..."
+    },
+
+    "EXPENSE": {
+        "TIME": "Hora",
+        "VALUE": "Valor",
+        "REPORT": "Informe",
+        "ISSUE_DATE": "Emissão",
+        "LIST_CAPTION": "Despesas",
+        "VIEW_CAPTION": "Visualizar despesa",
+        "NAME": "Motivo/Descrição",
+        "NEW_EXPENSE": "Nova Despesas",
+        "EDIT_EXPENSE": "Editar Despesas",
+        "VALUE_PLACEHOLDER": "Digite o valor...",
+        "LOCALE_PLACEHOLDER": "Digite o local...",
+        "ISSUE_DATE_PLACEHOLDER": "Selecione a data...",
+        "TIME_PLACEHOLDER": "Selecione a hora...",
+        "QUANTITY_PLACEHOLDER": "Digite a quantidade...",
+        "NAME_PLACEHOLDER": "Digite o Motivo/Descrição...",
+        "UNITY_VALUE_PLACEHOLDER": "Digite o valor unitário...",
+        "PROVIDER_PLACEHOLDER": "Digite o nome do fornecedor...",
+        "DOCUMENT_NUMBER_PLACEHOLDER": "Digite o nº do documento...",
+        "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando."
+    },
+ 
+    "EXPENSE_REQUIRED_FIELDS": {
+        "LOCALE": "Local",
+        "TIME": "Hora da despesa",
+        "QUANTITY": "Quantidade",
+        "PROVIDER": "Fornecedor",
+        "IMAGE": "Imagem da despesa",
+        "UNITY_VALUE": "Valor Unitário",
+        "DOCUMENT_NUMBER": "Número do documento"
+    },
+
+    "EXPENSE_REPORT": {
+        "SENT_AT": "Enviado em:",
+        "STATUS": "Status",
+        "POLICY": "Política",
+        "VALUE": "Valor (COP)",
+        "NAME": "Motivo/Descrição",
+        "DEPARTMENT": "Departamento",
+        "CAPTION": "Informe de Despesas",
+        "NEW_REPORT": "Novo Informe de Despesas",
+        "EDIT_REPORT": "Editar Informe de Despesas",
+        "SELECTED_EXPENSES_LABEL": "Despesas Selecionadas"
+    },
+
+
+    "EXPENSE_REPORT_DETAILS": {
+        "DESCRIPTION": "Descrição",
+        "SEND_DATE": "Data de Envio",
+        "REFUNDER_USER": "Usuário Restituidor",
+        "EXPENSES_LENGTH": "Despesas Indicadas",
+        "REPROVED_EXPENSE": "Despesa Reprovada",
+        "SEND_TO_REVIEW": "Enviar para revisão",
+        "CAPTION": "Visualizar Informe de Despesas",
+        "CLICK_TO_SHOW": "clique para mostrar o motivo",
+        "CLICK_TO_HIDE": "clique para esconder o motivo"
+    },
+
+    "EXPENSE_REPORT_STATUS": {
+        "PAID": "Pago",
+        "OPEN": "Aberto",
+        "SENT": "Enviado",
+        "APPROVED": "Aprovado",
+        "VISUALIZED": "Visualizado",
+        "IN_APPROVING_PROCESS": "Em Revisão",
+        "EDITION_REQUEST": "Edição Requisitada",
+        "APPROVED_WITH_EXCEPTIONS": "Aprovado com Excessão"
+    },
+
+    "REVIEW": {
+        "THERE_IS": "Há",
+        "REFUNDER": "Restituidor",
+        "NAME": "Motivo/Descrição",
+        "APPROVE_BUTTON": "Aprovar",
+        "CANCEL_BUTTON": "Cancelar",
+        "POLICY": "Política de despesas",
+        "MARK_AS_PAID_BUTTON": "Marcar como pago",
+        "REPROVED_EXPENSES": "Despesas Reprovadas",
+        "CAPTION": "Revisão de Informes de Despesas",
+        "REQUEST_EDITION_BUTTON": "Solicitar Edição",
+        "EXPENSES_AND_REPORT": "Despesas no Informe e",
+        "SHOW_EXPENSES_ALL": "Exibir Despesas no Informe",
+        "SHOW_REPROVED_EXPENSES": "Exibir Despesas Reprovadas",
+        "APPROVING_MODAL_CAPTION": "Aprovação do Informe de Despesas",
+        "REQUEST_EDITION_CAPTION": "Requisitar Edição do Informe?",
+        "REQUEST_EDITION_PLACEHOLDER": "Informe o Motivo da Reprovação?",
+        "REQUEST_EDITION_MESSAGE": "Ao requisitar a edição do informe, o restituidor que o criou deve modificar as despesas de acordo com as informações inseridas abaixo."
+    },
+
+    "THEME": {
+        "EXIT": "Sair",
+        "SHOW_MENU": "Abrir Menu",
+        "HIDE_MENU": "Esconder Menu",
+        "CONFIGURATIONS": "Configurações",
+        "NOTIFICATIONS_LABEL": "Notificações",
+        "MANAGE_YOUR_ACCOUNT": "Gerenciar sua conta",
+        "NO_NOTIFICATIONS_LABEL": "Sem novas notificações",
+        "MARK_ALL_AS_READ_LABEL": "Marcar todas como lidas"
+    }
+}

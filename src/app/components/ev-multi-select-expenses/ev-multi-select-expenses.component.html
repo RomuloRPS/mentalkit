@@ -1,5 +1,5 @@
 <ion-card class="card-no-border card-no-margin">
-  <ion-label><p class="mt-2 text-center text-4xl font-bold">Despesas</p></ion-label>
+  <ion-label><p class="mt-2 text-center text-4xl font-bold">{{'EXPENSE_REPORT.SELECTED_EXPENSES_LABEL' | translate}}</p></ion-label>
     <ion-list>
       <ng-container *ngFor="let item of values; let i = index">
         <ion-item lines="full" *ngIf="i < 3" [disabled]="disabled">
@@ -13,7 +13,7 @@
       </ng-container>
       <div class="m-auto text-center mt-2">
         <ion-badge *ngIf="values?.length > 3"  color="primary" >
-          <ion-label class="text-center font-bold">Mais {{values.length - 3}}...</ion-label>
+          <ion-label class="text-center font-bold">{{'PLUS' | translate}} {{values.length - 3}}...</ion-label>
         </ion-badge>
       </div>
     </ion-list>
