@@ -44,7 +44,8 @@
         "CONTINUE_WITH_LABEL": "ou continuar com",
         "FORGOT_PASSWORD_LABEL": "Esqueceu sua senha?",
         "PASSWORD_INPUT_PLACEHOLDER": "Digite sua senha...",
-        "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail..."
+        "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail...",
+        "INVALID_CREDENCIALS": "Credenciais inválidas"
     },
 
     "USER": {
@@ -65,6 +66,13 @@
         "IMPORT_USERS_LABEL": "Atualizar/Importar vários usuários",
         "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
         "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
+    },
+
+    "ROLES": {
+        "ADMIN": "Administrador",
+        "REFUNDER": "Restituidor",
+        "APPROVING": "Aprovador",
+        "FINANCIAL": "Financeiro"
     },
 
     "POLICY": {
@@ -122,7 +130,7 @@
         "SENT_AT": "Enviado em:",
         "STATUS": "Status",
         "POLICY": "Política",
-        "VALUE": "Valor (COP)",
+        "VALUE": "Valor",
         "NAME": "Motivo/Descrição",
         "DEPARTMENT": "Departamento",
         "CAPTION": "Informe de Despesas",
@@ -184,5 +192,15 @@
         "MANAGE_YOUR_ACCOUNT": "Gerenciar sua conta",
         "NO_NOTIFICATIONS_LABEL": "Sem novas notificações",
         "MARK_ALL_AS_READ_LABEL": "Marcar todas como lidas"
+    },
+
+    "MENUS": {
+        "USER": "Usuários",
+        "POLICY": "Políticas de Despesas",
+        "EXPENSE": "Despesas",
+        "EXPENSE_REPORT": "Informe de Despesas",
+        "REVIEW": "Revisão",
+        "FINANCIAL": "Pagamentos",
+        "COMPANY": "Empresa"
     }
 }

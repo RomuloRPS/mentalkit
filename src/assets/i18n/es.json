@@ -44,7 +44,8 @@
         "CONTINUE_WITH_LABEL": "O continuar con",
         "FORGOT_PASSWORD_LABEL": "¿Olvidó su contraseña?",
         "PASSWORD_INPUT_PLACEHOLDER": "Escriba su contraseña...",
-        "USER_INPUT_PLACEHOLDER": "Escriba su nombre de usuario o e-mail..."
+        "USER_INPUT_PLACEHOLDER": "Escriba su nombre de usuario o e-mail...",
+        "INVALID_CREDENCIALS": "Credenciales inválidas"
     },
 
     "USER": {
@@ -64,7 +65,14 @@
         "LOGIN_PLACEHOLDER": "Escriba el nombre de usuario...",
         "IMPORT_USERS_LABEL": "Actualizar/importar varios usuarios",
         "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
-        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
+        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s).",
+    },
+
+    "ROLES": {
+        "ADMIN": "Administrador",
+        "REFUNDER": "Responsable del gasto",
+        "APPROVING": "Gestor",
+        "FINANCIAL": "Financiero"
     },
 
     "POLICY": {
@@ -131,7 +139,6 @@
         "SELECTED_EXPENSES_LABEL": "Gastos seleccionados"
     },
 
-
     "EXPENSE_REPORT_DETAILS": {
         "DESCRIPTION": "Descripción",
         "SEND_DATE": "Fecha de envío",
@@ -184,5 +191,15 @@
         "MANAGE_YOUR_ACCOUNT": "Administrar su cuenta",
         "MARK_ALL_AS_READ_LABEL": "Marcar todas como leídas",
         "NO_NOTIFICATIONS_LABEL": "Sin nuevas notificaciones"
+    },
+
+    "MENUS": {
+        "USER": "Usuarios",
+        "POLICY": "Políticas de Gastos",
+        "EXPENSE": "Gastos",
+        "EXPENSE_REPORT": "Informe de Gastos",
+        "REVIEW": "Revisión",
+        "FINANCIAL": "Pagamentos",
+        "COMPANY": "Empresa"
     }
 }
