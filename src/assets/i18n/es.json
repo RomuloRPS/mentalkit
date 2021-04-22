@@ -65,7 +65,7 @@
         "LOGIN_PLACEHOLDER": "Escriba el nombre de usuario...",
         "IMPORT_USERS_LABEL": "Actualizar/importar varios usuarios",
         "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
-        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s).",
+        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
     },
 
     "ROLES": {
