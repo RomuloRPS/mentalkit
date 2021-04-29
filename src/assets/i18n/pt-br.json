@@ -31,6 +31,7 @@
 
     "PLUS": "Mais",
     "LOADING": "Carregando",
+    "SUCCESS": "Sucesso",
     "REQUIRED_FIELD": "Campo Obrigatório",
     "READY": "Pronto",
     "COMPANY": {
@@ -45,7 +46,8 @@
         "FORGOT_PASSWORD_LABEL": "Esqueceu sua senha?",
         "PASSWORD_INPUT_PLACEHOLDER": "Digite sua senha...",
         "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail...",
-        "INVALID_CREDENCIALS": "Credenciais inválidas"
+        "INVALID_CREDENCIALS": "Credenciais inválidas",
+        "NOT_AVAILABLE_TRY_AGAIN_LATER": "Não foi possivel fazer o login, tente novamente mais tarde"
     },
 
     "USER": {
@@ -65,7 +67,11 @@
         "ROLES_PLACEHOLDER": "Selecione as permissões...",
         "IMPORT_USERS_LABEL": "Atualizar/Importar vários usuários",
         "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
-        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
+        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s).",
+        "DIFF_PASSWORD": "As senhas não são iguais",
+        "POLICY_REQUIRED": "Informe pelo menos uma permissão de usuário",
+        "PASSWORD_UPDATE": "Senha atualizada com sucesso",
+        "PASSWORD_UPDATE_FAILED": "Não foi possível alterar a senha"
     },
 
     "ROLES": {
@@ -83,7 +89,9 @@
         "REQUIRED_FIELDS_LABEL": "Campos Obrigatórios",
         "APPROVAL_GROUPS_LABEL": "Grupos de Aprovação",
         "APPROVAL_GROUP_LABEL": "Grupo de Aprovação",
-        "REFUNDER_USERS_LABEL": "Usuários Restituidores"
+        "REFUNDER_USERS_LABEL": "Usuários Restituidores",
+        "UPDATE": "Política(s) atualizada(s) com sucesso",
+        "UPDATE_FAILED": "Não foi possível atualizar a(s) políticas(s)"
     },
 
     "APPROVAL_GROUPS": {
@@ -113,9 +121,12 @@
         "UNITY_VALUE_PLACEHOLDER": "Digite o valor unitário...",
         "PROVIDER_PLACEHOLDER": "Digite o nome do fornecedor...",
         "DOCUMENT_NUMBER_PLACEHOLDER": "Digite o nº do documento...",
-        "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando."
+        "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando.",
+        "NO_IMAGE_WARNING": "Nenhuma imagem foi informada. Deseja salvar mesmo assim?",
+        "NO_IMAGE_ERROR": "É necessário informar uma imagem para salvar.",
+        "EXPENSE_WITHOUT_INFORM_WARNING": "Selecione despesas avulsas para criar um informe."
     },
- 
+
     "EXPENSE_REQUIRED_FIELDS": {
         "LOCALE": "Local",
         "TIME": "Hora da despesa",
@@ -136,9 +147,11 @@
         "CAPTION": "Informe de Despesas",
         "NEW_REPORT": "Novo Informe de Despesas",
         "EDIT_REPORT": "Editar Informe de Despesas",
-        "SELECTED_EXPENSES_LABEL": "Despesas Selecionadas"
+        "SELECTED_EXPENSES_LABEL": "Despesas Selecionadas",
+        "SUCCESSFULY_PAID": "Informe pago com sucesso",
+        "SUCCESSFULY_SAVED": "Informe de despesa salvo com sucesso!",
+        "FIELDS_MISSING": "Não é possível enviar os informes. Alguma(s) despesa(s) tem informações necessárias faltando."
     },
-
 
     "EXPENSE_REPORT_DETAILS": {
         "DESCRIPTION": "Descrição",
@@ -164,6 +177,7 @@
     },
 
     "REVIEW": {
+        "APPROVED_WITH_SUCCESS": "Aprovado com sucesso",
         "THERE_IS": "Há",
         "REFUNDER": "Restituidor",
         "NAME": "Motivo/Descrição",
@@ -180,7 +194,11 @@
         "APPROVING_MODAL_CAPTION": "Aprovação do Informe de Despesas",
         "REQUEST_EDITION_CAPTION": "Requisitar Edição do Informe?",
         "REQUEST_EDITION_PLACEHOLDER": "Informe o Motivo da Reprovação?",
-        "REQUEST_EDITION_MESSAGE": "Ao requisitar a edição do informe, o restituidor que o criou deve modificar as despesas de acordo com as informações inseridas abaixo."
+        "REQUEST_EDITION_MESSAGE": "Ao requisitar a edição do informe, o restituidor que o criou deve modificar as despesas de acordo com as informações inseridas abaixo.",
+        "NOT_APPROVAL_ERROR": "Não foi possível não aprovar",
+        "CONFIRM_REASON": "Informe um motivo para confirmar",
+        "DISAPPROVE_EXPENSE": "Reprovar despesa",
+        "DISAPPROVE_EXPENSE_MESSAGE": "Mensagem de reprovação da Despesa"
     },
 
     "THEME": {
@@ -202,5 +220,40 @@
         "REVIEW": "Revisão",
         "FINANCIAL": "Pagamentos",
         "COMPANY": "Empresa"
+    },
+
+    "ATENTION": "Atenção",
+    "ACTION_ERROR": "Houve um erro ao realizar a ação",
+    "FIELD_UPDATE": "Registro atualizado com sucesso!",
+    "START": "Início",
+    "UNINFORMED": "Não informado",
+    "NAVIGATE_SIDE_MENU": "Navegue pelo menu lateral",
+    "WELCOME": "Bem-vindo ao Kampo APP",
+    "CHANGE_IMAGE": "Alterar imagem",
+    "CLICK_TO_CHOOSE": "Clique para escolher",
+    "NOT_POSSIBLE_TO_UPDATE_THE_LIST": "Não foi possível atualizar a lista",
+    "NOT_POSSIBLE_TO_SAVE": "Não foi possível salvar",
+    "SAVING": "Guardando",
+    "CHOOSE_EXPENSES": "Escolher despesas",
+
+    "JPG_GIF_PNG_ONLY": "JPG, GIF e PNG somente",
+    "NO_PHOTO": "Sem foto",
+    "NO_PHOTO_INFORMED": "Nenhuma foto informada",
+    "TAKE_PHOTO": "Tirar foto",
+    "SEE_PHOTO": "Ver foto",
+    "DELETE_PHOTO": "Excluir foto",
+    "GALLERY": "Galeria",
+
+    "NEW_ITEM": "Criar novo item",
+    "CREATE_ERROR": "Erro ao criar",
+    "LOADING_ERROR": "Erro ao carregar",
+    "CREATING": "Criando",
+    "REASON": "Motivo",
+    "MESSAGE": "Mensagem",
+
+    "NONE_FOUND": {
+        "EXPENSE_REPORT": "Nenhum informe de despesa encontrado!",
+        "EXPENSE": "Nenhuma despesa encontrada",
+        "USER": "Nenhum usuário encontrado"
     }
 }

@@ -30,6 +30,7 @@
     "NAVIGATE_TO_LIST_BUTTON": "Volver a listado",
 
     "PLUS": "Más",
+    "SUCCESS": "Éxito",
     "LOADING": "Cargando",
     "REQUIRED_FIELD": "Campo obligatorio",
     "READY": "Listo",
@@ -45,7 +46,8 @@
         "FORGOT_PASSWORD_LABEL": "¿Olvidó su contraseña?",
         "PASSWORD_INPUT_PLACEHOLDER": "Escriba su contraseña...",
         "USER_INPUT_PLACEHOLDER": "Escriba su nombre de usuario o e-mail...",
-        "INVALID_CREDENCIALS": "Credenciales inválidas"
+        "INVALID_CREDENCIALS": "Credenciales inválidas",
+        "NOT_AVAILABLE_TRY_AGAIN_LATER": "No se pudo inciar sesión, inténtelo más tarde"
     },
 
     "USER": {
@@ -65,7 +67,11 @@
         "LOGIN_PLACEHOLDER": "Escriba el nombre de usuario...",
         "IMPORT_USERS_LABEL": "Actualizar/importar varios usuarios",
         "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
-        "USER_UPDATE_ERROR_MESSAGE": "Não foi possível atualizar o(s) usuário(s)."
+        "USER_UPDATE_ERROR_MESSAGE": "No se pudo actualizar lo usuario",
+        "DIFF_PASSWORD": "Las contraseñas no coinciden",
+        "POLICY_REQUIRED": "Seleccione al menos un permiso de usuario",
+        "PASSWORD_UPDATE": "Contraseña actualizada con éxito",
+        "PASSWORD_UPDATE_FAILED": "No se pudo cambiar la contraseña"
     },
 
     "ROLES": {
@@ -83,7 +89,9 @@
         "APPROVAL_GROUP_LABEL": "Grupo de aprobación",
         "REQUIRED_FIELDS_LABEL": "Campos obligatorios",
         "APPROVAL_GROUPS_LABEL": "Grupos de aprobación (gestores)",
-        "REFUNDER_USERS_LABEL": "Usuarios que efectuarán los gastos"
+        "REFUNDER_USERS_LABEL": "Usuarios que efectuarán los gastos",
+        "UPDATE": "Política(s) actualizada(s) con éxito",
+        "UPDATE_FAILED": "No se pudo acualizar la(s) política(s)"
     },
 
     "APPROVAL_GROUPS": {
@@ -113,7 +121,10 @@
         "PROVIDER_PLACEHOLDER": "Escriba nombre del proveedor...",
         "UNITY_VALUE_PLACEHOLDER": "Escriba el valor unitario...",
         "DOCUMENT_NUMBER_PLACEHOLDER": "Escriba el N° de documento...",
-        "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando."
+        "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando.",
+        "NO_IMAGE_WARNING": "Ninguna imagen cargada. Desea guardar de todos modos?",
+        "NO_IMAGE_ERROR": "Es necesario cargar una imagen para guardar",
+        "EXPENSE_WITHOUT_INFORM_WARNING": "Seleccione los gastos separados para crear un informe"
     },
 
     "EXPENSE_REQUIRED_FIELDS": {
@@ -136,7 +147,10 @@
         "CAPTION": "Informe de gastos",
         "NEW_REPORT": "Nuevo Informe de Gastos",
         "EDIT_REPORT": "Editar Informe de Gastos",
-        "SELECTED_EXPENSES_LABEL": "Gastos seleccionados"
+        "SELECTED_EXPENSES_LABEL": "Gastos seleccionados",
+        "SUCCESSFULY_PAID": "Informe pago con éxito",
+        "SUCCESSFULY_SAVED": "Informe de gastos guardado con éxito",
+        "FIELDS_MISSING": "No es posible enviar los informes. Falta información en algún(os) gasto(s)."
     },
 
     "EXPENSE_REPORT_DETAILS": {
@@ -163,6 +177,7 @@
     },
 
     "REVIEW": {
+        "APPROVED_WITH_SUCCESS": "Aprobado con éxito",
         "THERE_IS": "Hay",
         "CANCEL_BUTTON": "Cancelar",
         "APPROVE_BUTTON": "Aprobar",
@@ -179,7 +194,11 @@
         "APPROVING_MODAL_CAPTION": "Aprobación de informe de gastos",
         "REQUEST_EDITION_CAPTION": "Solicitar modificación del informe?",
         "REQUEST_EDITION_PLACEHOLDER": "Motivo del rechazo?",
-        "REQUEST_EDITION_MESSAGE": "Al solicitar la modificación del informe, el responsable de su elaboración deberá modificar los gastos de acuerdo con la información que se ingresa a continuación."
+        "REQUEST_EDITION_MESSAGE": "Al solicitar la edición del informe, el responsable del gasto que lo elaboró ​​deberá modificar los gastos de acuerdo con la información que se ingresa a continuación",
+        "NOT_APPROVAL_ERROR": "No se pudo rechazar",
+        "CONFIRM_REASON": "Informe un motivo para confirmar",
+        "DISAPPROVE_EXPENSE": "Desaprobar gasto",
+        "DISAPPROVE_EXPENSE_MESSAGE": "Mensaje de desaprobación de gastos"
     },
 
     "THEME": {
@@ -201,5 +220,40 @@
         "REVIEW": "Revisión",
         "FINANCIAL": "Pagamentos",
         "COMPANY": "Empresa"
+    },
+
+    "ATENTION": "Atención",
+    "ACTION_ERROR": "Ocurrió un error al realizar la acción",
+    "FIELD_UPDATE": "Registro actualizado con éxito",
+    "START": "Inicio",
+    "UNINFORMED": "No informado",
+    "NAVIGATE_SIDE_MENU": "Navegar en menú lateral",
+    "WELCOME": "Bienvenido a Kampo",
+    "CHANGE_IMAGE": "Cambiar imagen",
+    "CLICK_TO_CHOOSE": "Haga clic para seleccionar",
+    "NOT_POSSIBLE_TO_UPDATE_THE_LIST": "No se pudo actualizar la lista",
+    "NOT_POSSIBLE_TO_SAVE": "No se pudo guardar",
+    "SAVING": "Guardando",
+    "CHOOSE_EXPENSES": "Seleccionar gastos",
+
+    "JPG_GIF_PNG_ONLY": "Soloen formato JPG, GIF o PNG",
+    "NO_PHOTO": "Sin foto",
+    "NO_PHOTO_INFORMED": "Ninguna foto cargada",
+    "TAKE_PHOTO": "Tomar foto",
+    "SEE_PHOTO": "Ver foto",
+    "DELETE_PHOTO": "Borrar foto",
+    "GALLERY": "Fotos",
+
+    "NEW_ITEM": "Crear un nuevo artículo",
+    "LOADING_ERROR": "Error al cargar",
+    "CREATE_ERROR": "Error al crear",
+    "CREATING": "Criando",
+    "REASON": "Motibo",
+    "MESSAGE": "Mensaje",
+    
+    "NONE_FOUND": {
+        "EXPENSE_REPORT": "Ningún informe de gastos encontrado",
+        "EXPENSE": "Ningún gasto encontracdo",
+        "USER": "Ningún usuario encontrado"
     }
 }
