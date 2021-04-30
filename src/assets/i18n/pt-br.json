@@ -6,17 +6,14 @@
     "OBSERVATION_LABEL": "Observação",
     "SELECT_IMAGE_LABEL": "Selecione uma imagem",
     "AVATAR_PLACEHOLDER": "Selecione uma imagem ou clique para ampliar",
-
     "ACTIONS_LABEL": "Ações",
     "ACTIVE_LABEL": "Ativo",
     "INACTIVE_LABEL": "Inativo",
     "ACTIVE_SLASH_INACTIVE_LABEL": "Ativar/Desativar",
     "LAST_UPDATE_LABEL": "Atualizado a",
-
     "CATEGORY_LABEL": "Categoria",
     "DEPARTMENT_LABEL": "Departamento",
     "COST_CENTER_LABEL": "Centro de custo",
-
     "BACK_BUTTON": "Voltar",
     "SAVE_BUTTON": "Salvar",
     "CLEAR_BUTTON": "Limpar",
@@ -28,16 +25,15 @@
     "SELECTED": "Selecionado",
     "SELECTEDS": "Selecionados",
     "NAVIGATE_TO_LIST_BUTTON": "Voltar à listagem",
-
     "PLUS": "Mais",
     "LOADING": "Carregando",
     "SUCCESS": "Sucesso",
     "REQUIRED_FIELD": "Campo Obrigatório",
     "READY": "Pronto",
+    "VALUE": "Valor",
     "COMPANY": {
         "COMPANY_CAPTION": "Empresa"
     },
-
     "LOGIN": {
         "SIGN_UP_LABEL": "Cadastre-se",
         "NEW_HERE_LABEL": "Novo Aqui?",
@@ -49,7 +45,6 @@
         "INVALID_CREDENCIALS": "Credenciais inválidas",
         "NOT_AVAILABLE_TRY_AGAIN_LATER": "Não foi possivel fazer o login, tente novamente mais tarde"
     },
-
     "USER": {
         "USER": "Usuário",
         "USERS": "Usuários",
@@ -73,14 +68,12 @@
         "PASSWORD_UPDATE": "Senha atualizada com sucesso",
         "PASSWORD_UPDATE_FAILED": "Não foi possível alterar a senha"
     },
-
     "ROLES": {
         "ADMIN": "Administrador",
         "REFUNDER": "Restituidor",
         "APPROVING": "Aprovador",
         "FINANCIAL": "Financeiro"
     },
-
     "POLICY": {
         "CATEGORIES_LABEL": "Categorias",
         "LIST_CAPTION": "Políticas de Despesas",
@@ -93,7 +86,6 @@
         "UPDATE": "Política(s) atualizada(s) com sucesso",
         "UPDATE_FAILED": "Não foi possível atualizar a(s) políticas(s)"
     },
-
     "APPROVAL_GROUPS": {
         "ADD_GROUP": "Adicionar Grupo",
         "ADD_USER": "Adicionar usuário ao grupo",
@@ -101,7 +93,6 @@
         "GROUP_NAME_PLACEHOLDER": "Nome do grupo...",
         "SELECT_USER_PLACEHOLDER": "Selecione um usuário..."
     },
-
     "EXPENSE": {
         "TIME": "Hora",
         "VALUE": "Valor",
@@ -124,9 +115,13 @@
         "MISSING_REQUIRED_INFO": "Despesa com informações necessárias faltando.",
         "NO_IMAGE_WARNING": "Nenhuma imagem foi informada. Deseja salvar mesmo assim?",
         "NO_IMAGE_ERROR": "É necessário informar uma imagem para salvar.",
-        "EXPENSE_WITHOUT_INFORM_WARNING": "Selecione despesas avulsas para criar um informe."
+        "EXPENSE_WITHOUT_INFORM_WARNING": "Selecione despesas avulsas para criar um informe.",
+        "CREATE_EXPENSE_REPORT": "Criar informe",
+        "CREATE_EXPENSE_REPORT_WITH_SELECTED_EXPENSES": "Criar Informe com as despesas selecionadas",
+        "ATTACH_TO_EXPENSE_REPORT": "Anexar a um informe",
+        "EXPENSE_WITH_CONFLICTS": "Despesa com conflito.",
+        "EXPENSE_ALREADY_SEND_MESSAGE": "Essa despesa já foi enviada anteriormente. Você pode excluir esse registro ou editá-lo para poder anexar a outro informe."
     },
-
     "EXPENSE_REQUIRED_FIELDS": {
         "LOCALE": "Local",
         "TIME": "Hora da despesa",
@@ -136,7 +131,6 @@
         "UNITY_VALUE": "Valor Unitário",
         "DOCUMENT_NUMBER": "Número do documento"
     },
-
     "EXPENSE_REPORT": {
         "SENT_AT": "Enviado em:",
         "STATUS": "Status",
@@ -150,9 +144,10 @@
         "SELECTED_EXPENSES_LABEL": "Despesas Selecionadas",
         "SUCCESSFULY_PAID": "Informe pago com sucesso",
         "SUCCESSFULY_SAVED": "Informe de despesa salvo com sucesso!",
-        "FIELDS_MISSING": "Não é possível enviar os informes. Alguma(s) despesa(s) tem informações necessárias faltando."
+        "FIELDS_MISSING": "Não é possível enviar os informes. Alguma(s) despesa(s) tem informações necessárias faltando.",
+        "EXPENSE_REPORT_WITH_CONFLICTS": "Informe com conflito",
+        "EXPENSE_REPORT_ALREADY_SEND_MESSAGE": "Esse informe já foi enviado anteriormente. Você pode excluir esse registro ou editá-lo para poder enviar novamente."
     },
-
     "EXPENSE_REPORT_DETAILS": {
         "DESCRIPTION": "Descrição",
         "SEND_DATE": "Data de Envio",
@@ -164,18 +159,17 @@
         "CLICK_TO_SHOW": "clique para mostrar o motivo",
         "CLICK_TO_HIDE": "clique para esconder o motivo"
     },
-
     "EXPENSE_REPORT_STATUS": {
         "PAID": "Pago",
         "OPEN": "Aberto",
         "SENT": "Enviado",
+        "CONFLICT": "Conflito",
         "APPROVED": "Aprovado",
         "VISUALIZED": "Visualizado",
         "IN_APPROVING_PROCESS": "Em Revisão",
         "EDITION_REQUEST": "Edição Requisitada",
         "APPROVED_WITH_EXCEPTIONS": "Aprovado com Excessão"
     },
-
     "REVIEW": {
         "APPROVED_WITH_SUCCESS": "Aprovado com sucesso",
         "THERE_IS": "Há",
@@ -200,7 +194,6 @@
         "DISAPPROVE_EXPENSE": "Reprovar despesa",
         "DISAPPROVE_EXPENSE_MESSAGE": "Mensagem de reprovação da Despesa"
     },
-
     "THEME": {
         "EXIT": "Sair",
         "SHOW_MENU": "Abrir Menu",
@@ -211,7 +204,33 @@
         "NO_NOTIFICATIONS_LABEL": "Sem novas notificações",
         "MARK_ALL_AS_READ_LABEL": "Marcar todas como lidas"
     },
-
+    "TAILWIND_TRANSLATE": {
+        "NGT_FORM_DEFAULT_VALIDATION_MESSAGE": "Preencha corretamente todos os campos",
+        "NGT_DATATABLE_NO_DATA_FOUND": "Nenhum registro encontrado",
+        "NGT_SELECT_LOADING_TEXT": "Carregando resultados...",
+        "NGT_SELECT_NOT_FOUND_TEXT": "Não encontrado",
+        "NGT_SELECT_TYPE_TO_SEARCH_TEXT": "Digite para procurar...",
+        "NGT_SELECT_CLEAR_ALL_TOOLTIP": "Limpar seleção",
+        "NGT_SELECT_PLACEHOLDER": "Selecione...",
+        "NGT_SELECT_CREATE_TEXT": "Adicionar ",
+        "NGT_TEXTAREA_REMAINING_CHARACTERS": "Caracteres restantes",
+        "NGT_VALIDATION_MAX_CHARACTERS_EXCEDED": "Número máximo de caracteres excedido",
+        "NGT_VALIDATION_REQUIRED_FIELD": "Campo obrigatório",
+        "NGT_VALIDATION_INVALID_EMAIL": "E-mail inválido",
+        "NGT_VALIDATION_ALREADY_EXISTS": "Já existe",
+        "NGT_VALIDATION_INVALID_CNPJ": "CNPJ inválido",
+        "NGT_VALIDATION_INVALID_CPF": "CPF inválido",
+        "NGT_VALIDATION_PASSWORD_REQUIRED_MIN_CHARACTERS": "O Campo deve ter no minimo 8 caracteres",
+        "NGT_VALIDATION_FIELDS_NOT_MATCH": "Os campos não coincidem",
+        "NGT_VALIDATION_INVALID_DATE": "Data inválida",
+        "NGT_VALIDATION_INVALID_PREVISION": "Previsão inválida",
+        "NGT_VALIDATION_EXTERNAL_SERVER_UNAVAILABLE": "Servidor externo indisponível",
+        "NGT_VALIDATION_VALUE_MUST_BE_GREATER_THAN": "O valor informado deve ser maior ou igual à ",
+        "NGT_VALIDATION_MIN_LENGHT_FIELD": "O Campo deve ter no mínimo ",
+        "NGT_PAGINATION_VIEWING": "Visualizando",
+        "NGT_PAGINATION_OF": "de",
+        "NGT_PAGINATION_REGISTERS": "registros"
+    },
     "MENUS": {
         "USER": "Usuários",
         "POLICY": "Políticas de Despesas",
@@ -221,10 +240,28 @@
         "FINANCIAL": "Pagamentos",
         "COMPANY": "Empresa"
     },
-
+    "MISSING_FIELD": {
+        "EXPENSE_IMAGE": "Imagem",
+        "EXPENSE_OBSERVATION": "Observação",
+        "EXPENSE_PROVIDER": "Fornecedor",
+        "EXPENSE_DOCUMENT_NUMBER": "Número do Documento",
+        "EXPENSE_QUANTITY": "Quantidade",
+        "EXPENSE_UNITY_VALUE": "Valor Unitário",
+        "EXPENSE_LOCALE": "Local",
+        "EXPENSE_TIME": "Horário"
+    },
+    "CURRENCY": {
+        "CAPTION": "Moeda",
+        "WRONG_CURRENCY_WARNING": "Tipo de moeda irregular. Moedas permitidas",
+        "STANDARD_CURRENCY": "Moeda padrão da empresa",
+        "ALLOWED_CURRENCIES": "Moedas permitidas",
+        "CURRENCY_CONFIGURATION_CAPTION": "Configuração monetária - Referente a USD $ 1,00 (Um dólar)",
+        "ADD_NEW_CURRENCY_CONFIGURATION": "Adicionar nova moeda para configuração"
+    },
     "ATENTION": "Atenção",
     "ACTION_ERROR": "Houve um erro ao realizar a ação",
     "FIELD_UPDATE": "Registro atualizado com sucesso!",
+    "CHARACTERS": "caracteres",
     "START": "Início",
     "UNINFORMED": "Não informado",
     "NAVIGATE_SIDE_MENU": "Navegue pelo menu lateral",
