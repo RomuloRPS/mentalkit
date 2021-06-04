@@ -1,7 +1,7 @@
 {
     "NAME_LABEL": "Nome",
     "EMAIL_LABEL": "Email",
-    "USER_LABEL": "Usuário",
+    "USER_LABEL": "Nome de Usuário",
     "PASSWORD_LABEL": "Senha",
     "OBSERVATION_LABEL": "Observação",
     "SELECT_IMAGE_LABEL": "Selecione uma imagem",
@@ -14,6 +14,7 @@
     "CATEGORY_LABEL": "Categoria",
     "DEPARTMENT_LABEL": "Departamento",
     "COST_CENTER_LABEL": "Centro de custo",
+    "SEARCH_LABEL": "Pesquisa",
     "BACK_BUTTON": "Voltar",
     "SAVE_BUTTON": "Salvar",
     "CLEAR_BUTTON": "Limpar",
@@ -22,6 +23,7 @@
     "NEW_REGISTER_BUTTON": "Incluir",
     "INPUT_SEARCH_PLACEHOLDER": "Pesquisar",
     "DEFAULT_SELECT_PLACEHOLDER": "Selecione...",
+    "DEFAULT_SELECT_WITH_CREATE_PLACEHOLDER": "Selecione ou adicione novo...",
     "SELECTED": "Selecionado",
     "SELECTEDS": "Selecionados",
     "NAVIGATE_TO_LIST_BUTTON": "Voltar à listagem",
@@ -31,8 +33,21 @@
     "REQUIRED_FIELD": "Campo Obrigatório",
     "READY": "Pronto",
     "VALUE": "Valor",
+    "AND": "e",
+    "EDIT": "Editar",
+    "COMPANIES": "Empresas",
+    "SOCIAL_MEDIA": "Mídias sociais",
+    "CREATED_AT": "Criado em",
+    "UPDATED_AT": "Atualizado em",
+    "CREATED_BY": "Criado por",
+    "APPROVED_BY": "Aprovado por",
+    "VIEW": "Visualizar",
+    "IMPORT": "Importar",
+    "EXPORT": "Exportar",
+    "PAYMENT_CAPTION": "Pagamentos de Informes de Despesas",
     "COMPANY": {
-        "COMPANY_CAPTION": "Empresa"
+        "COMPANY_CAPTION": "Empresa",
+        "CREATED_BY_USER": "Criado por"
     },
     "LOGIN": {
         "SIGN_UP_LABEL": "Cadastre-se",
@@ -43,7 +58,9 @@
         "PASSWORD_INPUT_PLACEHOLDER": "Digite sua senha...",
         "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail...",
         "INVALID_CREDENCIALS": "Credenciais inválidas",
-        "NOT_AVAILABLE_TRY_AGAIN_LATER": "Não foi possivel fazer o login, tente novamente mais tarde"
+        "NOT_AVAILABLE_TRY_AGAIN_LATER": "Não foi possivel fazer o login, tente novamente mais tarde",
+        "BACK_TO_LOGIN": "Voltar para o login",
+        "INVALID_RECOVERY_LINK": "O endereço de recuperação de senha utilizado não é válido."
     },
     "USER": {
         "USER": "Usuário",
@@ -66,13 +83,36 @@
         "DIFF_PASSWORD": "As senhas não são iguais",
         "POLICY_REQUIRED": "Informe pelo menos uma permissão de usuário",
         "PASSWORD_UPDATE": "Senha atualizada com sucesso",
-        "PASSWORD_UPDATE_FAILED": "Não foi possível alterar a senha"
+        "PASSWORD_UPDATE_FAILED": "Não foi possível alterar a senha",
+        "IN_TRIAL": "Período de experiência",
+        "BETA_TESTER": "Beta tester",
+        "TRIAL_END_DATE": "Termina em",
+        "REMAINING_DAYS": "Dias restantes",
+        "ENTRY_DATE": "Data de entrada",
+        "LINK_WITH_APPLE": "Conectar com a sua conta da Apple",
+        "LINK_WITH_GOOGLE": "Conectar com a sua conta do Google",
+        "LINK_WITH_LINKEDIN": "Conectar com a sua conta do Linkedin",
+        "INVALID_ROLE": "Permissão inválida do usuário: ",
+        "INVALID_IMPORT_FORMAT": "Formato de importação inválido",
+        "IMPORT_TITLE": "Importação de usuários",
+        "LINK": "Conectar",
+        "UNLINK": "Desconectar",
+        "SOCIAL_MEDIA_ALREADY_LINKED": "Essa conta já está vinculada a outro usuário.",
+        "DOWNLOAD_MODEL": "Baixar modelo"
+    },
+    "MODAL_IMPORT": {
+        "ATENTION": "Atenção ao importar",
+        "USER_WARNING": "Ao retirar um usuário da listagem ele será desativado",
+        "PERMISSION_WARNING": "Informe as permissões do usuário dessa maneira: ",
+        "ROLE_TYPES": "Administrador, Restituidor, Aprovador, Financeiro, Plataforma",
+        "SUCCESS": "Importado com sucesso!"
     },
     "ROLES": {
         "ADMIN": "Administrador",
         "REFUNDER": "Restituidor",
         "APPROVING": "Aprovador",
-        "FINANCIAL": "Financeiro"
+        "FINANCIAL": "Financeiro",
+        "PLATFORM": "Plataforma"
     },
     "POLICY": {
         "CATEGORIES_LABEL": "Categorias",
@@ -84,7 +124,8 @@
         "APPROVAL_GROUP_LABEL": "Grupo de Aprovação",
         "REFUNDER_USERS_LABEL": "Usuários Restituidores",
         "UPDATE": "Política(s) atualizada(s) com sucesso",
-        "UPDATE_FAILED": "Não foi possível atualizar a(s) políticas(s)"
+        "UPDATE_FAILED": "Não foi possível atualizar a(s) políticas(s)",
+        "KILOMETERS_CATEGORY_LABEL": "Valor por quilômetro"
     },
     "APPROVAL_GROUPS": {
         "ADD_GROUP": "Adicionar Grupo",
@@ -97,7 +138,7 @@
         "TIME": "Hora",
         "VALUE": "Valor",
         "REPORT": "Informe",
-        "ISSUE_DATE": "Emissão",
+        "ISSUE_DATE": "Data de emissão",
         "LIST_CAPTION": "Despesas",
         "VIEW_CAPTION": "Visualizar despesa",
         "NAME": "Motivo/Descrição",
@@ -121,10 +162,27 @@
         "ATTACH_TO_EXPENSE_REPORT": "Anexar a um informe",
         "EXPENSE_WITH_CONFLICTS": "Despesa com conflito.",
         "EXPENSE_ALREADY_SEND_MESSAGE": "Essa despesa já foi enviada anteriormente. Você pode excluir esse registro ou editá-lo para poder anexar a outro informe.",
-        "UNLINKED_EXPENSE": "Despesa Avulsa",
+        "UNLINKED_EXPENSE": "Ainda sem informe atribuido",
         "CALCULATE_VALUE_AFTER_LINK_REPORT": "O valor de despesas de quilometragem são calculados após selecionar um Informe.",
         "INIT_KILOMETER": "Quilometragem Inicial",
-        "FINAL_KILOMETER": "Quilometragem Final"
+        "FINAL_KILOMETER": "Quilometragem Final",
+        "NOT_AVAILABLE_FOR_CHOOSEN_REPORT": "não habilitada (s) para o informe escolhido.",
+        "ERROR_ON_SEND": "Erro ao enviar despesa.",
+        "SELECTED_EXPENSE_ALREADY_LINKED": "Alguma despesa selecionada já está atribuída a outro informe.",
+        "NOT_SENT_FILTER": "Não enviados",
+        "SENT_FILTER": "Enviados",
+        "UNLINKED_FILTER": "Sem informe",
+        "LINKED_FILTER": "Com informe",
+        "BIGGER_THEN": "Maior que",
+        "LESS_THAN": "Menor que",
+        "EQUAL": "Igual a"
+    },
+    "EXPENSE_STATUS": {
+        "UNLINKED": "Sem informe atribuído",
+        "LINKED": "Atribuída a um informe",
+        "SENT": "Enviado",
+        "RETURNED": "Recusada",
+        "CONFLICT": "Com conflito"
     },
     "EXPENSE_REQUIRED_FIELDS": {
         "LOCALE": "Local",
@@ -150,7 +208,20 @@
         "SUCCESSFULY_SAVED": "Informe de despesa salvo com sucesso!",
         "FIELDS_MISSING": "Não é possível enviar os informes. Alguma(s) despesa(s) tem informações necessárias faltando.",
         "EXPENSE_REPORT_WITH_CONFLICTS": "Informe com conflito",
-        "EXPENSE_REPORT_ALREADY_SEND_MESSAGE": "Esse informe já foi enviado anteriormente. Você pode excluir esse registro ou editá-lo para poder enviar novamente."
+        "EXPENSE_REPORT_ALREADY_SEND_MESSAGE": "Esse informe já foi enviado anteriormente. Você pode excluir esse registro ou editá-lo para poder enviar novamente.",
+        "EXPENSE_REPORT_WITHOUT_EXPENSES": "Não é possivel enviar um informe sem despesas vinculadas.",
+        "ERROR_ON_SEND": "Erro ao enviar informe.",
+        "ONLY_OPEN_WITH_EXPENSES_CAN_BE_SEND": "Apenas informes com despesas vinculadas e com status aberto ou edição requisitada podem ser enviados.",
+        "SEND_SELECTED_TO_REVISION": "Enviar itens selecionados para revisão",
+        "WAITING_PAYMENT": "Por pagar",
+        "EDIT_AND_RECREATE": "Editar e recriar como novo",
+        "DELETE_EXPENSE_REPORT": "Excluir Informe"
+    },
+    "EXPENSE_REPORT_STATE": {
+        "OPENED_AT": "Aberto em",
+        "SENT_AT": "Enviado em",
+        "APPROVED_AT": "Aprovado em",
+        "PAID_AT": "Pago em"
     },
     "EXPENSE_REPORT_DETAILS": {
         "DESCRIPTION": "Descrição",
@@ -193,6 +264,8 @@
         "REQUEST_EDITION_CAPTION": "Requisitar Edição do Informe?",
         "REQUEST_EDITION_PLACEHOLDER": "Informe o Motivo da Reprovação?",
         "REQUEST_EDITION_MESSAGE": "Ao requisitar a edição do informe, o restituidor que o criou deve modificar as despesas de acordo com as informações inseridas abaixo.",
+        "RECEIVED": "Recebidos",
+        "APPROVED": "Aprovados",
         "NOT_APPROVAL_ERROR": "Não foi possível não aprovar",
         "CONFIRM_REASON": "Informe um motivo para confirmar",
         "DISAPPROVE_EXPENSE": "Reprovar despesa",
@@ -242,7 +315,11 @@
         "EXPENSE_REPORT": "Informe de Despesas",
         "REVIEW": "Revisão",
         "FINANCIAL": "Pagamentos",
-        "COMPANY": "Empresa"
+        "COMPANY": "Empresa",
+        "DASHBOARD": "Painel de controle",
+        "PLATFORM_USER": "Usuários",
+        "COMPANIES": "Empresas",
+        "CONFIGURATION": "Configurações"
     },
     "MISSING_FIELD": {
         "EXPENSE_IMAGE": "Imagem",
@@ -259,7 +336,8 @@
         "WRONG_CURRENCY_WARNING": "Tipo de moeda irregular. Moedas permitidas",
         "STANDARD_CURRENCY": "Moeda padrão da empresa",
         "ALLOWED_CURRENCIES": "Moedas permitidas",
-        "CURRENCY_CONFIGURATION_CAPTION": "Configuração monetária - Referente a USD $ 1,00 (Um dólar)",
+        "CURRENCY_CONFIGURATION_CAPTION": "Configuração monetária",
+        "CURRENCY_CONFIGURATION_SUBTITLE": "Referente a USD $ 1,00 (Um dólar)",
         "ADD_NEW_CURRENCY_CONFIGURATION": "Adicionar nova moeda para configuração"
     },
     "ATENTION": "Atenção",
@@ -320,5 +398,60 @@
         "EXPENSE_REPORT": "Nenhum informe de despesa encontrado!",
         "EXPENSE": "Nenhuma despesa encontrada",
         "USER": "Nenhum usuário encontrado"
-    }
+    },
+
+    "CONFIGURATIONS": {
+        "CAPTION": "Configurações da plataforma",
+        "TRIAL_CAPTION": "Período de experiência (em dias)"
+    },
+    "HELPER": {
+        "TITLE": "Ajuda?",
+        "NEW_REGISTER_ON_SELECT": "É possível inserir um novo registro indicando o seu nome no campo de seleção.",
+        "USER": {
+            "LOGIN_EMAIL": "Login e/ou Email serão utilizados para entrar na plataforma. É necessário que um dos dois seja informado.",
+            "POLICIES": "Indica as políticas em que o usuário pode fazer apontamentos. Para criar ou editar vá para o menu 'Políticas de Despesas'.",
+            "PERMISSIONS": "Indica as permissões do usuário dentro da plataforma. As permissões modificam os menus que o usuário pode acessar."
+        },
+        "POLICY": {
+            "APPROVAL_GROUPS": "Indica a sequência necessária para a aprovação da despesa e os usuários de cada grupo. Cada grupo pode ter quantos usuários desejar e quando algum usuário do grupo aprovar, a despesa passará para o próximo grupo.",
+            "REFUNDER_USERS": "Indica os usuários que podem utilizar essa política para fazer apontamentos.",
+            "CATEGORIES": "Indica as categorias habilitadas para os usuários presentes nessa política.",
+            "CURRENCIES": "Indica os tipos de moeda permitidas para o apontamento do usuário.",
+            "REQUIRED_FIELDS": "Indica quais campos serão obrigatórios para o restituidor preencher no formulário de Despesas."
+        },
+        "COMPANY": {
+            "STANDARD_CURRENCY": "Tipo de moeda padrão. Os valores do informe serão convertidos para a moeda selecionada de acordo com os valores adicionados. Podem ser selecionadas USD (dólar americano) ou as moedas adicionadas na configuração monetária.",
+            "CURRENCY_CONFIG": "Na configuração deve ser inserido o valor da moeda escolhida referente ao dólar americano (USD)."
+        },
+        "EXPENSE": {
+            "CATEGORY": "Ao selecionar a categoria 'Quilometragem', é habilitado os campos 'Quilometragem Inicial' e 'Quilometragem Final'. Quando a categoria é alterada, o campo de Informes é atualizado para mostrar somente Informes com políticas que incluem a categoria indicada.",
+            "EXPENSE_REPORT": "Quando o Informe é alterado, o campo de Categorias é atualizado para mostrar somente Categorias existentes na política indicada no Informe selecionado.",
+            "INIT_KILOMETER": "Informe o valor do contador/registro de quilometragem no início da despesa.",
+            "FINAL_KILOMETER": "Informe o valor do contador/registro de quilometragem no final da despesa."
+        }
+    },
+    "NOTIFICATION": {
+        "EXPENSE_REPORT_APPROVED_TITLE": "Informe de despesas Aprovado",
+        "EXPENSE_REPORT_APPROVED_SUBTITLE": "Um de seus informes de despesas foi aprovado",
+        "EXPENSE_REPORT_APPROVED_DESCRIPTION": "Clique para mais informações",
+        "EXPENSE_REPORT_EDITION_REQUEST_TITLE": "Informe de despesas com edição requisitada",
+        "EXPENSE_REPORT_EDITION_REQUEST_SUBTITLE": "Um de seus informes de despesas teve uma edição requisitada",
+        "EXPENSE_REPORT_EDITION_REQUEST_DESCRIPTION": "Clique para mais informações",
+        "EXPENSE_REPORT_PAID_TITLE": "Informe de despesas pago",
+        "EXPENSE_REPORT_PAID_SUBTITLE": "Um de seus informes de despesas foi pago",
+        "EXPENSE_REPORT_PAID_DESCRIPTION": "Clique para mais informações",
+        "EXPENSE_REPORT_SENT_TITLE": "Informe de despesas foi recebido para aprovação",
+        "EXPENSE_REPORT_SENT_SUBTITLE": "Um informe de despesas foi recebido para aprovação",
+        "EXPENSE_REPORT_SENT_DESCRIPTION": "Clique para mais informações",
+        "EXPENSE_REPORT_READY_TO_PAYMENT_TITLE": "Informe de despesas pronto para pagamento",
+        "EXPENSE_REPORT_READY_TO_PAYMENT_SUBTITLE": "Um informe de despesas está aprovado e pronto para o pagamento",
+        "EXPENSE_REPORT_READY_TO_PAYMENT_DESCRIPTION": "Clique para mais informações"
+    },
+    "ALL": "Todos",
+    "ATENTION": "Atenção",
+    "ACTION_ERROR": "Houve um erro ao realizar a ação",
+    "FIELD_UPDATE": "Registro atualizado com sucesso!",
+    "CHARACTERS": "caracteres",
+    "COMING_SOON": "Em breve",
+    "DELETE_REGISTER": "Tem certeza que deseja excluir este(s) registro(s)?"
 }
