@@ -120,7 +120,11 @@
         "CREATE_EXPENSE_REPORT_WITH_SELECTED_EXPENSES": "Criar Informe com as despesas selecionadas",
         "ATTACH_TO_EXPENSE_REPORT": "Anexar a um informe",
         "EXPENSE_WITH_CONFLICTS": "Despesa com conflito.",
-        "EXPENSE_ALREADY_SEND_MESSAGE": "Essa despesa já foi enviada anteriormente. Você pode excluir esse registro ou editá-lo para poder anexar a outro informe."
+        "EXPENSE_ALREADY_SEND_MESSAGE": "Essa despesa já foi enviada anteriormente. Você pode excluir esse registro ou editá-lo para poder anexar a outro informe.",
+        "UNLINKED_EXPENSE": "Despesa Avulsa",
+        "CALCULATE_VALUE_AFTER_LINK_REPORT": "O valor de despesas de quilometragem são calculados após selecionar um Informe.",
+        "INIT_KILOMETER": "Quilometragem Inicial",
+        "FINAL_KILOMETER": "Quilometragem Final"
     },
     "EXPENSE_REQUIRED_FIELDS": {
         "LOCALE": "Local",
@@ -287,6 +291,30 @@
     "CREATING": "Criando",
     "REASON": "Motivo",
     "MESSAGE": "Mensagem",
+
+    "CATEGORY": {
+        "PUBLICITY": "Publicidade",
+        "MARKETING": "Marketing",
+        "BENEFITS": "Benefícios",
+        "CAR": "Carro",
+        "EQUIPMENT": "Equipamentos",
+        "FEES": "Honorários",
+        "HOME_OFFICE": "Escritório em casa",
+        "INSURANCE": "Seguro",
+        "INTEREST": "Interesse",
+        "LABOR": "Trabalho",
+        "MAINTENANCE": "Manutenção",
+        "MATERIALS": "Materiais",
+        "MEALS_AND_ENTERTAINMENT": "Refeições e Entretenimento",
+        "OFFICE_SUPPLIES": "Material de Escritório",
+        "PROFESSIONAL_SERVICES": "Serviços Profissionais",
+        "RENT": "Aluguel",
+        "TAXES": "Impostos",
+        "TRAVEL": "Viagem",
+        "UTILITIES": "Serviços de Utilidade Pública",
+        "OTHER": "Outros",
+        "KILOMETERS": "Quilometragem"
+    },
 
     "NONE_FOUND": {
         "EXPENSE_REPORT": "Nenhum informe de despesa encontrado!",
