@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject, LOCALE_ID } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { EvModalSearchComponent } from '../ev-modal-search/ev-modal-search.component';
 import { EvModalMultiSelectSearchComponent } from '../ev-modal-multi-select-search/ev-modal-multi-select-search.component';
 import { EvModalMultiSelectExpenseSearchComponent } from '../ev-modal-multi-select-expense-search/ev-modal-multi-select-expense-search.component';
+import { CompanyModel } from 'src/app/coloquent-model/company/company.model';
 
 @Component({
     selector: 'app-ev-multi-select-expenses',
@@ -27,10 +28,19 @@ export class EvMultiSelectExpensesComponent implements OnInit {
   @Output() public valueChange = new EventEmitter();
 
   public constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    @Inject(LOCALE_ID) public locale,
   ) { }
 
   public ngOnInit() { }
+
+  public getCurrency(expense) {
+      if(expense) {
+          return expense.getRelation('currency').getAttribute('code');
+      }
+
+      return CompanyModel.getStandardCurrency();
+  }
 
   public async chooseOption() {
       if (!this.showField) {

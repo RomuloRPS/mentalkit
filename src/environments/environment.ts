@@ -5,9 +5,10 @@
 export const environment = {
     production: false,
     // api: 'https://apikampo.tecnoelo.com.br',
-    api: 'http://127.0.0.1:8000',
-    version: '0.0.1',
-    oneSignalKey: '360db572-e36c-4663-913b-8f7372da47a9'
+    // api: 'http://127.0.0.1:8000',
+    api: 'https://api.kampo.io',
+    version: '0.0.4',
+    oneSignalKey: 'a1a669bf-e590-4f48-92c8-2f99546265ef'
 };
 
 /*

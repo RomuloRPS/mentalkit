@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>649687061602-jogedvd9fp1c7g42afgg7hnobnbhgodt.apps.googleusercontent.com</string>
+	<string>548912274575-riifkvn1b5skvh4u8fm4s26f7imfrs5p.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.649687061602-jogedvd9fp1c7g42afgg7hnobnbhgodt</string>
+	<string>com.googleusercontent.apps.548912274575-riifkvn1b5skvh4u8fm4s26f7imfrs5p</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBlb1_1paoUD5JV57y5bVV0VvopwfyYAzU</string>
+	<string>AIzaSyDzvU2regsEiOSdiecw7agyqgjK4LEznKw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>649687061602</string>
+	<string>548912274575</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>br.com.eloverde.app</string>
+	<string>col.com.eloverde.kampo</string>
 	<key>PROJECT_ID</key>
-	<string>eloverde-sistemas</string>
+	<string>kampo-429a2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eloverde-sistemas.appspot.com</string>
+	<string>kampo-429a2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:649687061602:ios:971cb75d8dbd4f8c4cad3b</string>
-	<key>DATABASE_URL</key>
-	<string>https://eloverde-sistemas.firebaseio.com</string>
+	<string>1:548912274575:ios:1605b2bf04eb179f2124fa</string>
 </dict>
 </plist>

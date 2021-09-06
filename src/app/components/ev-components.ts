@@ -30,6 +30,7 @@ import { EvMultiSelectExpensesComponent } from './ev-multi-select-expenses/ev-mu
 import { EvModalMultiSelectExpenseSearchComponent } from './ev-modal-multi-select-expense-search/ev-modal-multi-select-expense-search.component';
 import { EvMediaViewComponent } from './ev-media/ev-media-view/ev-media-view.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ExpenseReportListIconsComponent } from './ev-expense-report-list-icons/ev-expense-report-list-icons.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -57,7 +58,8 @@ import { TranslateModule } from '@ngx-translate/core';
         EvMediaPopoverColoquentComponent,
         EvMultiSelectExpensesComponent,
         EvModalMultiSelectExpenseSearchComponent,
-        EvMediaViewComponent
+        EvMediaViewComponent,
+        ExpenseReportListIconsComponent
     ],
     entryComponents: [
         EvModalSearchComponent,
@@ -72,7 +74,8 @@ import { TranslateModule } from '@ngx-translate/core';
         EvMediaPopoverColoquentComponent,
         EvMultiSelectExpensesComponent,
         EvModalMultiSelectExpenseSearchComponent,
-        EvMediaViewComponent
+        EvMediaViewComponent,
+        ExpenseReportListIconsComponent
     ],
     exports: [
         EvMediaComponent,
@@ -89,7 +92,8 @@ import { TranslateModule } from '@ngx-translate/core';
         EvMediaPopoverColoquentComponent,
         EvMultiSelectExpensesComponent,
         EvModalMultiSelectExpenseSearchComponent,
-        EvMediaViewComponent
+        EvMediaViewComponent,
+        ExpenseReportListIconsComponent
     ],
     providers: [
         Keyboard,

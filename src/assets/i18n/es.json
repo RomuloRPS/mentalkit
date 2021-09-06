@@ -361,7 +361,8 @@
         "TRAVEL": "Viaje",
         "UTILITIES": "Servicios públicos",
         "OTHER": "Outros",
-        "KILOMETERS": "Kilometraje"
+        "KILOMETERS": "Kilometraje",
+        "WRONG_CATEGORY_WARNING": "Categoria irregular. Categorias permitidas"
     },
     "CONFIGURATIONS": {
         "CAPTION": "Configuración de la plataforma",

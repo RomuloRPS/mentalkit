@@ -1,0 +1,9 @@
+export enum MenuEnum {
+    USER = 'USER',
+    POLICY = 'POLICY',
+    EXPENSE = 'EXPENSE',
+    EXPENSE_REPORT = 'EXPENSE_REPORT',
+    FINANCIAL = 'FINANCIAL',
+    REVIEW = 'REVIEW',
+    COMPANY = "COMPANY"
+}

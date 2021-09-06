@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content color="light">
-  <div style="background-color: #0205A1;" class=" h-24 absolute">
+  <div style="background-color: #308ac4;" class=" h-24 absolute">
     
     <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
       <defs>
@@ -32,7 +32,8 @@
 
       <ion-card-header>
         <img class="h-32 rounded-lg m-auto" src="./assets/logo.jpeg" />
-        <p class="text-center font-bold text-4xl" style="color: #230E40;">Kampo</p>
+        <p class="text-center font-bold text-4xl" style="color: #230E40;">Iate Clube</p>
+        <p class="text-center font-bold text-4xl" style="color: #230E40;">Joinville</p>
       </ion-card-header>
     
       <form class="mt-6" #loginForm="ngForm" novalidate>
@@ -77,23 +78,23 @@
       </form>
       <br>
 
-      <ion-row class="w-10/12 m-auto">
-        <ion-col size="4">
+      <!-- <ion-row class="w-10/12 m-auto">
+        <ion-col>
           <ion-button (click)="loginWithGoogle()" fill="outline" expand="block">
             <ion-icon name="logo-google"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col size="4">
-          <ion-button fill="outline" expand="block">
+        <ion-col *ngIf="isIos()">
+          <ion-button (click)="appleSignIn()" fill="outline" expand="block">
             <ion-icon name="logo-apple"></ion-icon>
           </ion-button>
         </ion-col>
-        <ion-col size="4">
+        <ion-col >
           <ion-button fill="outline" expand="block">
             <ion-icon name="logo-linkedin"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-card>
   </div>
   

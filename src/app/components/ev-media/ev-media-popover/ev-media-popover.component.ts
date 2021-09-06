@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { SingularResponse } from 'coloquent';
 import { AvatarModel } from 'src/app/coloquent-model/avatar/avatar.model';
 import { LoadingService } from 'src/app/shared-services/loading/loading.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
     selector: 'app-ev-media',
@@ -56,7 +57,8 @@ export class EvMediaPopoverComponent implements OnInit {
         private loadingController: LoadingController,
         private popoverController: PopoverController,
         private httpService: HttpClientService,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private userModel: UserModel
     ) { }
 
     public ngOnInit() {
@@ -127,7 +129,23 @@ export class EvMediaPopoverComponent implements OnInit {
 
         formData.append("file", file);
 
-        return this.httpService.post(environment.api + '/attachments/upload', formData);
+        const url = this.bindParams(environment.api + '/tenancies/:tenancy_id/attachments/upload');
+
+        return this.httpService.post(url, formData);
+    }
+
+    public bindParams(url: string) {
+        let tenancyId;
+
+        this.userModel.load();
+
+        const tenancy = this.userModel.get('selectedTenancyId');
+
+        if (tenancy) {
+            tenancyId = tenancy;
+        }
+
+        return url.replace(':tenancy_id', tenancyId);
     }
 
     public fillFilterArray(value) {

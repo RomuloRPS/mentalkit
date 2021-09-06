@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { CompanyModel } from 'src/app/coloquent-model/company/company.model';
 import { ExpenseReportModel } from 'src/app/coloquent-model/expense-report/expense-report.model';
 import { ExpenseReportService } from 'src/app/resources/expense-report/expense-report.service';
 import { LoadingService } from 'src/app/shared-services/loading/loading.service';
@@ -18,6 +20,7 @@ export class RevisionViewPage implements OnInit {
     public expenseReport: ExpenseReportModel;
 
     public constructor(
+        @Inject(LOCALE_ID) public locale,
         private router: Router,
         private route: ActivatedRoute,
         private expenseReportService: ExpenseReportService,
@@ -25,8 +28,17 @@ export class RevisionViewPage implements OnInit {
         private popoverController: PopoverController,
         private loadingService: LoadingService,
         private toasterService: ToasterService,
-        private alertController: AlertController
+        private alertController: AlertController,
+        private translateService: TranslateService
     ) { }
+
+    public getCurrency(expense?) {
+        if(expense && expense.getRelation('currency')) {
+            return expense.getRelation('currency').getAttribute('code');
+        }
+
+        return CompanyModel.getStandardCurrency();
+    }
 
     public ngOnInit() {
         this.permissionType = localStorage.getItem('expense-report-permission-type');
@@ -86,12 +98,12 @@ export class RevisionViewPage implements OnInit {
 
     public async presentPromptNotApproveText() {
         let alert = await this.alertController.create({
-            header: 'Requisitar Edição do Informe?',
-            subHeader: 'Ao requisitar a edição do informe, o restituidor que o criou deve modificar as despesas de acordo com as informações inseridas abaixo.',
+            header: this.translateService.instant('REVIEW.REQUEST_EDITION_CAPTION'),
+            subHeader: this.translateService.instant('REVIEW.REQUEST_EDITION_MESSAGE'),
             inputs: [
                 {
                     name: 'reason',
-                    placeholder: 'Motivo',
+                    placeholder: this.translateService.instant('REASON'),
                 },
             ],
             buttons: [
@@ -113,7 +125,7 @@ export class RevisionViewPage implements OnInit {
                                 this.router.navigate(['revisions/update' + new Date().toISOString()]);
                             });
                         } else {
-                            this.toasterService.error('Informe um motivo para confirmar');
+                            this.toasterService.error(this.translateService.instant('REVIEW.CONFIRM_REASON'));
                         }
                     }
                 }
@@ -125,12 +137,12 @@ export class RevisionViewPage implements OnInit {
 
     public async presentPromptDisapproveExpense(index) {
         let alert = await this.alertController.create({
-            header: 'Reprovar despesa',
-            subHeader: 'Mensagem de reprovação da Despesa',
+            header: this.translateService.instant('REVIEW.DISAPPROVE_EXPENSE'),
+            subHeader: this.translateService.instant('REVIEW.DISAPPROVE_EXPENSE_MESSAGE'),
             inputs: [
                 {
                     name: 'reason',
-                    placeholder: 'Mensagem',
+                    placeholder: this.translateService.instant('MESSAGE'),
                 },
             ],
             buttons: [
@@ -148,7 +160,7 @@ export class RevisionViewPage implements OnInit {
                         if (data.reason) {
                             this.disapproveExpense(index, data.reason);
                         } else {
-                            this.toasterService.error('Informe um motivo para confirmar');
+                            this.toasterService.error(this.translateService.instant('REVIEW.CONFIRM_REASON'));
                         }
                     }
                 }

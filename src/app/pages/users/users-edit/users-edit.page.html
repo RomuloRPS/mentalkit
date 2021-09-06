@@ -16,7 +16,7 @@
     </div>
     <div style="background-color: black;" class="absolute bottom-0 pb-6 h-12 w-full opacity-50 text-center"></div>
     <div class="absolute bottom-0 mb-6 w-full text-center">
-      <span style="color: white;" class="text-sm font-bold">Alterar imagem</span>
+      <span style="color: white;" class="text-sm font-bold">{{'CHANGE_IMAGE' | translate}}</span>
     </div>
   </div>
 
@@ -77,7 +77,7 @@
         </ion-item>
         <ion-text color="danger">
           <p [hidden]="(password.valid && verifyEmail())|| submitted == false" class="ion-padding-start">
-            {{'PASSWORD_INPUT_PLACEHOLDER' | translate}}
+            {{'LOGIN.PASSWORD_INPUT_PLACEHOLDER' | translate}}
           </p>
         </ion-text>
       </ion-col>
@@ -98,21 +98,18 @@
       </ion-col>
 
       <ion-col size="11">
-        <app-ev-multi-select [values]="roles" iconColor="tertiary" icon="../../../assets/fontawesome/solid/user-lock.svg" showField="description" placeholder="{{'USER.ROLES_LABEL' | translate}}"
-        (valueChange)="selectChange($event)" [(valueId)]="selectedRoles" inputName='Roles' [baseService]="roleService"
-        #roleSelect></app-ev-multi-select>
-      </ion-col>
-
-      <ion-col size="11">
-        <app-ev-select name="Departamento" [baseModel]="departmentModel" [creatable]="true" [value]="department" iconColor="tertiary" icon="../../../assets/fontawesome/solid/user-friends.svg" showField="name" placeholder="{{'DEPARTMENT_LABEL' | translate}}"
-        (valueChange)="selectChange($event)" [(valueId)]="selectedDepartmentId" inputName='Roles' [baseService]="departmentService"
-        #roleSelect></app-ev-select>
-      </ion-col>
-
-      <ion-col size="11">
-        <app-ev-select name="Centro de Custo" [baseModel]="costCenterModel" [creatable]="true" [value]="costCenter" iconColor="tertiary" icon="../../../assets/fontawesome/solid/file-invoice-dollar.svg" showField="name" placeholder="{{'COST_CENTER_LABEL' | translate}}"
-        (valueChange)="selectChange($event)" [(valueId)]="selectedCostCenterId" inputName='Roles' [baseService]="costCenterService"
-        #roleSelect></app-ev-select>
+        <ion-item>
+          <ion-label > Cargo: </ion-label>
+          <ion-select [(ngModel)]="user.elementRelations.role" name="role" >
+            <ion-select-option value="ADMIN">Administrador</ion-select-option>
+            <ion-select-option value="REFUNDER">Sócios</ion-select-option>
+            <ion-select-option value="APPROVING1">Supervisor Manutenção</ion-select-option>
+            <ion-select-option value="APPROVING2">Manutenção</ion-select-option>
+            <ion-select-option value="APPROVING3">Supervisor de Pátio</ion-select-option>
+            <ion-select-option value="APPROVING4">Pátio</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
       </ion-col>
 
 
@@ -157,7 +154,7 @@
     <ion-row>
       <ion-col size="6">
         <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
-          {{'BACK_BUTTON' | translate}}
+          Voltar
         </ion-button>
       </ion-col>
       <ion-col *ngIf="!editing" size="6">

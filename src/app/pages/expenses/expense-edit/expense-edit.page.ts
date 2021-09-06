@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RoutesRecognized } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { CategoryModel } from 'src/app/coloquent-model/category/category.model';
+import { CurrencyModel } from 'src/app/coloquent-model/currency/currency.model';
 import { ExpenseReportModel, ExpenseReportStatusEnum } from 'src/app/coloquent-model/expense-report/expense-report.model';
 import { ExpenseModel } from 'src/app/coloquent-model/expense/expense.model';
 import { PolicyModel } from 'src/app/coloquent-model/policy/policy.model';
@@ -11,6 +13,7 @@ import { EvMediaPopoverComponent } from 'src/app/components/ev-media/ev-media-po
 import { UserModel } from 'src/app/models/user.model';
 import { DateTimeFormatPipe } from 'src/app/pipes/date-time-format.pipe';
 import { CategoryService } from 'src/app/resources/category/category.service';
+import { CurrencyService } from 'src/app/resources/currency/currency.service';
 import { ExpenseReportRelations } from 'src/app/resources/expense-report/expense-report-relations';
 import { ExpenseReportService } from 'src/app/resources/expense-report/expense-report.service';
 import { ExpenseRelations } from 'src/app/resources/expense/expense-relations';
@@ -19,19 +22,29 @@ import { PolicyService } from 'src/app/resources/policy/policy.service';
 import { LoadingService } from 'src/app/shared-services/loading/loading.service';
 import { OfflineCacheService } from 'src/app/shared-services/offline-cache.service';
 import { ToasterService } from 'src/app/shared-services/toaster/toaster.service';
-import { environment } from 'src/environments/environment';
+import {Location} from '@angular/common';
+import { MapsAPILoader } from '@agm/core';
 
+declare let google;
 @Component({
     selector: 'app-expense-edit',
     templateUrl: './expense-edit.page.html',
     styleUrls: ['./expense-edit.page.scss'],
 })
+
 export class ExpenseEditPage implements OnInit {
     @ViewChild('expenseForm', {static: false}) public expenseForm: NgForm;
+    @ViewChild('map', {static: false}) public mapRef: ElementRef;
+    public map: google.maps.Map;
+    public mapOptions: google.maps.MapOptions;
+
     public expense: ExpenseModel;
 
     public category: CategoryModel;
     public selectedCategoryId;
+
+    public currency: CurrencyModel;
+    public selectedCurrencyId;
 
     public expenseReport: ExpenseReportModel;
     public selectedExpenseReportId;
@@ -57,6 +70,8 @@ export class ExpenseEditPage implements OnInit {
         speed: 400
     };
 
+    public lastRoute = '';
+
     public constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -67,10 +82,18 @@ export class ExpenseEditPage implements OnInit {
         private popoverController: PopoverController,
         private loadingService: LoadingService,
         private toasterService: ToasterService,
-        private userModel: UserModel
-    ) { }
+        private userModel: UserModel,
+        private translateService: TranslateService,
+        public currencyService: CurrencyService,
+        private _location: Location,
+        private mapsAPILoader: MapsAPILoader
+    ) {
+
+    }
 
     public ngOnInit() {
+        this.initMap();
+
         this.route.paramMap.subscribe(async params => {
             this.submitted = false;
             this.userModel.load();
@@ -90,6 +113,15 @@ export class ExpenseEditPage implements OnInit {
                         if (this.expense.getRelation('category')) {
                             this.category = this.expense.getRelation('category');
                             this.selectedCategoryId = this.expense.getRelation('category').getApiId();
+
+                            if (this.expense.getRelation('category').getAttribute('name') == 'KILOMETERS') {
+                                this.expense.elementRelations.has_kilometer_count = true;
+                            }
+                        }
+
+                        if (this.expense.getRelation('currency')) {
+                            this.currency = this.expense.getRelation('currency');
+                            this.selectedCurrencyId = this.expense.getRelation('currency').getApiId();
                         }
 
                         if (this.expense.getRelation('expenseReport')) {
@@ -107,6 +139,7 @@ export class ExpenseEditPage implements OnInit {
                     this.expenseReport = resp.data[0];
                     this.selectedExpenseReportId = resp.data[0].getApiId();
                     this.expense = new ExpenseModel();
+                    this.currency = new CurrencyModel();
                     this.expense.setRelation('expenseReport', resp.data[0]);
                     this.editing = false;
                 });
@@ -123,6 +156,12 @@ export class ExpenseEditPage implements OnInit {
         const servicesToCache = [
             this.categoryService.cache({
                 page: {limit: 99999}
+            }),
+            this.currencyService.cache({
+                page: {limit: 99999},
+                filter: {
+                    currentTenancy: 1
+                }
             }),
             this.expenseReportService.cache({
                 include: ExpenseReportRelations,
@@ -203,15 +242,27 @@ export class ExpenseEditPage implements OnInit {
     }
 
     public backToList() {
-        if (this.expense.getRelation('expenseReport')) {
-            this.router.navigate(['expense-report-view/' + this.expense.getRelation('expenseReport').getApiId() + '/update' + new Date().toISOString()]);
-        } else {
-            this.router.navigate(['expenses/update' + new Date().toISOString()]);
-        }
+        this._location.back();
+    }
+
+    public isKilometer() {
+        return this.expense.elementRelations.has_kilometer_count;
     }
 
     public categoryChange(event) {
+        if (event && event.getAttribute('name') == 'KILOMETERS') {
+            this.expense.elementRelations.has_kilometer_count = true;
+            this.expense.setAttribute('has_kilometer_count', true);
+        } else {
+            this.expense.setAttribute('has_kilometer_count', false);
+            this.expense.elementRelations.has_kilometer_count = false;
+        }
+
         this.expense.elementRelations.category = event;
+    }
+
+    public currencyChange(event) {
+        this.expense.elementRelations.currency = event;
     }
 
     public expenseReportChange(event) {
@@ -240,7 +291,7 @@ export class ExpenseEditPage implements OnInit {
         this.submitted = true;
 
         if (form.valid) {
-            this.loadingService.show('Salvando despesa');
+            this.loadingService.show(this.translateService.instant('SAVING'));
             this.expense.elements.issue_date = (new DateTimeFormatPipe()).transform(this.date, 'yyyy-MM-dd HH:mm:ss');
 
             if (!this.expense.getRelation('avatar')) {
@@ -264,7 +315,7 @@ export class ExpenseEditPage implements OnInit {
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível salvar as alterações!');
+                this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_SAVE'));
             });
         }
     }
@@ -273,7 +324,7 @@ export class ExpenseEditPage implements OnInit {
         this.submitted = true;
 
         if (form.valid) {
-            this.loadingService.show('Criando despesa');
+            this.loadingService.show(this.translateService.instant('CREATING'));
             this.expense.elements.attachments = this.attachments;
             this.expense.elements.avatar = this.avatar;
             this.expense.elements.from_app = true;
@@ -292,7 +343,7 @@ export class ExpenseEditPage implements OnInit {
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível criar despesa!');
+                this.toasterService.error(this.translateService.instant('CREATE_ERROR'));
             });
         }
     }
@@ -319,4 +370,29 @@ export class ExpenseEditPage implements OnInit {
             this.router.navigate(['expenses/update' + new Date().toISOString()]);
         }
     }
+
+    private initMap(): void {
+        this.mapsAPILoader.load().then(() => {
+            let latlng = new google.maps.LatLng(-26.287160, -48.782530); // NE
+
+            this.mapOptions = {
+                center: latlng,
+                zoom: 10,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                streetViewControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                gestureHandling: 'cooperative'
+            };
+
+            console.log(this.mapRef);
+
+            this.map = new google.maps.Map(this.mapRef.nativeElement, this.mapOptions);
+
+            new google.maps.Marker({
+                position: new google.maps.LatLng(-26.287160, -48.782530),
+                map: this.map,
+            });
+        });
+    };
 }

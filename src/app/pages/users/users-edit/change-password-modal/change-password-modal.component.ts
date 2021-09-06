@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { UserResourceModel } from 'src/app/coloquent-model/user/user.model';
 import { LoadingService } from 'src/app/shared-services/loading/loading.service';
 import { ToasterService } from 'src/app/shared-services/toaster/toaster.service';
@@ -18,7 +19,8 @@ export class ChangePasswordModalComponent implements OnInit {
     public constructor(
         private modalController: ModalController,
         private loadingService: LoadingService,
-        private toasterService: ToasterService
+        private toasterService: ToasterService,
+        private translateService: TranslateService
     ) { }
 
     public ngOnInit() {}
@@ -31,7 +33,7 @@ export class ChangePasswordModalComponent implements OnInit {
         if (this.password == this.confirmation){
             return true;
         } else {
-            this.toasterService.error('As senhas não coincidem');
+            this.toasterService.error(this.translateService.instant('DIFF_PASSWORD'));
         }
     }
 
@@ -45,13 +47,13 @@ export class ChangePasswordModalComponent implements OnInit {
             this.loadingService.show('Alterando senha');
 
             this.user.updatePassword(password).then(() => {
-                this.toasterService.success('Senha atualizada com sucesso!');
+                this.toasterService.success(this.translateService.instant('PASSWORD_UPDATE'));
                 this.loadingService.dismiss();
                 this.close();
             }).catch((error) => {
                 setTimeout(() => {
                     this.loadingService.dismiss();
-                    this.toasterService.error('Não foi possível alterar a senha!');
+                    this.toasterService.error(this.translateService.instant('PASSWORD_UPDATE_FAILED'));
                 }, 200);
             });
         }

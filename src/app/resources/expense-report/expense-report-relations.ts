@@ -10,6 +10,7 @@ export const ExpenseReportRelations = [
     'expenses.disapprovedExpense',
     'expenses.category',
     'expenses.avatar',
+    'expenses.currency',
     'currentExpenseReportState',
     'expenseReportStates',
 ];

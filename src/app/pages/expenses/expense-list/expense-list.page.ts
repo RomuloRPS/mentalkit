@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { ExpenseModel } from 'src/app/coloquent-model/expense/expense.model';
 import { CategoryService } from 'src/app/resources/category/category.service';
 import { ExpenseRelations } from 'src/app/resources/expense/expense-relations';
 import { ExpenseService } from 'src/app/resources/expense/expense.service';
@@ -21,7 +23,13 @@ export class ExpenseListPage implements OnInit {
 
     public selectOn;
 
-    public expenses = [];
+    public expenses = [
+        {
+            name: 'Arrumar lâmpada',
+            who: 'Solicitado por Rômulo',
+        }
+    ];
+
     public selecteds = [];
     public isSearchable = false;
     public listLength = 10;
@@ -31,19 +39,23 @@ export class ExpenseListPage implements OnInit {
     public loading = true;
     public selectedCategory;
 
+    public date = new Date().toISOString();
+
     public menuFilters = {
         category: null,
         // date: new Date().toDateString()
     };
 
     public constructor(
+        @Inject(LOCALE_ID) public locale,
         private router: Router,
         private expenseService: ExpenseService,
         private cacheService: OfflineCacheService,
         private toasterService: ToasterService,
         private menuController: MenuController,
         private popoverController: PopoverController,
-        public categoryService: CategoryService
+        public categoryService: CategoryService,
+        private translateService: TranslateService
     ) { }
 
     public async openOptions(ev) {
@@ -75,9 +87,14 @@ export class ExpenseListPage implements OnInit {
         this.selectOn = option;
     }
 
+    public getCurrency(expense: ExpenseModel) {
+        if (expense.getRelation('currency')) {
+            return expense.getRelation('currency').getAttribute('code');
+        }
+    }
+
     public ngOnInit() {
-        this.refresh();
-        this.getExpensesLength();
+        this.loading = false;
     }
 
     public filter(event) {
@@ -125,8 +142,19 @@ export class ExpenseListPage implements OnInit {
     }
 
     public doRefresh() {
-        this.loading = true;
         this.refresh();
+    }
+
+    public toDefinition() {
+        this.router.navigate(['definition']);
+    }
+
+    public toPrevalencia() {
+        this.router.navigate(['prevalencia']);
+    }
+
+    public toInterventions() {
+        this.router.navigate(['interventions']);
     }
 
     public refresh(event?) {
@@ -150,7 +178,7 @@ export class ExpenseListPage implements OnInit {
                 })
                 .catch((error) => {
                     this.loading = false;
-                    this.toasterService.error('Não foi possível atualizar a lista de despesas!');
+                    this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_UPDATE_THE_LIST'));
                     this.getExpenses();
 
                     if (event && event.target) {
@@ -159,7 +187,7 @@ export class ExpenseListPage implements OnInit {
                 });
         } else {
             this.loading = false;
-            this.toasterService.error('Não foi possível atualizar a lista de despesas!');
+            this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_UPDATE_THE_LIST'));
             this.getExpenses();
 
             if (event && event.target) {
@@ -174,44 +202,6 @@ export class ExpenseListPage implements OnInit {
 
     public toExpenseEdit(id) {
         this.router.navigate(['expense-edit' + '/' + id]);
-    }
-
-    public trySelect(task) {
-        if (this.selecteds.length == 0) {
-            this.toExpenseEdit(task.getApiId());
-
-            return;
-        }
-
-        if (task.selected && this.selecteds.length > 1) {
-            this.removeSelectedTask(task);
-        } else if(!task.selected) {
-            this.selectTask(task);
-        }
-    }
-
-    public selectTask(taskToSelect: any) {
-        this.selecteds.push(taskToSelect);
-
-        const taskIndex = this.expenses.findIndex(
-            (task) => task.getApiId() == taskToSelect.id
-        );
-
-        this.expenses[taskIndex].selected = true;
-    }
-
-    public removeSelectedTask(taskToUnselect) {
-        const selectedIndex = this.selecteds.findIndex(
-            (task) => task.id == taskToUnselect.id
-        );
-
-        this.selecteds.splice(selectedIndex, 1);
-
-        const taskIndex = this.expenses.findIndex(
-            (task) => task.getApiId() == taskToUnselect.id
-        );
-
-        this.expenses[taskIndex].selected = false;
     }
 
     public getIconUrl(token): string {
@@ -233,14 +223,6 @@ export class ExpenseListPage implements OnInit {
 
     public getCardColor(task) {
         return task.selected ? "medium" : "";
-    }
-
-    public triggerLongPress(taskToSelect) {
-        if (!taskToSelect.selected) {
-            this.selectTask(taskToSelect);
-        } else if (taskToSelect.selected && this.selecteds.length == 1) {
-            this.removeSelectedTask(taskToSelect);
-        }
     }
 
     public changeSearch() {
@@ -265,21 +247,6 @@ export class ExpenseListPage implements OnInit {
 
     public openMenu() {
         this.menuController.open('filters');
-    }
-
-    public deleteUsers() {
-        let selectedTaskIds = [];
-
-        this.expenses.forEach(task => {
-            if (task.selected) {
-                selectedTaskIds.push(task.getApiId());
-            }
-        });
-
-        this.expenseService.delete(selectedTaskIds).then((resp) => {
-            this.refresh();
-        });
-        this.loadingFirstTime = true;
     }
 
     public searchTask() {

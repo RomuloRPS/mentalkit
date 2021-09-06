@@ -16,8 +16,15 @@
   <ion-list *ngIf="list?.length > 0">
     <ion-item *ngFor="let item of list" (click)="setValue(item)">
       <ng-container *ngIf="item.getAttribute(indexField) || item.getAttribute(showField)">
-        <ion-text class="py-2" *ngIf="!indexField">{{item.getAttribute(showField)}}</ion-text>
-        <ion-text class="py-2" *ngIf="indexField">{{item.getAttribute(indexField)}} - {{item.getAttribute(showField) ? item.getAttribute(showField) : 'Não informado'}}</ion-text>
+        <ng-container *ngIf="!translateValue">
+          <ion-text class="py-2" *ngIf="!indexField">{{item.getAttribute(showField)}}</ion-text>
+          <ion-text class="py-2" *ngIf="indexField">{{item.getAttribute(indexField)}} - {{item.getAttribute(showField) ? item.getAttribute(showField) : 'Não informado'}}</ion-text>
+        </ng-container>
+
+        <ng-container *ngIf="translateValue">
+          <ion-text class="py-2" *ngIf="translateValue">{{item ? (item | standardCategoryTranslate) : 'UNINFORMED' | translate}}</ion-text>
+        </ng-container>
+
       </ng-container>
       <ng-container *ngIf="!item.getAttribute(indexField) && !item.getAttribute(showField)">
         <ion-text class="font-bold">{{notFound}}</ion-text>

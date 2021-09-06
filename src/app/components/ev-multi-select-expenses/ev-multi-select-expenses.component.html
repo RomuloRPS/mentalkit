@@ -8,7 +8,7 @@
             <img color="primary" style="height: 30px; width: 30px;" *ngIf="!item.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/image.svg">
           </ion-avatar>
           <ion-label>{{item?.getAttribute('name')}}</ion-label>
-          <ion-badge color="warning">{{item?.getAttribute('value') | currency:'COP ':true }}</ion-badge>
+          <ion-badge color="warning">{{item?.getAttribute('value') | currency:getCurrency(item):true:'1.2-2':locale }}</ion-badge>
         </ion-item>
       </ng-container>
       <div class="m-auto text-center mt-2">
@@ -20,7 +20,7 @@
     
     <div style="text-align: center;" >
       <ion-button class="mt-2 mb-2 text-center m-auto" color="primary" fill="outline" size="small" (click)="chooseOption()">
-        <ion-label class="text-center font-bold">Clique para escolher</ion-label>
+        <ion-label class="text-center font-bold">{{'CLICK_TO_CHOOSE' | translate}}</ion-label>
       </ion-button>
     </div>
 </ion-card>

@@ -1,3 +1,5 @@
+
+
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -10,123 +12,47 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title *ngIf="!isSearchable">{{'REVIEW.CAPTION' | translate}}</ion-title>
-
-    <ion-searchbar (ionBlur)="checkBlur()" #search [hidden]="!isSearchable" color="light" [(ngModel)]="searchTerm"
-      (ionChange)="searchTask()" placeholder="{{'INPUT_SEARCH_PLACEHOLDER' | translate}}"></ion-searchbar>
-  </ion-toolbar>
-
-
-  <ion-toolbar class="text-center" color="primary">
-    <ion-buttons *ngIf="selecteds.length === 0" slot="start">
-      <ion-button [disabled]="loading" (click)="doRefresh()">
-        <ion-icon name="refresh"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    <ion-buttons *ngIf="selecteds.length >= 1"  slot="start">
-      <ion-button (click)="deleteUsers()" >
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ng-container *ngIf="!loadingFirstTime">
-      <ng-container *ngIf="!loadingFirstTime">
-        <ion-label *ngIf="selecteds.length == 0" class="font-bold">{{expenses?.length}} / {{expenseReportsLength}} {{'EXPENSE_REPORT.CAPTION' | translate}}</ion-label>
-        <ion-label *ngIf="selecteds.length == 1" class="font-bold">{{selecteds.length}} {{'EXPENSE_REPORT.CAPTION' | translate}}</ion-label>
-        <ion-label *ngIf="selecteds.length > 1" class="font-bold">{{selecteds.length}} {{'EXPENSE_REPORT.CAPTION' | translate}}</ion-label>
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="loadingFirstTime">
-      <ion-label *ngIf="selecteds.length == 0" class="font-bold">{{'LOADING' | translate}}...</ion-label>
-    </ng-container>
-    <ion-buttons *ngIf="selecteds.length >= 1"  slot="end">
-      <ion-button (click)="clearSelect()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title *ngIf="!isSearchable">Opção</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content id="main" color="light">
-  <ion-progress-bar color="dark" *ngIf="loading" type="indeterminate"></ion-progress-bar>
 
-  <ion-refresher [disabled]="loading" id="refresher" #refresher (ionRefresh)="refresh($event)" color="light" slot="fixed">
-    <ion-refresher-content color="light" pullingIcon="chevron-down-outline"
-      refreshingSpinner="crescent" >
-    </ion-refresher-content>
-  </ion-refresher>
-
-  <ng-container *ngIf="!loadingFirstTime">
-  
-    <ng-container *ngFor="let expense of expenses">
-      <ion-card  [color]="getCardColor(expense)" class="relative card-no-border card-no-margin">
-        <ev-long-press >
-            <ion-item [color]="getCardColor(expense)"  lines="none">
-              <ion-thumbnail size="large" slot="start">
-                <img *ngIf="expense.getRelation('avatar')?.getAttribute('token')" [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
-                <ion-icon color="primary" class="text-5xl"  *ngIf="!expense.getRelation('avatar')?.getAttribute('token')" src="/assets/fontawesome/solid/image.svg"></ion-icon>
-              </ion-thumbnail>
-        
-              <ion-label class="text-xs ">
-                <p style="font-size: 13px;" class="mt-2 w-12/12">
-                  <span class="font-bold text-base" style="font-size: 15px;">{{expense?.getAttribute('name')}}</span>
-                </p>
-                <p style="font-size: 13px;" class="mt-2 w-12/12">
-                  <span class="text-base" style="font-size: 15px;">{{expense?.getRelation('policy')?.getAttribute('name')}}</span>
-                </p>
-                <p style="font-size: 13px;" class="mt-2 w-12/12">
-                  <span class="text-base" style="font-size: 15px;">{{expense?.getRelation('costCenter')?.getAttribute('name')}}</span>
-                </p>
-                <p style="font-size: 13px;" class="mt-2 w-12/12">
-                  <span class="text-base" style="font-size: 15px;">{{expense?.getRelation('department')?.getAttribute('name')}}</span>
-                </p>
-                <p style="font-size: 13px;" class="mt-2 w-12/12">
-                  <span class="text-base" style="font-size: 15px;">{{expense?.getAttribute('observation')}}</span>
-                </p>
-                <p style="font-size: 13px;" class="ml-1 mt-2">
-                  <strong>{{expense.getRelation('category')?.getAttribute('name')}}</strong>
-                </p>
-
-                <p style="font-size: 13px;" class="mt-2">
-                  <ion-badge class="mt-2" color="warning">
-                    <ion-label>{{expense?.getAttribute('value') | currency:'COP ':true }}</ion-label>
-                  </ion-badge>
-               </p>
-               <ion-badge [color]="expense?.getStatusBadgeColor()"  class="mt-2" color="success">
-                <ion-label>{{'EXPENSE_REPORT_STATUS.' + expense?.getAttribute('status') | translate}}</ion-label>
-              </ion-badge>
-              </ion-label>
-
+          <ion-card class="card-no-border card-no-margin">
+            <ion-item (click)="toDefinition()" lines="none">
+              <ion-icon  slot="start"  color="primary" name="ellipse"></ion-icon>
+              <ion-label>Definição</ion-label>  
               <ion-buttons  slot="end">
-                <ion-button [disabled]="expense.selected" (click)="toExpenseReportView(expense.getApiId())" color="primary">
+                <ion-button color="primary">
                   <ion-icon name="chevron-forward-outline"></ion-icon>
                 </ion-button>
               </ion-buttons>
             </ion-item>
-        </ev-long-press>
-      </ion-card>
-    </ng-container>
-  </ng-container>
+          </ion-card>
 
-  <ion-card *ngIf="expenses.length == 0 && !this.loading">
-    <ion-card-content>
-      <div class="text-center">
-        <ion-img class="h-20" src="../../assets/fontawesome/solid/wallet.svg"></ion-img>
-        <ion-text color="dark" class="mt-4">
-          <p class="mt-4">
-            <strong class="text-xl mt-4">Nenhum informe de despesa encontrado!</strong>
-          </p>
-        </ion-text>
-      </div>
-    </ion-card-content>
-  </ion-card>
+          <ion-card class="card-no-border card-no-margin">
+            <ion-item  lines="none">
+              <ion-icon  slot="start"  color="primary" name="ellipse"></ion-icon>
+              <ion-label>Prevalência</ion-label>  
+              <ion-buttons  slot="end">
+                <ion-button color="primary">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-card>
 
-  <ion-infinite-scroll id="infiniteScroll" #infiniteScroll threshold="100px" (ionInfinite)="loadMoreData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" >
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+          <ion-card class="card-no-border card-no-margin">
+            <ion-item  lines="none">
+              <ion-icon  slot="start"  color="primary" name="ellipse"></ion-icon>
+              <ion-label>Intervenções</ion-label>  
+              <ion-buttons  slot="end">
+                <ion-button color="primary">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-card>
 
 </ion-content>
-

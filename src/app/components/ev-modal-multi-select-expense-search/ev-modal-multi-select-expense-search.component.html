@@ -19,19 +19,19 @@
        
         <ion-label class="text-xs ">
           <p style="font-size: 13px;" class="mt-2 w-12/12">
-            <span class="font-bold text-base" style="font-size: 15px;">{{item.getAttribute('name')}} - {{item.getAttribute('provider')}}</span>
+            <span class="font-bold text-base" style="font-size: 15px;">{{item?.getAttribute('name')}} - {{item?.getAttribute('provider')}}</span>
           </p>
           <p style="font-size: 13px;" class="ml-1 mt-2">
-            <strong>{{item.getRelation('category')?.getAttribute('name')}}</strong>
+            <strong>{{item?.getRelation('category') | standardCategoryTranslate}}</strong>
           </p>
   
           <p style="font-size: 13px;" class="ml-1 mt-2">
-             <span>{{item.getAttribute('issue_date') | dateTimeFormat: 'dd/MM/yyyy'}}</span>
+             <span>{{item?.getAttribute('issue_date') | dateTimeFormat: 'dd/MM/yyyy'}}</span>
           </p>
 
           <p style="font-size: 13px;" class="mt-2">
             <ion-badge class="mt-2" color="warning">
-              <ion-label>{{item.getAttribute('value') | currency:'COP ':true }}</ion-label>
+              <ion-label>{{item.getAttribute('value') | currency:getCurrency(item):true:'1.2-2':locale}}</ion-label>
             </ion-badge>
          </p>
         </ion-label>

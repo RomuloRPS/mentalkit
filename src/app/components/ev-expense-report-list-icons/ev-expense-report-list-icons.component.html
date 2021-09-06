@@ -1,0 +1,45 @@
+<div class="w-full">
+    <div class="m-auto flex gap-1 mb-1 mt-3 w-4/12">
+        <ion-icon src="assets/fontawesome/solid/circle.svg" 
+            [class]="getBadgeColor(expenseReportStatusEnum.OPEN)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.OPEN)">
+        </ion-icon>
+    
+        <ion-icon *ngIf="currentStatus != expenseReportStatusEnum.CONFLICT" src="assets/fontawesome/solid/paper-plane.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.SENT)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.SENT)">
+        </ion-icon>
+    
+        <ion-icon *ngIf="currentStatus == expenseReportStatusEnum.CONFLICT" src="assets/fontawesome/solid/paper-plane.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.CONFLICT)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.CONFLICT)">
+        </ion-icon>
+    
+        <ion-icon src="assets/fontawesome/solid/forward.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.IN_APPROVING_PROCESS)" 
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.IN_APPROVING_PROCESS)">
+        </ion-icon>
+    
+        <ion-icon src="assets/fontawesome/solid/times-circle.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.EDITION_REQUEST)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.EDITION_REQUEST)">
+        </ion-icon>
+    
+        <ion-icon *ngIf="currentStatus != expenseReportStatusEnum.APPROVED_WITH_EXCEPTIONS"
+            src="assets/fontawesome/solid/check-circle.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.APPROVED)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.APPROVED)">
+        </ion-icon>
+    
+        <ion-icon *ngIf="currentStatus == expenseReportStatusEnum.APPROVED_WITH_EXCEPTIONS"
+            src="assets/fontawesome/solid/check-circle.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.APPROVED_WITH_EXCEPTIONS)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.APPROVED_WITH_EXCEPTIONS)">
+        </ion-icon>
+    
+        <ion-icon src="assets/fontawesome/solid/money-bill.svg"
+            [class]="getBadgeColor(expenseReportStatusEnum.PAID)"
+            [class.opacity-50]="isNextStatus(expenseReportStatusEnum.PAID)">
+        </ion-icon>
+    </div>
+</div>

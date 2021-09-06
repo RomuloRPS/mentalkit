@@ -3,36 +3,37 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-header class="ion-no-border">
         <ion-toolbar color="primary">
-          <ion-title>Kampo App</ion-title>
+          <ion-title>Mental Kit App</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="cacheApp()" name="refresh-outline"></ion-button>
+            <ion-button name="refresh-outline"></ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-          <ion-list *ngFor="let role of roleService.getRoles()"  id="inbox-list">
-            <ion-list-header>{{role.getAttribute('description')}}</ion-list-header>
-            <ng-container *ngFor="let menu of role.getRelation('menus'); let i = index">
-              <ion-menu-toggle auto-hide="false" *ngIf="menu.getAttribute('application_type') == 'WEB_APP'">
-                <ion-item routerDirection="root" [routerLink]="[menu.getAttribute('action')]" lines="none" detail="false" routerLinkActive="selected">
-                  <ion-icon color="tertiary" slot="start" [src]="getIcon(menu)" ></ion-icon>
-                  <ion-label>{{ menu.getAttribute('name') }}</ion-label>
+          <ion-list id="inbox-list">
+            <ion-list-header>Menus</ion-list-header>
+            <ng-container *ngFor="let menu of menus; let i = index">
+              <ion-menu-toggle auto-hide="false">
+                <ion-item [disabled]="menu.disabled" routerDirection="root" [routerLink]="[menu.action]" lines="none" detail="false" routerLinkActive="selected">
+                  <ion-icon color="primary" slot="start" [src]="getIcon(menu)" ></ion-icon>
+                  <ion-text>{{menu.name}}</ion-text>
                 </ion-item>
               </ion-menu-toggle>
             </ng-container> 
-            <div class="h-1 w-2/6 mt-2 mb-2 m-auto rounded-md" style="background-color: #0205A1;"></div>
+            <div class="h-1 w-2/6 mt-2 mb-2 m-auto rounded-md" style="background-color: #308ac4;"></div>
           </ion-list>
-          <ion-list>
+          
+          <!-- <ion-list>
             <ion-menu-toggle auto-hide="false">
               <ion-item (click)="logout()" lines="none">
                 <ion-icon color="danger" slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
-                <ion-label>{{'THEME.EXIT' | translate}}</ion-label>
+                <ion-label>Sair</ion-label>
               </ion-item>
             </ion-menu-toggle>
-          </ion-list>
+          </ion-list> -->
       </ion-content>
       <ion-footer>
-        <img style="height: 100px;" class="rounded-md m-auto mb-6" src="./assets/logo-white.jpeg" />
+        <img style="height: 100px;" class="rounded-md m-auto mb-6" src="./assets/logo.jpeg" />
       </ion-footer>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

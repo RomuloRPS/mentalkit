@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { CompanyModel } from 'src/app/coloquent-model/company/company.model';
 import { CategoryService } from 'src/app/resources/category/category.service';
 import { ExpenseReportRelations } from 'src/app/resources/expense-report/expense-report-relations';
 import { ExpenseReportService } from 'src/app/resources/expense-report/expense-report.service';
@@ -36,13 +38,15 @@ export class RevisionListPage implements OnInit {
     };
 
     public constructor(
+        @Inject(LOCALE_ID) public locale,
         private router: Router,
         private expenseReportService: ExpenseReportService,
         private cacheService: OfflineCacheService,
         private toasterService: ToasterService,
         private menuController: MenuController,
         private popoverController: PopoverController,
-        public categoryService: CategoryService
+        public categoryService: CategoryService,
+        private translateService: TranslateService
     ) { }
 
     public async openOptions(ev) {
@@ -57,13 +61,24 @@ export class RevisionListPage implements OnInit {
         return await popover.present();
     }
 
+    public getCurrency(expense?) {
+        if(expense) {
+            return expense.getRelation('currency').getAttribute('code');
+        }
+
+        return CompanyModel.getStandardCurrency();
+    }
+
     public setSelect(option) {
         this.selectOn = option;
     }
 
+    public toDefinition() {
+        this.router.navigate(['definition']);
+    }
+
     public ngOnInit() {
-        this.refresh();
-        this.getExpensesLength();
+
     }
 
     public filter(event) {
@@ -95,6 +110,7 @@ export class RevisionListPage implements OnInit {
         this.expenseReportService.onlyOffline().get(filter).subscribe((resp) => {
             this.loadingFirstTime = false;
             this.expenses = resp.data;
+            console.log(resp);
             this.loading = false;
         });
     }
@@ -134,7 +150,7 @@ export class RevisionListPage implements OnInit {
                 })
                 .catch((error) => {
                     this.loading = false;
-                    this.toasterService.error('Não foi possível atualizar a lista de informe de despesas!');
+                    this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_UPDATE_THE_LIST'));
                     this.getExpenseReports();
 
                     if (event && event.target) {
@@ -143,7 +159,7 @@ export class RevisionListPage implements OnInit {
                 });
         } else {
             this.loading = false;
-            this.toasterService.error('Não foi possível atualizar a lista de informe de despesas!');
+            this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_UPDATE_THE_LIST'));
             this.getExpenseReports();
 
             if (event && event.target) {

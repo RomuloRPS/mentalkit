@@ -1,0 +1,25 @@
+import { StandardCategoriesEnum } from "./category.enum";
+
+export const standardCategories = [
+    StandardCategoriesEnum.PUBLICITY,
+    StandardCategoriesEnum.MARKETING,
+    StandardCategoriesEnum.BENEFITS,
+    StandardCategoriesEnum.CAR,
+    StandardCategoriesEnum.EQUIPMENT,
+    StandardCategoriesEnum.FEES,
+    StandardCategoriesEnum.HOME_OFFICE,
+    StandardCategoriesEnum.INSURANCE,
+    StandardCategoriesEnum.INTEREST,
+    StandardCategoriesEnum.LABOR,
+    StandardCategoriesEnum.MAINTENANCE,
+    StandardCategoriesEnum.MATERIALS,
+    StandardCategoriesEnum.MEALS_AND_ENTERTAINMENT,
+    StandardCategoriesEnum.OFFICE_SUPPLIES,
+    StandardCategoriesEnum.PROFESSIONAL_SERVICES,
+    StandardCategoriesEnum.RENT,
+    StandardCategoriesEnum.TAXES,
+    StandardCategoriesEnum.TRAVEL,
+    StandardCategoriesEnum.UTILITIES,
+    StandardCategoriesEnum.OTHER,
+    StandardCategoriesEnum.KILOMETERS,
+];

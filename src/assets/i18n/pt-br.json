@@ -55,8 +55,8 @@
         "LOGIN_BUTTON_TEXT": "Continuar",
         "CONTINUE_WITH_LABEL": "ou continuar com",
         "FORGOT_PASSWORD_LABEL": "Esqueceu sua senha?",
-        "PASSWORD_INPUT_PLACEHOLDER": "Digite sua senha...",
-        "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail...",
+        "PASSWORD_INPUT_PLACEHOLDER": "Digite sua senha.",
+        "USER_INPUT_PLACEHOLDER": "Digite seu login ou e-mail.",
         "INVALID_CREDENCIALS": "Credenciais inválidas",
         "NOT_AVAILABLE_TRY_AGAIN_LATER": "Não foi possivel fazer o login, tente novamente mais tarde",
         "BACK_TO_LOGIN": "Voltar para o login",
@@ -75,7 +75,7 @@
         "CONFIRM_PASSWORD_PLACEHOLDER": "Digite sua confirmação de senha",
         "CHANGE_PASSWORD": "Trocar senha",
         "EMAIL_PLACEHOLDER": "Digite o e-mail",
-        "NAME_PLACEHOLDER": "Digite o nome...",
+        "NAME_PLACEHOLDER": "Digite o nome",
         "ROLES_PLACEHOLDER": "Selecione as permissões...",
         "IMPORT_USERS_LABEL": "Atualizar/Importar vários usuários",
         "USER_UPDATED_MESSAGE": "Usuário(s) atualizado(s) com sucesso.",
@@ -391,7 +391,8 @@
         "TRAVEL": "Viagem",
         "UTILITIES": "Serviços de Utilidade Pública",
         "OTHER": "Outros",
-        "KILOMETERS": "Quilometragem"
+        "KILOMETERS": "Quilometragem",
+        "WRONG_CATEGORY_WARNING": "Categoria irregular. Categorias permitidas"
     },
 
     "NONE_FOUND": {

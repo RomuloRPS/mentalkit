@@ -29,7 +29,11 @@ export class HttpUtil {
           tenancyId = this.userModel.get("selectedTenancy").id;
       }
 
-      return url.replace(":tenancy_id", tenancyId);
+      const language = window.navigator.language.toLowerCase();
+
+      const newUrl = url.replace('tenancies', 'lang/' + language + '/tenancies');
+
+      return newUrl.replace(":tenancy_id", tenancyId);
   }
 
   /**

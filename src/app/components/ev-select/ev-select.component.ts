@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { BaseModel } from 'src/app/coloquent-model/coloquent.model';
 import { EvModalSearchComponent } from '../ev-modal-search/ev-modal-search.component';
 
@@ -23,12 +24,15 @@ export class EvSelectComponent implements OnInit {
   @Input() public resource;
   @Input() public showField;
   @Input() public indexField;
+  @Input() public translateValue = false;
+  @Input() public translatePrefix;
   @Input() public value;
   @Output() public valueIdChange = new EventEmitter();
   @Output() public valueChange = new EventEmitter();
 
   public constructor(
-    private modalController: ModalController
+    private modalController: ModalController,
+    private translate: TranslateService
   ) { }
 
   public ngOnInit() { }
@@ -48,7 +52,10 @@ export class EvSelectComponent implements OnInit {
               value: this.value,
               creatable: this.creatable,
               baseModel: this.baseModel,
-              name: this.name
+              name: this.name,
+              translateValue: this.translateValue,
+              translatePrefix: this.translatePrefix,
+              indexField: this.indexField
           }
       });
 

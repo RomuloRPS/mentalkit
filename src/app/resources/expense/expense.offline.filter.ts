@@ -79,8 +79,6 @@ export class ExpenseOfflineFilter extends BaseOfflineFilter {
                             return expense;
                         }
 
-                        console.log(filters);
-
                         if (filters.expenseReportId) {
                             if (expense && expense.getRelation('expenseReport') && expense.getRelation('expenseReport').getApiId() == filters.expenseReportId) {
                                 return expense;

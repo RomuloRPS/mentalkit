@@ -3,14 +3,14 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Início</ion-title>
+      <ion-title>{{'START' | translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
   
 
-  <div style="background-color: #0205A1;" class=" h-24 relative">
+  <div style="background-color: #308ac4;" class=" h-24 relative">
     
     <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
       <defs>
@@ -35,11 +35,15 @@
           <ion-card mode="ios">
             <ion-card-content>
               <div class="text-center relative">
-                <img style="height: 100px;" class="m-auto justify-center" src="../../../assets/logo.jpeg" />
+                <img style="height: 100px;" class="m-auto justify-center" src="./assets/logo.jpeg" />
                 <br>
                 <ion-text color="dark" style="margin-top: 10px;">
-                  <h1><strong>Bem-vindo ao Kampo APP</strong></h1>
-                  <h2><strong>Navegue pelo menu lateral</strong></h2>
+                  <h1><strong>Bem vindo ao Mental Kit App</strong></h1>
+                  <br/>
+                  <p class="mt-4"><strong>Mental Kit é um aplicativo desenvolvido para facilitar o acesso a evidências cientificas para ajudar a melhorar a saúde mental de crinças e adolescentes no Brasil.</strong></p>
+                  <br/>
+                  <h2 class="mt-4"><strong>Navegue pelo menu lateral</strong></h2>
+
                 </ion-text>
 
                 <ion-icon name="arrow-back-outline" color="primary" class="mt-6 text-5xl"></ion-icon>
@@ -51,11 +55,11 @@
     </ion-grid>
   </div>
 
-  <ion-fab (click)="toExpenseCreate()" vertical="bottom" horizontal="end" slot="fixed">
+  <!-- <ion-fab (click)="toExpenseCreate()" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button  color="secondary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
   
 
 </ion-content>

@@ -54,8 +54,12 @@ export abstract class BaseModel extends Model {
    }
 
    public bindUrlForTenancy(url: string) {
+       const language = window.navigator.language.toLowerCase();
+
        if (url && BaseModel.getSelectedTenancyId()) {
-           return (url + '').replace(':tenancy_id', BaseModel.getSelectedTenancyId());
+           const newUrl = url.replace('tenancies', 'lang/' + language + '/tenancies');
+
+           return (newUrl + '').replace(':tenancy_id', BaseModel.getSelectedTenancyId());
        }
    }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { CostCenterModel } from 'src/app/coloquent-model/cost-center/cost-center.model';
 import { DepartmentModel } from 'src/app/coloquent-model/department/department.model';
@@ -58,31 +59,15 @@ export class UsersEditPage implements OnInit {
         private loadingService: LoadingService,
         private toasterService: ToasterService,
         public departmentService: DepartmentService,
-        public costCenterService: CostCenterService
+        public costCenterService: CostCenterService,
+        private translateService: TranslateService
     ) { }
 
     public ngOnInit() {
         this.route.paramMap.subscribe(params => {
             this.submitted = false;
-
-            this.updateInfos().then(() => {
-                if (params.get('id')) {
-                    let filters = {
-                        id: params.get('id')
-                    };
-
-                    this.userService.onlyOffline().get(filters).subscribe((resp) => {
-                        this.user = resp.data[0];
-                        this.setRoles(this.user);
-                        this.setDepartment(this.user);
-                        this.setCostCenter(this.user);
-                        this.editing = true;
-                    });
-                } else {
-                    this.user = new UserResourceModel();
-                    this.editing = false;
-                }
-            });
+            this.user = new UserResourceModel();
+            this.editing = false;
         });
     }
 
@@ -158,7 +143,9 @@ export class UsersEditPage implements OnInit {
     }
 
     public getIconUrl(token): string {
-        return `${environment.api}/attachments/${token}/preview`;
+        let tenancyId = localStorage.getItem('selectedTenancyId');
+
+        return `${environment.api}/tenancies/${tenancyId}/attachments/${token}/preview`;
     }
 
     public changePassword() {
@@ -196,7 +183,7 @@ export class UsersEditPage implements OnInit {
                 return;
             }
 
-            this.loadingService.show('Salvando usuário');
+            this.loadingService.show(this.translateService.instant('SAVING'));
 
             this.user.save().then(() => {
                 this.submitted = false;
@@ -204,7 +191,7 @@ export class UsersEditPage implements OnInit {
                 this.router.navigate(['users/update' + new Date().toISOString()]);
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível salvar as alterações!');
+                this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_SAVE'));
             });
         }
     }
@@ -218,14 +205,14 @@ export class UsersEditPage implements OnInit {
             }
 
             if (!this.hasPasswordInformedAndIsValid()) {
-                this.toasterService.warning('As senhas não são iguais');
+                this.toasterService.warning(this.translateService.instant('DIFF_PASSWORD'));
 
                 return;
             }
 
             this.user.elements.password = this.passwordParams.password;
 
-            this.loadingService.show('Criando usuário');
+            this.loadingService.show(this.translateService.instant('CREATING'));
 
             this.user.create().then(() => {
                 this.submitted = false;
@@ -233,7 +220,7 @@ export class UsersEditPage implements OnInit {
                 this.router.navigate(['users/update' + new Date().toISOString()]);
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível criar usuário!');
+                this.toasterService.error(this.translateService.instant('CREATE_ERROR'));
             });
         }
     }
@@ -244,22 +231,12 @@ export class UsersEditPage implements OnInit {
         }
     }
 
-    private updateInfos() {
-        const servicesToCache = [
-            this.departmentService.cache(),
-            this.costCenterService.cache(),
-            this.roleService.cache()
-        ];
-
-        return forkJoin(servicesToCache).toPromise();
-    }
-
     private checkRoles() {
         if (this.user && this.user.getRelation('roles') && this.user.getRelation('roles').length > 0) {
             return true;
         }
 
-        this.toasterService.warning('Informe pelo menos uma permissão de usuário!');
+        this.toasterService.warning(this.translateService.instant('USER.POLICY_REQUIRED'));
 
         return false;
     }

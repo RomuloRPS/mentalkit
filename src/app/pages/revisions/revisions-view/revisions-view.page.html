@@ -10,12 +10,12 @@
 </ion-header>
 
 <ion-content color="light">
-  <div [style.background-color]="status == 'aprobado' ? '#1acc8d' : '#0205A1'"  class="relative">
+  <div [style.background-color]="status == 'aprobado' ? '#1acc8d' : '#308ac4'"  class="relative">
     <div class="pt-4">
       <ion-text >
         <p style="color: white;" class="text-center text-base font-bold">{{expenseReport?.getAttribute('name')}}</p>
       </ion-text>
-      <p style="color: white;" class="text-center font-extrabold text-3xl">{{expenseReport ?.getAttribute('value') | currency:'COP ':true }}</p>
+      <p style="color: white;" class="text-center font-extrabold text-3xl">{{expenseReport ?.getAttribute('value') | currency:getCurrency():true:'1.2-2':locale }}</p>
       <!-- <p style="color: white;" class="text-center font-light">Aprovado: 0 COP</p> -->
     </div>
   
@@ -79,26 +79,26 @@
                     <span class="font-bold text-base" style="font-size: 15px;">{{expense.getAttribute('provider')}}</span>
                   </p>
                   <p style="font-size: 13px;" class="ml-1 mt-2">
-                    <strong>{{expense.getRelation('category')?.getAttribute('name')}}</strong>
+                    <strong>{{expense.getRelation('category') | standardCategoryTranslate}}</strong>
                   </p>
                   <p style="font-size: 13px;" class="ml-1 mt-2">
                       <span>{{expense.getAttribute('issue_date') | dateTimeFormat: 'dd/MM/yyyy'}}</span>
                   </p>
                   <p style="font-size: 13px;" class="ml-1 mt-2">
                     <ion-badge color="warning">
-                      <ion-label>{{expense?.getAttribute('value') | currency:'COP ':true }}</ion-label>
+                      <ion-label>{{expense?.getAttribute('value') | currency:getCurrency(expense):true:'1.2-2':locale}}</ion-label>
                     </ion-badge>
                   </p>
                 </ion-label>
                 <ion-buttons *ngIf="expense.disapproved" (click)="approveExpense(i)" slot="end">
                   <ion-button>
-                    <ion-icon color="success" src="../../../../assets/fontawesome/solid/plus-circle.svg"></ion-icon>
+                    <ion-icon color="success" src=".././assets/fontawesome/solid/plus-circle.svg"></ion-icon>
                   </ion-button>
                 </ion-buttons>
         
                 <ion-buttons *ngIf="!expense.disapproved" (click)="presentPromptDisapproveExpense(i)" slot="end">
                   <ion-button>
-                    <ion-icon color="danger" src="../../../../assets/fontawesome/solid/minus-circle.svg"></ion-icon>
+                    <ion-icon color="danger" src=".././assets/fontawesome/solid/minus-circle.svg"></ion-icon>
                   </ion-button>
                 </ion-buttons>
               </ion-item>

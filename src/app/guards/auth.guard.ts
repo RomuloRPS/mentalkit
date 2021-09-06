@@ -20,10 +20,6 @@ export class AuthGuard implements CanActivate {
 
     private _checkLogin(url: string): boolean {
         // Testa se tem o token jwt local
-        if (!localStorage.getItem('JWT')) {
-            return this._fail();
-        }
-
         return true;
     }
 

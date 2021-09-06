@@ -19,8 +19,21 @@ export enum ExpenseReportStatusEnum {
     EDITION_REQUEST = "EDITION_REQUEST",
     APPROVED = "APPROVED",
     APPROVED_WITH_EXCEPTIONS = "APPROVED_WITH_EXCEPTIONS",
-    PAID = "PAID"
+    PAID = "PAID",
+    CONFLICT = "CONFLICT"
 }
+
+export const statusBadgeColors = {
+    [ExpenseReportStatusEnum.OPEN]: 'bg-blue-500',
+    [ExpenseReportStatusEnum.SENT]: 'bg-ultramarine-500',
+    [ExpenseReportStatusEnum.CONFLICT]: 'bg-red-500',
+    [ExpenseReportStatusEnum.PAID]: 'bg-yellow-500',
+    [ExpenseReportStatusEnum.APPROVED]: 'bg-green-500',
+    [ExpenseReportStatusEnum.VISUALIZED]: 'bg-gray-500',
+    [ExpenseReportStatusEnum.EDITION_REQUEST]: 'bg-orange-500',
+    [ExpenseReportStatusEnum.IN_APPROVING_PROCESS]: 'bg-gray-700',
+    [ExpenseReportStatusEnum.APPROVED_WITH_EXCEPTIONS]: 'bg-red-700',
+};
 
 @Injectable({
     providedIn: 'root'

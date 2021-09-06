@@ -5,6 +5,7 @@ import { RouteModel } from '../models/route.model';
 import { UserModel } from '../models/user.model';
 import { CategoryService } from '../resources/category/category.service';
 import { CostCenterService } from '../resources/cost-center/cost-center.service';
+import { CurrencyService } from '../resources/currency/currency.service';
 import { DepartmentService } from '../resources/department/department.service';
 import { ExpenseReportRelations } from '../resources/expense-report/expense-report-relations';
 import { ExpenseReportService } from '../resources/expense-report/expense-report.service';
@@ -26,6 +27,7 @@ export class OfflineCacheService {
     private departmentService: DepartmentService;
     private costCenterService: CostCenterService;
     private policyService: PolicyService;
+    private currencyService: CurrencyService;
 
     public constructor(injector: Injector) {
         this.userModel = injector.get(UserModel);
@@ -37,6 +39,7 @@ export class OfflineCacheService {
         this.departmentService = injector.get(DepartmentService);
         this.costCenterService = injector.get(CostCenterService);
         this.policyService = injector.get(PolicyService);
+        this.currencyService = injector.get(CurrencyService);
     }
 
     public cacheInfo() {
@@ -93,6 +96,12 @@ export class OfflineCacheService {
             this.policyService.cache({
                 page: {limit: 99999}
             }),
+            this.currencyService.cache({
+                page: {limit: 9999},
+                filter: {
+                    currentTenancy: 1
+                }
+            })
         );
 
         return localEnabledServices;

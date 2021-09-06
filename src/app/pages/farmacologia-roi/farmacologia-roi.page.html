@@ -1,0 +1,54 @@
+
+
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title >Triple P - ROI</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="share-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content id="main" color="light">
+          <ion-card class="card-no-border card-no-margin">
+            <ion-card-header>
+              <ion-label>
+                <p class="text-center text-4xl" style="font-size: large;">Custos totais: <strong>-R$ 3.384.124</strong></p>
+                <p class="text-center text-4xl" style="font-size: large;">Retorno por real investido: <strong>R$ 78</strong></p>
+              </ion-label>
+              <br/>
+              <div style="margin: auto; justify-content: center; text-align: center;">
+                <ion-button *ngIf="!showDetails" (click)="moreDetails()">Mais detalhes</ion-button>
+                <ion-button *ngIf="showDetails" (click)="moreDetails()">Menos detalhes</ion-button>
+              </div>
+            </ion-card-header>
+            <ion-grid *ngIf="showDetails" class="ion-margin">
+              <ion-row style="border-bottom: 2px solid black;">
+                <ion-col size="6"></ion-col>
+                <ion-col>18 a 19 anos</ion-col>
+                <ion-col><strong>Custo total/economia</strong></ion-col>
+              </ion-row>
+              <ng-container *ngFor="let student of students; index as i">
+                <ion-row style="border-bottom: 1px solid gray; background-color: #2a79ac; color: white; font-weight: bold;" *ngIf="i == (students.length -1) ">
+                  <ion-col size="6"><strong>{{ student.name }}</strong></ion-col>
+                  <ion-col>{{ student.gender }}</ion-col>
+                  <ion-col>{{ student.country }}</ion-col>
+                </ion-row>
+
+                <ion-row style="border-bottom: 1px solid gray;" *ngIf="i < (students.length - 1)">
+                  <ion-col size="6"><strong>{{ student.name }}</strong></ion-col>
+                  <ion-col>{{ student.gender }}</ion-col>
+                  <ion-col>{{ student.country }}</ion-col>
+                </ion-row>
+              </ng-container>
+              
+            </ion-grid>
+          </ion-card>
+
+</ion-content>

@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Triple P - Parâmetros</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="expense?.getRelation('disapprovedExpense')" color="warning">
+    <ion-text>{{'OBSERVATION_LABEL' | translate}}: {{expense?.getRelation('disapprovedExpense')?.getAttribute('observation')}}</ion-text>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <div class="mx-8">
+    <ion-card class="card-no-border">
+      <ion-item lines="none">
+        <ion-label position="floating">Região</ion-label>
+        <ion-select placeholder="Brasil" cancelText="Cancelar">
+          <ion-select-option>Brasil</ion-select-option>
+          <ion-select-option>Região Centro-Oeste</ion-select-option>
+          <ion-select-option>Região Nordeste</ion-select-option>
+          <ion-select-option>Região Norte</ion-select-option>
+          <ion-select-option>Região Sul</ion-select-option>
+          <ion-select-option>Região Sudeste</ion-select-option>
+          <ion-select-option>Acre</ion-select-option>
+          <ion-select-option>Alagoas</ion-select-option>
+          <ion-select-option>Amapá</ion-select-option>
+          <ion-select-option>Amazonas</ion-select-option>
+          <ion-select-option>Bahia</ion-select-option>
+          <ion-select-option>Ceará</ion-select-option>
+          <ion-select-option>Distrito Federal</ion-select-option>
+          <ion-select-option>Espírito Santo</ion-select-option>
+          <ion-select-option>Goiás</ion-select-option>
+          <ion-select-option>Maranhão</ion-select-option>
+          <ion-select-option>Mato Grosso</ion-select-option>
+          <ion-select-option>Mato Grosso do Sul</ion-select-option>
+          <ion-select-option>Pará</ion-select-option>
+          <ion-select-option>Paraíba</ion-select-option>
+          <ion-select-option>Paraná</ion-select-option>
+          <ion-select-option>Pernambuco</ion-select-option>
+          <ion-select-option>Piauí</ion-select-option>
+          <ion-select-option>Rio de Janeiro</ion-select-option>
+          <ion-select-option>Rio Grande do Norte</ion-select-option>
+          <ion-select-option>Rio Grande do Sul</ion-select-option>
+          <ion-select-option>Rondônio</ion-select-option>
+          <ion-select-option>Roraima</ion-select-option>
+          <ion-select-option>Santa Catarina</ion-select-option>
+          <ion-select-option>São Paulo</ion-select-option>
+          <ion-select-option>Sergipe</ion-select-option>
+          <ion-select-option>Tocantins</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
+    
+  </div>
+
+  <div class="mt-12 mx-8">
+    <ion-card color="primary" (click)="toCusto()" class="card-no-border card-no-margin text-center text-2xl font-bold p-8">
+      <h1 >Custos do programa</h1>
+    </ion-card>
+  </div>
+
+  <div class="mt-12  mx-8">
+    <ion-card color="primary" (click)="toOutroCusto()" class="card-no-border card-no-margin text-center text-2xl font-bold p-8">
+      <h1>Outros custos</h1>
+    </ion-card>
+  </div>
+
+  <div class="mt-12  mx-8">
+    <ion-card color="primary"  (click)="toOutroParam()" class="card-no-border card-no-margin text-center text-2xl font-bold p-8">
+      <h1 >Outros parâmetros</h1>
+    </ion-card>
+  </div>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
+          Voltar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="save()"  expand="block">
+          Calcular
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
+
+
+

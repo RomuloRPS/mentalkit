@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Triple P</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="expense?.getRelation('disapprovedExpense')" color="warning">
+    <ion-text>{{'OBSERVATION_LABEL' | translate}}: {{expense?.getRelation('disapprovedExpense')?.getAttribute('observation')}}</ion-text>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+
+  <form *ngIf="expense" class="mb-6" #expenseForm="ngForm" name="expenseForm">
+    <ion-row *ngFor="let row of questions; let i = index" class="flex justify-center ">
+      <ion-col style="background-color: white; margin-top: 20px; border-radius: 20px;" size="11">
+        <div style="margin-left: 20px;">
+          <ion-label> {{row.question}}</ion-label>
+        </div>
+        <ion-item lines="none" class="rounded-lg">
+          <!-- <ion-icon slot="start" color="tertiary" name="cash-outline"></ion-icon> -->
+          <ion-input [(ngModel)]="row.value" [name]="row.question" placeholder="00"  [name]="'init_kilometer' + i" type="number" 
+            spellcheck="false" autocapitalize="off" required>
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="backToList()" fill="outline" color="danger" expand="block">
+          Voltar
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="!editing" size="6">
+        <ion-button (click)="create(expenseForm)"  expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="editing" size="6">
+        <ion-button (click)="save(expenseForm)"  expand="block">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+

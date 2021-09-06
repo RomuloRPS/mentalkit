@@ -25,6 +25,8 @@ import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate
 import { HttpClient } from '@angular/common/http';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { SignInWithApple } from "@ionic-native/sign-in-with-apple/ngx";
+import { AgmCoreModule } from '@agm/core';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new TranslateHttpLoader(httpClient);
@@ -51,6 +53,11 @@ export const DEFAULT_LANGUAGE = 'pt-br';
                 deps: [HttpClient]
             }
         }),
+        AgmCoreModule.forRoot({
+            // please get your own API key here:
+            // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+            apiKey: ''
+        })
     ],
     providers: [
         CodePush,
@@ -68,6 +75,7 @@ export const DEFAULT_LANGUAGE = 'pt-br';
         SQLite,
         ScreenOrientation,
         GooglePlus,
+        SignInWithApple,
         {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig}
     ],
     bootstrap: [AppComponent]
@@ -77,8 +85,8 @@ export class AppModule {
     public constructor(private platform: Platform, private translate: TranslateService) {
         platform.ready().then( () => {
             translate.setDefaultLang(DEFAULT_LANGUAGE);
-            // translate.use(window.navigator.language.toLowerCase());
-            translate.use('es-419');
+            translate.use(window.navigator.language.toLowerCase());
+            // translate.use('es-419');
         });
     }
 }

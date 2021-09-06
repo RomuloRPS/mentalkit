@@ -94,7 +94,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/revisions/revisions-view/revisions-view.module').then( m => m.RevisionViewPageModule)
     },
     {
-        path: 'expenses',
+        path: 'solicitations',
         loadChildren: () => import('./pages/expenses/expense-list/expense-list.module').then( m => m.ExpenseListPageModule)
     },
     {
@@ -108,6 +108,50 @@ const routes: Routes = [
     {
         path: 'expense-add-to-expense-report',
         loadChildren: () => import('./pages/expense-add-to-expense-report/expense-add-to-expense-report.module').then( m => m.ExpenseAddToExpenseReportPageModule)
+    },
+    {
+        path: 'definition',
+        loadChildren: () => import('./pages/definition/definition.module').then( m => m.DefinitionPageModule)
+    },
+    {
+        path: 'prevalencia',
+        loadChildren: () => import('./pages/prevalencia/prevalencia.module').then( m => m.PrevalenciaPageModule)
+    },
+    {
+        path: 'interventions',
+        loadChildren: () => import('./pages/interventions/interventions.module').then( m => m.InterventionsPageModule)
+    },
+    {
+        path: 'farmacologia/:param',
+        loadChildren: () => import('./pages/farmacologia/farmacologia.module').then( m => m.FarmacologiaPageModule)
+    },
+    {
+        path: 'farmacologia-info',
+        loadChildren: () => import('./pages/farmacologia-info/farmacologia-info.module').then( m => m.FarmacologiaInfoPageModule)
+    },
+    {
+        path: 'farmacologia-description',
+        loadChildren: () => import('./pages/farmacologia-description/farmacologia-description.module').then( m => m.FarmacologiaDescriptionPageModule)
+    },
+    {
+        path: 'farmacologia-roi',
+        loadChildren: () => import('./pages/farmacologia-roi/farmacologia-roi.module').then( m => m.FarmacologiaRoiPageModule)
+    },
+    {
+        path: 'farmacologia-agrupado',
+        loadChildren: () => import('./pages/farmacologia-agrupado/farmacologia-agrupado.module').then( m => m.FarmacologiaAgrupadoPageModule)
+    },
+    {
+        path: 'custos-do-programa',
+        loadChildren: () => import('./pages/custos-do-programa/custos-do-programa.module').then( m => m.CustosDoProgramaPageModule)
+    },
+    {
+        path: 'outros-custos',
+        loadChildren: () => import('./pages/outros-custos/outros-custos.module').then( m => m.OutrosCustosPageModule)
+    },
+    {
+        path: 'outros-parametros',
+        loadChildren: () => import('./pages/outros-parametros/outros-parametros.module').then( m => m.OutrosParametrosPageModule)
     }
 ];
 

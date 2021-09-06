@@ -10,6 +10,7 @@ import { ExpenseReportViewPage } from './expense-report-view.page';
 import { ExpenseReportPopoverComponent } from './menu-popover/menu-popover.component';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { EvComponentsModule } from 'src/app/components/ev-components';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
         IonicModule,
         ExpenseReportViewPageRoutingModule,
         PipesModule,
-        TranslateModule
+        TranslateModule,
+        EvComponentsModule
     ],
     declarations: [ExpenseReportViewPage, ExpenseReportPopoverComponent],
     entryComponents: [

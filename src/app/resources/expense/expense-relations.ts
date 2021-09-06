@@ -1,8 +1,11 @@
 export const ExpenseRelations = [
     'user',
-    'expenseReport',
+    'expenseReport.policy.requiredFields',
+    'expenseReport.policy.categories',
     'category',
     'avatar',
     'attachments',
-    'disapprovedExpense'
+    'disapprovedExpense',
+    'currency',
+
 ];

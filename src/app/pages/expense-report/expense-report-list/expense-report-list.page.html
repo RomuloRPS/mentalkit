@@ -65,6 +65,7 @@
     <ng-container *ngFor="let expense of expenses">
       <ion-card  [color]="getCardColor(expense)" (click)="trySelect(expense)" class="relative card-no-border card-no-margin">
         <ev-long-press (onPressing)="triggerLongPress(expense)">
+          
             <ion-item [color]="getCardColor(expense)"  lines="none">
               <ion-thumbnail size="large" slot="start">
                 <img *ngIf="expense.getRelation('avatar')?.getAttribute('token')" [src]="expense.getRelation('avatar')?.getAttribute('token') | attachmentToken">
@@ -88,12 +89,12 @@
                   <span class="text-base" style="font-size: 15px;">{{expense?.getAttribute('observation')}}</span>
                 </p>
                 <p style="font-size: 13px;" class="ml-1 mt-2">
-                  <strong>{{expense.getRelation('category')?.getAttribute('name')}}</strong>
+                  <strong>{{expense.getRelation('category') | standardCategoryTranslate}}</strong>
                 </p>
 
                 <p style="font-size: 13px;" class="mt-2">
                   <ion-badge class="mt-2" color="warning">
-                    <ion-label>{{expense?.getAttribute('value') | currency:'COP ':true }}</ion-label>
+                    <ion-label>{{expense?.getAttribute('value') | currency:getCurrency():true:'1.2-2':locale}}</ion-label>
                   </ion-badge>
                </p>
                <ion-badge [color]="expense?.getStatusBadgeColor()" class="mt-2" color="success">
@@ -118,10 +119,10 @@
   <ion-card *ngIf="expenses.length == 0 && !this.loading">
     <ion-card-content>
       <div class="text-center">
-        <ion-img class="h-20" src="../../assets/fontawesome/solid/wallet.svg"></ion-img>
+        <ion-img class="h-20" src=".././assets/fontawesome/solid/wallet.svg"></ion-img>
         <ion-text color="dark" class="mt-4">
           <p class="mt-4">
-            <strong class="text-xl mt-4">Nenhum informe de despesa encontrado!</strong>
+            <strong class="text-xl mt-4">{{'NONE_FOUND.EXPENSE_REPORT' | translate}}</strong>
           </p>
         </ion-text>
       </div>

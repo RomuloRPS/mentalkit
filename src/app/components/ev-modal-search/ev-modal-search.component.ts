@@ -21,6 +21,8 @@ export class EvModalSearchComponent implements OnInit {
   @Input() public showField;
   @Input() public indexField;
   @Input() public value;
+  @Input() public translateValue = false;
+  @Input() public translatePrefix;
   @Input() public selectTitle;
   @Input() public name = "Item";
   @Input() public creatable = true;
@@ -42,9 +44,7 @@ export class EvModalSearchComponent implements OnInit {
 
   public ngOnInit() {
       if (!this.selectTitle) {
-          this.translate.get('DEFAULT_SELECT_PLACEHOLDER').subscribe((value) => {
-              this.selectTitle = value;
-          });
+          this.selectTitle =  this.translate.instant('DEFAULT_SELECT_PLACEHOLDER');
       }
 
       if (!this.resource) {
@@ -66,7 +66,7 @@ export class EvModalSearchComponent implements OnInit {
               this.listOriginal = resp.data;
           });
       }).catch(() => {
-          this.toasterService.error('Erro ao carregar ' + this.name);
+          this.toasterService.error(this.translate.instant('LOADING_ERROR') + ' ' + this.name);
           this.loadingService.dismiss();
       });
   }
@@ -114,7 +114,7 @@ export class EvModalSearchComponent implements OnInit {
 
   public async presentNewPromptDisapproveExpense() {
       let alert = await this.alertController.create({
-          header: 'Criar novo item',
+          header: this.translate.instant('NEW_ITEM'),
           inputs: [
               {
                   name: 'value',
@@ -134,14 +134,14 @@ export class EvModalSearchComponent implements OnInit {
                   text: 'Confirmar',
                   handler: data => {
                       if (data.value) {
-                          this.loadingService.show('Criando ' + this.name);
+                          this.loadingService.show(this.translate.instant('CREATING') + ' ' + this.name);
                           this.baseModel.setAttribute(this.showField, data.value);
                           this.baseModel.create().then((resp) => {
                               this.refresh();
                           }).catch(() => {
                               this.loadingService.dismiss();
 
-                              this.toasterService.error('Erro ao criar ' + this.name);
+                              this.toasterService.error(this.translate.instant('CREATE_ERROR') + ' ' + this.name);
                           });
                       } else {
                           this.toasterService.error('Informe ' + this.name + ' para confirmar');

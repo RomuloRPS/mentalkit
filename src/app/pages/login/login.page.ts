@@ -69,32 +69,36 @@ export class LoginPage implements OnInit {
 
         if (form.valid) {
             this.userData.email = this.userData.login;
-
-            this.authService.login(this.userData).then((response: any) => {
-                if (response && response.data) {
-                    const userResource = new SingularResponse(
-                        UserResourceModel.query().getQuery(),
-                        null,
-                        UserResourceModel,
-                        response
-                    ).getData();
-
-                    this.saveUserParams(userResource, response);
-
-                    this.offlineCacheSercice.cacheInfo().toPromise().then((resp) => {
-                        this.loading = false;
-
-                        this.route.navigate(['menu']);
-                    }).catch((error) => {
-                        this.loading = false;
-                        this.toasterService.error('Usuário ou senha inválidos!');
-                    });
-                }
+            this.route.navigate(['menu']).then(resp => {
+                console.log(resp);
             }).catch((error) => {
                 console.log(error);
-                this.loading = false;
-                this.toasterService.error('Usuário ou senha inválidos!');
             });
+
+            // this.authService.login(this.userData).then((response: any) => {
+            //     if (response && response.data) {
+            //         const userResource = new SingularResponse(
+            //             UserResourceModel.query().getQuery(),
+            //             null,
+            //             UserResourceModel,
+            //             response
+            //         ).getData();
+
+            //         this.saveUserParams(userResource, response);
+
+            //         this.offlineCacheSercice.cacheInfo().toPromise().then((resp) => {
+            //             this.loading = false;
+
+            //         }).catch((error) => {
+            //             this.loading = false;
+            //             this.toasterService.error('Usuário ou senha inválidos!');
+            //         });
+            //     }
+            // }).catch((error) => {
+            //     console.log(error);
+            //     this.loading = false;
+            //     this.toasterService.error('Usuário ou senha inválidos!');
+            // });
         } else {
             this.submitted = true;
             this.loading = false;

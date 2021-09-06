@@ -12,6 +12,7 @@ import { DepartmentModule } from './department/department.module';
 import { CostCenterModule } from './cost-center/cost-center.module';
 import { ExpenseReportModule } from './expense-report/expense-report.module';
 import { PolicyModule } from './policy/policy.module';
+import { CurrencyModule } from './currency/currency.module';
 
 @NgModule({
     declarations: [],
@@ -24,7 +25,8 @@ import { PolicyModule } from './policy/policy.module';
         DepartmentModule,
         CostCenterModule,
         ExpenseReportModule,
-        PolicyModule
+        PolicyModule,
+        CurrencyModule
     ],
     providers: [
         StorageUtil,

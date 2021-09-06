@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { CompanyModel } from 'src/app/coloquent-model/company/company.model';
 import { ExpenseReportModel, ExpenseReportStatusEnum } from 'src/app/coloquent-model/expense-report/expense-report.model';
 import { ExpenseModel } from 'src/app/coloquent-model/expense/expense.model';
 import { EvModalMultiSelectExpenseSearchComponent } from 'src/app/components/ev-modal-multi-select-expense-search/ev-modal-multi-select-expense-search.component';
@@ -21,6 +23,7 @@ export class ExpenseReportViewPage implements OnInit {
     public expenseReport: ExpenseReportModel;
 
     public constructor(
+        @Inject(LOCALE_ID) public locale,
         private router: Router,
         private route: ActivatedRoute,
         private expenseReportService: ExpenseReportService,
@@ -28,7 +31,8 @@ export class ExpenseReportViewPage implements OnInit {
         private modalController: ModalController,
         private popoverController: PopoverController,
         private loadingService: LoadingService,
-        private toasterService: ToasterService
+        private toasterService: ToasterService,
+        private translateService: TranslateService
     ) { }
 
     public ngOnInit() {
@@ -46,9 +50,15 @@ export class ExpenseReportViewPage implements OnInit {
 
         this.expenseReportService.onlyOffline().get(filters).subscribe((resp) => {
             this.expenseReport = resp.data[0];
-
-            console.log(resp.data);
         });
+    }
+
+    public getCurrency(expense?) {
+        if(expense && expense.getRelation('currency')) {
+            return expense.getRelation('currency').getAttribute('code');
+        }
+
+        return CompanyModel.getStandardCurrency();
     }
 
     public async chooseExpenses() {
@@ -67,7 +77,7 @@ export class ExpenseReportViewPage implements OnInit {
 
         modalPage.onDidDismiss().then((resp: any) => {
             if (resp.data) {
-                this.loadingService.show('Salvando informe de despesa');
+                this.loadingService.show(this.translateService.instant('SAVING'));
 
                 this.expenseReport.setRelation('expenses', resp.data);
                 this.expenseReport.save().then((resp) => {
@@ -80,7 +90,7 @@ export class ExpenseReportViewPage implements OnInit {
                     });
                 }).catch((error) => {
                     this.loadingService.dismiss();
-                    this.toasterService.error('Não foi possível salvar o informe de despesa');
+                    this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_SAVE'));
                 });
             }
         });

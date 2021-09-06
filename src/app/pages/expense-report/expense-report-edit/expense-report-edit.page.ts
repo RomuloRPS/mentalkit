@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { SingularResponse } from 'coloquent';
 import { forkJoin } from 'rxjs';
 import { CategoryModel } from 'src/app/coloquent-model/category/category.model';
@@ -46,6 +47,7 @@ export class ExpenseReportEditPage implements OnInit {
     public selectedCostCenterId;
 
     public attachments = [];
+    public avatar;
 
     public expenseFilters= {
         noExpenseReport: true,
@@ -75,7 +77,8 @@ export class ExpenseReportEditPage implements OnInit {
         private popoverController: PopoverController,
         private loadingService: LoadingService,
         private toasterService: ToasterService,
-        private userService: UserService
+        private userService: UserService,
+        private translateService: TranslateService
     ) { }
 
     public ngOnInit() {
@@ -220,12 +223,51 @@ export class ExpenseReportEditPage implements OnInit {
         return true;
     }
 
+    public async openOptionsAvatar(ev) {
+        let image;
+
+        image = this.avatar;
+
+        if (this.expenseReport.getRelation('avatar')) {
+            image = this.expenseReport.getRelation('avatar');
+        }
+
+        const popoverOptions = {
+            component: EvMediaPopoverComponent,
+            translucent: true,
+            event: ev,
+            componentProps: {
+                image
+            }
+        };
+
+        const popover = await this.popoverController.create(popoverOptions);
+
+        popover.onDidDismiss().then((resp: any) => {
+            if (resp.data) {
+                if (resp.data == 'delete') {
+                    this.avatar = null;
+                    this.expenseReport.setRelation('avatar', null);
+                } else {
+                    this.avatar = resp.data;
+                }
+            }
+        });
+
+        return await popover.present();
+    }
+
     public save(form: NgForm) {
         this.submitted = true;
 
         if (form.valid && this.checkRequiredParams()) {
-            this.loadingService.show('Salvando informe de despesa');
+            this.loadingService.show(this.translateService.instant('SAVING'));
             this.expenseReport.setRelation('currentExpenseReportState', null);
+
+            if (this.avatar) {
+                this.expenseReport.setRelation('avatar', this.avatar);
+            }
+
             this.expenseReport.save().then(() => {
                 this.updateInfos().then(() => {
                     this.submitted = false;
@@ -238,7 +280,7 @@ export class ExpenseReportEditPage implements OnInit {
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível salvar as alterações!');
+                this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_SAVE'));
             });
         }
     }
@@ -247,10 +289,13 @@ export class ExpenseReportEditPage implements OnInit {
         this.submitted = true;
 
         if (form.valid && this.checkRequiredParams()) {
-            this.loadingService.show('Criando informe de despesa');
+            this.loadingService.show(this.translateService.instant('CREATING'));
             // this.expenseReport.elements.attachments = this.attachments;
             // this.expenseReport.elements.avatar = this.attachments[0];
-            // this.expenseReport.elements.from_app = true;
+
+            if (this.avatar) {
+                this.expenseReport.setRelation('avatar', this.avatar);
+            }
 
             this.expenseReport.create().then(() => {
                 this.updateInfos().then(() => {
@@ -264,7 +309,7 @@ export class ExpenseReportEditPage implements OnInit {
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível criar informe de despesa!');
+                this.toasterService.error(this.translateService.instant('CREATE_ERROR'));
             });
         }
     }

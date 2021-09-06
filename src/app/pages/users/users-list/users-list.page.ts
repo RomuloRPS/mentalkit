@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { UserRelations } from 'src/app/resources/user/user-relations';
 import { UserService } from 'src/app/resources/user/user.service';
 import { OfflineCacheService } from 'src/app/shared-services/offline-cache.service';
@@ -16,7 +17,13 @@ export class UsersListPage implements OnInit {
     @ViewChild("search", { static: false }) public search: any;
     @ViewChild("infiniteScroll", { static: false }) public infiniteScroll: any;
 
-    public users = [];
+    public users = [
+        {
+            name: "Romulo",
+            type: 'Adminstrador'
+        }
+    ];
+
     public selecteds = [];
     public isSearchable = false;
     public listLength = 10;
@@ -34,12 +41,17 @@ export class UsersListPage implements OnInit {
         private userService: UserService,
         private cacheService: OfflineCacheService,
         private toasterService: ToasterService,
-        private menuController: MenuController
+        private menuController: MenuController,
+        private translateService: TranslateService
     ) { }
 
     public ngOnInit() {
         this.refresh();
         this.getUsersLength();
+    }
+
+    public toChoose() {
+        this.router.navigate(['solicitations']);
     }
 
     public filter() {
@@ -91,36 +103,26 @@ export class UsersListPage implements OnInit {
 
         this.clearSelect();
 
-        if (window.navigator.onLine) {
-            this.cacheService
-                .cacheOneServiceIncluded(this.userService, UserRelations, filter, null)
-                .then((resp) => {
-                    if (event && event.target) {
-                        event.target.complete();
-                    }
+        // if (window.navigator.onLine) {
+        //     this.cacheService
+        //         .cacheOneServiceIncluded(this.userService, UserRelations, filter, null)
+        //         .then((resp) => {
+        //             if (event && event.target) {
+        //                 event.target.complete();
+        //             }
 
-                    this.loading = false;
-                    this.getUsersLength();
-                    this.getUsers();
-                })
-                .catch((error) => {
-                    this.loading = false;
-                    this.toasterService.error('Não foi possível atualizar a lista usuários!');
-                    this.getUsers();
+        this.loading = false;
+        // this.getUsersLength();
+        // this.getUsers();
+        // .catch((error) => {
+        //     this.loading = false;
+        //     this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_UPDATE_THE_LIST'));
+        //     this.getUsers();
 
-                    if (event && event.target) {
-                        event.target.complete();
-                    }
-                });
-        } else {
-            this.loading = false;
-            this.toasterService.error('Não foi possível atualizar a lista usuários!');
-            this.getUsers();
-
-            if (event && event.target) {
-                event.target.complete();
-            }
-        }
+        //     if (event && event.target) {
+        //         event.target.complete();
+        //     }
+        // });
     }
 
     public checkBlur() {
@@ -129,44 +131,6 @@ export class UsersListPage implements OnInit {
 
     public toUserEdit(id) {
         this.router.navigate(['users-edit' + '/' + id]);
-    }
-
-    public trySelect(user) {
-        if (this.selecteds.length == 0) {
-            this.toUserEdit(user.getApiId());
-
-            return;
-        }
-
-        if (user.selected && this.selecteds.length > 1) {
-            this.removeSelectedTask(user);
-        } else if(!user.selected) {
-            this.selectTask(user);
-        }
-    }
-
-    public selectTask(taskToSelect: any) {
-        this.selecteds.push(taskToSelect);
-
-        const taskIndex = this.users.findIndex(
-            (task) => task.getApiId() == taskToSelect.id
-        );
-
-        this.users[taskIndex].selected = true;
-    }
-
-    public removeSelectedTask(taskToUnselect) {
-        const selectedIndex = this.selecteds.findIndex(
-            (task) => task.id == taskToUnselect.id
-        );
-
-        this.selecteds.splice(selectedIndex, 1);
-
-        const taskIndex = this.users.findIndex(
-            (task) => task.getApiId() == taskToUnselect.id
-        );
-
-        this.users[taskIndex].selected = false;
     }
 
     public getIconUrl(token): string {
@@ -188,14 +152,6 @@ export class UsersListPage implements OnInit {
 
     public getCardColor(task) {
         return task.selected ? "medium" : "";
-    }
-
-    public triggerLongPress(taskToSelect) {
-        if (!taskToSelect.selected) {
-            this.selectTask(taskToSelect);
-        } else if (taskToSelect.selected && this.selecteds.length == 1) {
-            this.removeSelectedTask(taskToSelect);
-        }
     }
 
     public changeSearch() {
@@ -220,21 +176,6 @@ export class UsersListPage implements OnInit {
 
     public openMenu() {
         this.menuController.open('filters');
-    }
-
-    public deleteUsers() {
-        let selectedTaskIds = [];
-
-        this.users.forEach(task => {
-            if (task.selected) {
-                selectedTaskIds.push(task.getApiId());
-            }
-        });
-
-        this.userService.delete(selectedTaskIds).then((resp) => {
-            this.refresh();
-        });
-        this.loadingFirstTime = true;
     }
 
     public searchTask() {

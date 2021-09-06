@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { CategoryModel } from 'src/app/coloquent-model/category/category.model';
 import { ExpenseReportModel, ExpenseReportStatusEnum } from 'src/app/coloquent-model/expense-report/expense-report.model';
@@ -20,6 +21,7 @@ import { LoadingService } from 'src/app/shared-services/loading/loading.service'
 import { OfflineCacheService } from 'src/app/shared-services/offline-cache.service';
 import { ToasterService } from 'src/app/shared-services/toaster/toaster.service';
 import { environment } from 'src/environments/environment';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'app-expense-view',
@@ -59,6 +61,7 @@ export class ExpenseViewPage implements OnInit {
     };
 
     public constructor(
+        @Inject(LOCALE_ID) public locale,
         private router: Router,
         private route: ActivatedRoute,
         private expenseService: ExpenseService,
@@ -68,7 +71,9 @@ export class ExpenseViewPage implements OnInit {
         private popoverController: PopoverController,
         private loadingService: LoadingService,
         private toasterService: ToasterService,
-        private userModel: UserModel
+        private userModel: UserModel,
+        private translateService: TranslateService,
+        private _location: Location
     ) { }
 
     public ngOnInit() {
@@ -120,6 +125,10 @@ export class ExpenseViewPage implements OnInit {
         });
     }
 
+    public getCurrency(expense: ExpenseModel) {
+        return expense.getRelation('currency').getAttribute('code');
+    }
+
     public async cacheServices() {
         const servicesToCache = [
             this.categoryService.cache({
@@ -159,15 +168,7 @@ export class ExpenseViewPage implements OnInit {
     }
 
     public backToList() {
-        if (this.expense.getRelation('expenseReport')) {
-            if (this.expense.getRelation('expenseReport').getAttribute('status') == ExpenseReportStatusEnum.SENT) {
-                this.router.navigate(['revision-view/' + this.expense.getRelation('expenseReport').getApiId()]);
-            } else {
-                this.router.navigate(['revision-view/' + this.expense.getRelation('expenseReport').getApiId()]);
-            }
-        } else {
-            this.router.navigate(['expenses/update' + new Date().toISOString()]);
-        }
+        this._location.back();
     }
 
     public categoryChange(event) {
@@ -200,7 +201,7 @@ export class ExpenseViewPage implements OnInit {
         this.submitted = true;
 
         if (form.valid) {
-            this.loadingService.show('Salvando despesa');
+            this.loadingService.show(this.translateService.instant('SAVING'));
             this.expense.elements.issue_date = (new DateTimeFormatPipe()).transform(this.date, 'yyyy-MM-dd HH:mm:ss');
 
             this.expense.save().then(() => {
@@ -217,7 +218,7 @@ export class ExpenseViewPage implements OnInit {
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível salvar as alterações!');
+                this.toasterService.error(this.translateService.instant('NOT_POSSIBLE_TO_SAVE'));
             });
         }
     }
@@ -226,7 +227,7 @@ export class ExpenseViewPage implements OnInit {
         this.submitted = true;
 
         if (form.valid) {
-            this.loadingService.show('Criando despesa');
+            this.loadingService.show(this.translateService.instant('CREATING'));
             this.expense.elements.attachments = this.attachments;
             this.expense.elements.avatar = this.attachments[0];
             this.expense.elements.from_app =
@@ -245,7 +246,7 @@ export class ExpenseViewPage implements OnInit {
                 });
             }).catch((error) => {
                 this.loadingService.dismiss();
-                this.toasterService.error('Não foi possível criar despesa!');
+                this.toasterService.error(this.translateService.instant('CREATE_ERROR'));
             });
         }
     }

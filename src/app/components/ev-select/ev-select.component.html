@@ -7,8 +7,16 @@
           </ng-container>
           <ng-container *ngIf="value?.getApiId() && valueId == value?.getApiId()">
             <ion-label position="start" color="medium">{{placeholder}}</ion-label>
-            <ion-label position="fixed"  *ngIf="!indexField" class="text-right">{{value?.getAttribute(showField)}}</ion-label>
-            <ion-label *ngIf="indexField" class="text-right">{{value?.getAttribute(indexField)}} - {{value?.getAttribute(showField)}}</ion-label>
+           
+            <ng-container *ngIf="!translateValue">
+              <ion-label position="fixed" *ngIf="!indexField" class="text-right">{{value?.getAttribute(showField)}}</ion-label>
+              <ion-label *ngIf="indexField" class="text-right">{{value?.getAttribute(indexField)}} - {{value?.getAttribute(showField)}}</ion-label>
+            </ng-container>
+
+            <ng-container *ngIf="translateValue">
+              <ion-label position="fixed"  *ngIf="!indexField" class="text-right">{{value | standardCategoryTranslate}}</ion-label>
+            </ng-container>
+            
             <ion-icon slot="end" color="medium" size="small" name="caret-down-outline"></ion-icon>
           </ng-container>
       </ion-item>

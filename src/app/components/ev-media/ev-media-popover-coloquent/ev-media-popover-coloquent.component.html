@@ -2,17 +2,17 @@
 
 <ion-list lines="none">
   <ion-item (click)="cameraCapture()"  button>
-    <ion-icon color="primary" slot="start" name="camera-outline"></ion-icon>Tirar foto
+    <ion-icon color="primary" slot="start" name="camera-outline"></ion-icon>{{'TAKE_PHOTO' | translate}}
   </ion-item>
   <ion-item button>
-    <ion-icon color="primary" slot="start" name="image-outline"></ion-icon>Galeria
+    <ion-icon color="primary" slot="start" name="image-outline"></ion-icon>{{'GALLERY' | translate}}
     <input  type="file" (change)="getPathImage($event)" #ev
               style=" position: absolute; height: 100%; width: 100%; border-radius: 50%; opacity: 0; z-index: 1000; top: 0; bottom: 0; left: 0; right: 0;">
   </ion-item>
   <ion-item *ngIf="items.length > 0" (click)="viewImage()"  button>
-    <ion-icon color="primary" slot="start" name="eye-outline"></ion-icon>Ver Foto
+    <ion-icon color="primary" slot="start" name="eye-outline"></ion-icon>{{'SEE_PHOTO' | translate}}
   </ion-item>
   <ion-item *ngIf="items.length > 0" (click)="removeImage()" button>
-    <ion-icon color="danger" slot="start" name="trash"></ion-icon>Excluir foto
+    <ion-icon color="danger" slot="start" name="trash"></ion-icon>{{'DELETE_PHOTO' | translate}}
   </ion-item>
 </ion-list>

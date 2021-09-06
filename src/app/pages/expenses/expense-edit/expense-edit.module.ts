@@ -11,6 +11,7 @@ import { SharedServicesModule } from 'src/app/shared-services/shared-services.mo
 import { EvComponentsModule } from 'src/app/components/ev-components';
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
         ExpenseEditPageRoutingModule,
         EvComponentsModule,
         PipesModule,
-        TranslateModule
+        TranslateModule,
+        AgmCoreModule,
     ],
     declarations: [ExpenseEditPage]
 })

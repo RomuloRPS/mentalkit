@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, LOCALE_ID, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { CompanyModel } from 'src/app/coloquent-model/company/company.model';
 import { BaseResourceService } from 'src/app/resources/base-resource.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class EvModalMultiSelectExpenseSearchComponent implements OnInit {
   public listLength = 20;
 
   public constructor(
+    @Inject(LOCALE_ID) public locale,
     private modalCtrl: ModalController,
     private router: Router
   ) { }
@@ -35,6 +37,14 @@ export class EvModalMultiSelectExpenseSearchComponent implements OnInit {
 
           this.checkItems();
       });
+  }
+
+  public getCurrency(expense) {
+      if(expense && expense.getRelation('currency')) {
+          return expense.getRelation('currency').getAttribute('code');
+      }
+
+      return CompanyModel.getStandardCurrency();
   }
 
   public checkItems() {
